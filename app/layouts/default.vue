@@ -1,21 +1,23 @@
 <template>
-  <header class="header">
-    <Container class="header-container">
-      <!-- <figure>
+  <div>
+    <!-- <header class="header">
+      <LayoutContainer class="header-container">
+        <figure>
       <img src="/logo.png" alt="Logo" width="150" height="150" />
-    </figure> -->
+    </figure>
 
-      <NavbarMobile />
-    </Container>
-  </header>
-  <main>
-    <slot />
-  </main>
+        <NavbarMobile />
+      </LayoutContainer>
+    </header> -->
+    <main class="layout-main">
+      <slot />
+    </main>
+  </div>
 </template>
 
 <script lang="ts" setup></script>
 
-<style scoped>
+<style lang="scss" scoped>
 .header {
   padding-inline: 24px;
 
@@ -34,5 +36,9 @@
   align-items: center;
   width: 100%;
   padding-block: 16px;
+}
+
+.layout-main {
+  padding-inline: 16px;
 }
 </style>

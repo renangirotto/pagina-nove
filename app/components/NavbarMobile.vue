@@ -1,14 +1,14 @@
 <template>
   <nav>
     <button class="button-menu" aria-label="Abrir menu">
-      <Icon name="menu" />
+      <custom-icon name="menu" />
     </button>
   </nav>
 </template>
 
 <script lang="ts" setup></script>
 
-<style scoped>
+<style lang="scss" scoped>
 .button-menu {
   --icon-width: 24px;
   --icon-height: 24px;

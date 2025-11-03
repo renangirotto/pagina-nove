@@ -1,12 +1,14 @@
 <template>
   <layout-container>
-    <h1>
+    <h1 class="title-page">
       <custom-icon aria-hidden="true" name="triangle-flag" /> Leituras
       finalizadas
     </h1>
 
     <template v-for="(items, month) in readingList" :key="month">
-      <h2 class="title-group">{{ month }}</h2>
+      <h2 class="title-group">
+        {{ month }}
+      </h2>
       <div class="grid">
         <article v-for="item in items" :key="item.path">
           <nuxt-link :aria-label="item.title" :to="item.path">
@@ -91,7 +93,7 @@ const readingList = computed(() => {
   }
 
   @include container-desktop {
-    grid-template-columns: repeat(auto-fit, minmax(112px, 260px));
+    grid-template-columns: repeat(auto-fit, minmax(112px, 204px));
     gap: 16px;
   }
 
@@ -138,6 +140,8 @@ const readingList = computed(() => {
 }
 
 .title-group {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+
   &:not(:last-child) {
     margin-block-end: 16px;
   }

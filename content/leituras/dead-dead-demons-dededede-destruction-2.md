@@ -1,13 +1,15 @@
 ---
-artists: ['teste'],
+artists: ['Inio Asano'],
 collection: 'Dead Dead Demon''s Dededede Destruction',
 collectionVolume: 2
 cover: 'dead-dead-demons-dededede-destruction/cover-2.webp',
 date: 2025-10-05,
-labels: ['teste'],
-publisher: 'teste',
+labels: ['Mangas'],
+pages: '168',
+publisher: 'JBC',
+publishYear: '2022',
+rating: '4',
 title: 'Dead Dead Demon''s Dededede Destruction #2',
-writers: ['teste']
 ---
 
-# teste de coisa
+# Title

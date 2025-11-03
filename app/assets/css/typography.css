@@ -1,6 +1,7 @@
 html,
 body {
   font-family: "Outfit", sans-serif;
+  color: #282a36;
 }
 
 h1,
@@ -13,5 +14,17 @@ h6 {
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+}
+
+.title-page {
+  --icon-size: clamp(1.5rem, 2.5vw, 1.75rem);
+
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-style: bold;
+  font-weight: 700;
+
+  &:not(:last-child) {
+    margin-block-end: 16px;
   }
 }

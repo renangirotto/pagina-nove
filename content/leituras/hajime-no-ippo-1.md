@@ -12,4 +12,3 @@ rating: '5',
 title: 'Hajime no Ippo #1',
 ---
 
-# Title

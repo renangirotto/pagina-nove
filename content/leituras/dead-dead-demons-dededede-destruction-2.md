@@ -12,4 +12,3 @@ rating: '4',
 title: 'Dead Dead Demon''s Dededede Destruction #2',
 ---
 
-# Title

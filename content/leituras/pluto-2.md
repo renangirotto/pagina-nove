@@ -12,4 +12,3 @@ rating: '5',
 title: 'Pluto: Edição de Luxo #2',
 ---
 
-# Title

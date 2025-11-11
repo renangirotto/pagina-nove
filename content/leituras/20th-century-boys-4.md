@@ -11,5 +11,3 @@ publishYear: '2025',
 rating: '5',
 title: '20th Century Boys - Edição Definitiva #4',
 ---
-
-# Title

@@ -5,9 +5,8 @@ date: 2025-09-19,
 labels: ['Mangas'],
 pages: '544',
 publisher: 'Conrad',
-publishYear: 2025,
+publishYear: '2025',
 rating: '4',
 title: 'Okinawa'
 ---
 
-# Title

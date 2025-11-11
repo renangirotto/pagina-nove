@@ -12,4 +12,3 @@ rating: '4.5',
 title: '20th Century Boys - Edição Definitiva #1',
 ---
 
-# Title

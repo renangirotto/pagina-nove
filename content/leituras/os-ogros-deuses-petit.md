@@ -11,4 +11,3 @@ rating: '4',
 title: 'Os Ogros Deuses: Petit',
 ---
 
-# Title

@@ -12,4 +12,3 @@ rating: '5',
 title: '20th Century Boys - Edição Definitiva #2',
 ---
 
-# Title

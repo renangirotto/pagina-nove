@@ -12,4 +12,3 @@ rating: '5',
 title: 'Dead Dead Demon''s Dededede Destruction #3',
 ---
 
-# teste de coisa

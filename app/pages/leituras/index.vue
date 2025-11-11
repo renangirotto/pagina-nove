@@ -82,18 +82,18 @@ const readingList = computed(() => {
 <style lang="scss">
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 112px);
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
   grid-auto-flow: row;
   grid-auto-rows: 1fr;
   gap: 8px;
 
   @include container-tablet {
-    grid-template-columns: repeat(auto-fit, minmax(112px, 174px));
+    grid-template-columns: repeat(auto-fill, minmax(174px, 1fr));
     gap: 12px;
   }
 
   @include container-desktop {
-    grid-template-columns: repeat(auto-fit, minmax(112px, 204px));
+    grid-template-columns: repeat(auto-fill, minmax(204px, 1fr));
     gap: 16px;
   }
 
@@ -140,7 +140,7 @@ const readingList = computed(() => {
 }
 
 .title-group {
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.5rem, 2.5vw, 1.75rem);
 
   &:not(:last-child) {
     margin-block-end: 16px;

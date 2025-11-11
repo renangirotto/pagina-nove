@@ -1,9 +1,9 @@
 <template>
-  <nuxt-icon :name="name" filled />
+  <nuxt-icon :class="customClass" :name="name" filled />
 </template>
 
 <script lang="ts" setup>
-defineProps<{ name: string }>();
+defineProps<{ customClass?: string; name: string }>();
 </script>
 
 <style lang="scss">
@@ -14,11 +14,11 @@ defineProps<{ name: string }>();
   margin-bottom: 0;
 
   #path-light {
-    fill: var(--icon-color-light, #c0b9ff);
+    fill: var(--icon-color-light, var(--color-purple-100));
   }
 
   #path-dark {
-    fill: var(--icon-color-dark, #9e94fa);
+    fill: var(--icon-color-dark, var(--color-purple-200));
   }
 }
 </style>

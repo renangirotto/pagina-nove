@@ -100,7 +100,7 @@ useSeoMeta({
 <style lang="scss" scoped>
 .cover-figure {
   grid-area: pattern;
-  max-width: 240px;
+  max-width: 230px;
   padding-block-start: 32px;
   margin-inline: auto;
   position: relative;

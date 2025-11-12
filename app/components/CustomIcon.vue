@@ -9,9 +9,9 @@ defineProps<{ customClass?: string; name: string }>();
 <style lang="scss">
 .nuxt-icon svg {
   min-width: var(--icon-size, 24px);
-  width: var(--icon-size, 24px);
-  height: var(--icon-size, 24px);
-  margin-bottom: 0;
+  width: var(--icon-size, 24px) !important;
+  height: var(--icon-size, 24px) !important;
+  margin-bottom: 0 !important;
 
   #path-light {
     fill: var(--icon-color-light, var(--color-purple-100));

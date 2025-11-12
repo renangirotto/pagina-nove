@@ -1,6 +1,8 @@
 <template>
   <layout-container>
-    <h1>Notas do leitor</h1>
+    <title-page>
+      <custom-icon aria-hidden="true" name="pen-tool" /> Notas de leitura
+    </title-page>
   </layout-container>
 </template>
 

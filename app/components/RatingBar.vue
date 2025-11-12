@@ -48,18 +48,19 @@ const emptyStars = computed(() => {
 
 <style>
 .icons {
-  --icon-size: 24px;
+  --icon-color-light: var(--rating-color-filled, var(--color-purple-100));
+  --icon-size: 28px;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
 .icon-empty {
-  --icon-color-light: #e7e7ef;
+  --icon-color-light: var(--rating-color-empty, var(--color-grey-light-100));
 }
 
 .icon-half {
-  --icon-color-dark: var(--color-purple-100);
-  --icon-color-light: #e7e7ef;
+  --icon-color-dark: var(--rating-color-filled, var(--color-purple-100));
+  --icon-color-light: var(--rating-color-empty, var(--color-grey-light-100));
 }
 </style>

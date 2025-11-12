@@ -1,6 +1,11 @@
 <template>
-  <layout-container class="grid">
-    <template v-if="page">
+  <layout-container class="layout-grid">
+    <div class="layout-pattern">
+      <figure class="cover-pattern">
+        <img src="~/assets/images/pattern.svg" />
+      </figure>
+    </div>
+    <div v-if="page" class="grid">
       <div class="grid-cover">
         <figure class="cover-figure">
           <img
@@ -63,7 +68,7 @@
           </p>
         </div>
       </template>
-    </template>
+    </div>
   </layout-container>
 </template>
 
@@ -94,7 +99,11 @@ useSeoMeta({
 
 <style lang="scss" scoped>
 .cover-figure {
-  max-width: 280px;
+  grid-area: pattern;
+  max-width: 240px;
+  padding-block-start: 32px;
+  margin-inline: auto;
+  position: relative;
 
   @include container-desktop {
     max-width: none;
@@ -105,6 +114,26 @@ useSeoMeta({
   width: 100%;
   aspect-ratio: 3 / 4;
   border-radius: 4px;
+}
+
+.layout-pattern {
+  grid-area: pattern;
+  width: 100%;
+  height: 320px;
+  border-radius: 16px;
+  margin-inline: auto;
+  background: var(--color-purple-100);
+  overflow: hidden;
+  z-index: 0;
+
+  @include container-desktop {
+    height: 480px;
+  }
+
+  img {
+    width: 100%;
+    opacity: 0.25;
+  }
 }
 
 .empty-text {
@@ -123,17 +152,19 @@ useSeoMeta({
 }
 
 .grid {
+  grid-area: pattern;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, auto);
-  gap: 56px 0px;
+  gap: 32px 0px;
   grid-template-areas:
     "cover"
     "info"
     "content";
+  z-index: 1;
 
   @include container-desktop {
-    grid-template-columns: 360px 1fr;
+    grid-template-columns: 392px 1fr;
     grid-template-rows: repeat(2, auto);
     gap: 64px 44px;
     grid-template-areas:
@@ -164,7 +195,10 @@ useSeoMeta({
 
 .grid-cover {
   grid-area: cover;
-  justify-self: center;
+
+  @include container-desktop {
+    padding-inline-start: 32px;
+  }
 }
 
 .grid-info {
@@ -173,6 +207,7 @@ useSeoMeta({
   text-align: center;
 
   @include container-desktop {
+    color: var(--color-yellow-grey-100);
     text-align: left;
   }
 }
@@ -187,7 +222,10 @@ useSeoMeta({
   color: var(--color-grey-light-200);
 
   @include container-desktop {
+    --rating-color-empty: var(--color-yellow-grey-100);
+    --rating-color-filled: var(--color-purple-200);
     flex-direction: row;
+    color: var(--color-yellow-grey-100);
   }
 
   &:not(:last-child) {
@@ -215,6 +253,11 @@ useSeoMeta({
     justify-content: flex-start;
     font-size: 1.25rem;
   }
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-areas: "pattern";
 }
 
 .title {

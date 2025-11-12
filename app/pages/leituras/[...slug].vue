@@ -248,6 +248,7 @@ useSeoMeta({
   align-items: center;
   gap: 8px;
   font-size: 1.125rem;
+  font-weight: 600;
 
   @include container-desktop {
     justify-content: flex-start;

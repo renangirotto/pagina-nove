@@ -49,7 +49,7 @@ const emptyStars = computed(() => {
 <style>
 .icons {
   --icon-color-light: var(--rating-color-filled, var(--color-purple-100));
-  --icon-size: 28px;
+  --icon-size: 32px;
   display: flex;
   align-items: center;
   gap: 4px;

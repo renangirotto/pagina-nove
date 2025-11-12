@@ -1,0 +1,12 @@
+const a=`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" id="Triangle-Flag--Streamline-Core"
+  preserveAspectRatio="xMidYMid meet">
+  <g id="triangle-flag--navigation-map-maps-flag-gps-location-destination-goal">
+    <path id="path-light" fill-rule="evenodd"
+      d="M2.89 0.112a0.5 0.5 0 0 0 -0.448 0.894l0.224 0.112v7.8l-0.224 0.112a0.5 0.5 0 1 0 0.447 0.895l8.919 -4.46a0.5 0.5 0 0 0 0 -0.894L2.889 0.11Z"
+      clip-rule="evenodd" stroke-width="1"></path>
+    <path id="path-dark" fill-rule="evenodd"
+      d="M2.666 0.044a0.75 0.75 0 0 1 0.75 0.75l0 12.412a0.75 0.75 0 0 1 -1.5 0l0 -12.412a0.75 0.75 0 0 1 0.75 -0.75Z"
+      clip-rule="evenodd" stroke-width="1"></path>
+  </g>
+</svg>
+`;export{a as default};

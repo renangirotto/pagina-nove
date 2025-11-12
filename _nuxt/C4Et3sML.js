@@ -1,0 +1,1 @@
+import{_}from"./0Nhv00x6.js";import{_ as r}from"./B8vFl0uY.js";import{_ as a}from"./DlAUqK2U.js";import{A as c,w as o,j as s,g as m,z as p}from"#entry";const f={};function i(l,t){const e=_,n=r;return s(),c(n,null,{default:o(()=>[m(e,null,{default:o(()=>[...t[0]||(t[0]=[p(" Início ",-1)])]),_:1})]),_:1})}const k=a(f,[["render",i]]);export{k as default};

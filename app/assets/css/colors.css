@@ -1,8 +1,0 @@
-:root {
-  --color-grey-dark-100: #1f1f1f;
-  --color-grey-light-100: #e7e7ef;
-}
-
-body {
-  color: var(--color-grey-dark-100);
-}

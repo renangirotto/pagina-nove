@@ -13,9 +13,9 @@ export default defineContentConfig({
         cover: z.string(),
         date: z.date(),
         labels: z.array(z.string()),
-        pages: z.string().optional(),
+        pages: z.string(),
         publisher: z.string(),
-        publishYear: z.string().optional(),
+        publishYear: z.string(),
         rating: z.string(),
         title: z.string(),
       })

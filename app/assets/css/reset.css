@@ -18,6 +18,8 @@
 }
 
 body {
+  min-height: 100dvh;
+
   /* Add base container */
   container-type: inline-size;
   container-name: body-container;

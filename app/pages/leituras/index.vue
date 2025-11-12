@@ -30,6 +30,10 @@ interface ReadingItem extends ContentNavigationItem {
   date: string;
 }
 
+useSeoMeta({
+  title: `Leituras Finalizadas | Página Nove`,
+});
+
 const { data: leituras } = await useAsyncData("navigation-reading-list", () => {
   return queryCollectionNavigation("leituras", ["cover", "date"]).order(
     "date",

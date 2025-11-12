@@ -1,11 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" id="Equal-Sign--Streamline-Core"
-  preserveAspectRatio="xMidYMid meet">
-  <desc>
-    Equal Sign Streamline Icon: https://streamlinehq.com
-  </desc>
-  <g id="equal-sign--interface-math-equal-sign-mathematics">
-    <path id="Union" fill="currentColor" fill-rule="evenodd"
-      d="M1 3.5c-0.552285 0 -1 0.44772 -1 1s0.447715 1 1 1h12c0.5523 0 1 -0.44772 1 -1s-0.4477 -1 -1 -1H1Zm0 5c-0.552285 0 -1 0.44772 -1 1 0 0.5523 0.447715 1 1 1h12c0.5523 0 1 -0.4477 1 -1 0 -0.55228 -0.4477 -1 -1 -1H1Z"
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" preserveAspectRatio="xMidYMid meet">
+  <g id="align-right--rag-paragraph-text-alignment-align-right-formatting-left">
+    <path id="path-light" fill-rule="evenodd"
+      d="M0 1A0.75 0.75 0 0 1 0.75 0.25h12.5a0.75 0.75 0 0 1 0 1.5H0.75A0.75 0.75 0 0 1 0 1Zm3.25 2.25a0.75 0.75 0 0 0 0 1.5h10a0.75 0.75 0 0 0 0 -1.5h-10ZM5.5 7a0.75 0.75 0 0 1 0.75 -0.75h7a0.75 0.75 0 0 1 0 1.5h-7A0.75 0.75 0 0 1 5.5 7Zm-3 3a0.75 0.75 0 0 1 0.75 -0.75h10a0.75 0.75 0 0 1 0 1.5h-10A0.75 0.75 0 0 1 2.5 10ZM0.75 12.25a0.75 0.75 0 0 0 0 1.5h12.5a0.75 0.75 0 0 0 0 -1.5H0.75Z"
       clip-rule="evenodd" stroke-width="1"></path>
   </g>
 </svg>

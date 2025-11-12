@@ -5,54 +5,25 @@
         <img src="~/assets/images/pattern.svg" />
       </figure>
     </div>
-    <div v-if="page" class="grid">
-      <div class="grid-cover">
-        <figure class="cover-figure">
-          <img
-            class="cover-image"
-            :src="`${pathImgCovers}/${page.cover}`"
-            alt=""
-          />
-        </figure>
-      </div>
-      <div class="grid-info">
-        <div class="info-rating">
-          <rating-bar :rating="page.rating" />
-          <span>|</span>
-          <p>
-            {{
-              new Date(page.date).toLocaleDateString("pt-BR", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })
-            }}
-          </p>
-        </div>
-        <h2 class="title">{{ page.title }}</h2>
-        <div class="info-texts">
-          <span>
-            por
-            <template v-if="artistsFormatted">
-              {{ artistsFormatted }}
-            </template>
-          </span>
-          <span>|</span>
-          <span>{{ page.pages }} páginas</span>
-          <span>|</span>
-          <span> Editora {{ page.publisher }} </span>
-          <span>|</span>
-          <span>Ano {{ page.publishYear }}</span>
-        </div>
-      </div>
+    <div v-if="page" class="layout-page">
+      <hero-read
+        :artists="artistsFormatted"
+        :cover="`${pathImgCovers}/${page.cover}`"
+        :date="dateFormatted"
+        :pages="page.pages"
+        :publisher="page.publisher"
+        :publish-year="page.publishYear"
+        :rating="page.rating"
+        :title="page.title"
+      />
 
       <template v-if="page.body.value.length">
-        <div class="grid-content">
+        <div class="layout-section">
           <ContentRenderer v-if="page" :value="page" />
         </div>
       </template>
       <template v-else>
-        <div class="grid-content" data-ui-content="empty">
+        <div class="layout-section" data-ui-content="empty">
           <h2 class="title">Notas de leitura?</h2>
           <p class="empty-text">
             <strong
@@ -92,28 +63,69 @@ const artistsFormatted = computed(() => {
   );
 });
 
+const dateFormatted = computed(() => {
+  return new Date(page.value?.date || "").toLocaleDateString("pt-BR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+});
+
 useSeoMeta({
   title: `${page.value?.title} | Página Nove`,
 });
 </script>
 
 <style lang="scss" scoped>
-.cover-figure {
-  grid-area: pattern;
-  max-width: 230px;
-  padding-block-start: 32px;
-  margin-inline: auto;
-  position: relative;
+.empty-text {
+  font-size: 1rem;
+  text-wrap: balance;
 
-  @include container-desktop {
-    max-width: none;
+  strong {
+    font-size: 1.125rem;
+  }
+
+  &:has(strong) {
+    &:not(:last-child) {
+      margin-block-end: 8px;
+    }
   }
 }
 
-.cover-image {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  border-radius: 4px;
+.layout-section {
+  &[data-ui-content="empty"] {
+    padding-block: 32px;
+    padding-inline: 32px;
+    border-radius: 16px;
+    text-align: center;
+    background: var(--color-grey-light-100);
+
+    .title {
+      --title: 1.75rem;
+
+      @include container-desktop {
+        --title: 2.25rem;
+      }
+    }
+  }
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-areas: "pattern";
+}
+
+.layout-page {
+  grid-area: pattern;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  gap: 32px 0px;
+  z-index: 1;
+
+  @include container-desktop {
+    gap: 64px 0px;
+  }
 }
 
 .layout-pattern {
@@ -133,143 +145,6 @@ useSeoMeta({
   img {
     width: 100%;
     opacity: 0.25;
-  }
-}
-
-.empty-text {
-  font-size: 1rem;
-  text-wrap: balance;
-
-  strong {
-    font-size: 1.125rem;
-  }
-
-  &:has(strong) {
-    &:not(:last-child) {
-      margin-block-end: 8px;
-    }
-  }
-}
-
-.grid {
-  grid-area: pattern;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, auto);
-  gap: 32px 0px;
-  grid-template-areas:
-    "cover"
-    "info"
-    "content";
-  z-index: 1;
-
-  @include container-desktop {
-    grid-template-columns: 392px 1fr;
-    grid-template-rows: repeat(2, auto);
-    gap: 64px 44px;
-    grid-template-areas:
-      "cover info"
-      "content content";
-  }
-}
-
-.grid-content {
-  grid-area: content;
-
-  &[data-ui-content="empty"] {
-    padding-block: 32px;
-    padding-inline: 32px;
-    border-radius: 16px;
-    text-align: center;
-    background: var(--color-grey-light-100);
-
-    .title {
-      --title: 1.75rem;
-
-      @include container-desktop {
-        --title: 2.25rem;
-      }
-    }
-  }
-}
-
-.grid-cover {
-  grid-area: cover;
-
-  @include container-desktop {
-    padding-inline-start: 32px;
-  }
-}
-
-.grid-info {
-  grid-area: info;
-  align-content: center;
-  text-align: center;
-
-  @include container-desktop {
-    color: var(--color-yellow-grey-100);
-    text-align: left;
-  }
-}
-
-.info-rating {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--color-grey-light-200);
-
-  @include container-desktop {
-    --rating-color-empty: var(--color-yellow-grey-100);
-    --rating-color-filled: var(--color-purple-200);
-    flex-direction: row;
-    color: var(--color-yellow-grey-100);
-  }
-
-  &:not(:last-child) {
-    margin-block-end: 12px;
-  }
-
-  span {
-    display: none;
-
-    @include container-desktop {
-      display: inline-block;
-    }
-  }
-}
-
-.info-texts {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.125rem;
-  font-weight: 600;
-
-  @include container-desktop {
-    justify-content: flex-start;
-    font-size: 1.25rem;
-  }
-}
-
-.layout-grid {
-  display: grid;
-  grid-template-areas: "pattern";
-}
-
-.title {
-  font-size: var(--title, 2rem);
-
-  @include container-desktop {
-    --title: 2.75rem;
-  }
-
-  &:not(:last-child) {
-    margin-block-end: 16px;
   }
 }
 </style>

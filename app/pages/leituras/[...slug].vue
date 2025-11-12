@@ -68,8 +68,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-
 const route = useRoute();
 const pathImgCovers = PATH_IMG_COVERS;
 
@@ -152,7 +150,7 @@ useSeoMeta({
     padding-inline: 32px;
     border-radius: 16px;
     text-align: center;
-    background: #f8f8f8;
+    background: var(--color-grey-light-100);
 
     .title {
       --title: 1.75rem;
@@ -186,7 +184,7 @@ useSeoMeta({
   gap: 8px;
   font-weight: 700;
   font-size: 1.25rem;
-  color: #cfcfde;
+  color: var(--color-grey-light-200);
 
   @include container-desktop {
     flex-direction: row;

@@ -1,9 +1,9 @@
 <template>
   <layout-container>
-    <h1 class="title-page">
+    <title-page>
       <custom-icon aria-hidden="true" name="triangle-flag" /> Leituras
       finalizadas
-    </h1>
+    </title-page>
 
     <template v-for="(items, month) in readingList" :key="month">
       <h2 class="title-group">
@@ -23,7 +23,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
 import type { ContentNavigationItem } from "@nuxt/content";
 
 interface ReadingItem extends ContentNavigationItem {
@@ -140,7 +139,7 @@ const readingList = computed(() => {
 }
 
 .title-group {
-  font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem);
 
   &:not(:last-child) {
     margin-block-end: 16px;

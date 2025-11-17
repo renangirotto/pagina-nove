@@ -122,7 +122,7 @@ const readingList = computed(() => {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      aspect-ratio: 3 / 4;
+      aspect-ratio: 3 / 4.4;
       padding-block: 12px;
       padding-inline: 12px;
       position: relative;

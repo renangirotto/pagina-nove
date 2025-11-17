@@ -57,7 +57,6 @@ const attrs = useAttrs();
 
   @include container-desktop {
     max-width: none;
-    padding-inline-start: 32px;
   }
 }
 
@@ -68,15 +67,15 @@ const attrs = useAttrs();
   gap: 32px 0px;
 
   @include container-desktop {
-    grid-template-columns: 392px 1fr;
+    grid-template-columns: 340px 1fr;
     grid-template-rows: auto;
     gap: 0px 44px;
+    padding-inline: 32px;
   }
 }
 
 .hero-read-image {
   width: 100%;
-  aspect-ratio: 3 / 4;
   border-radius: 4px;
 }
 
@@ -85,6 +84,7 @@ const attrs = useAttrs();
   text-align: center;
 
   @include container-desktop {
+    max-height: 480px;
     color: var(--color-yellow-grey-100);
     text-align: left;
   }

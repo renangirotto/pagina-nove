@@ -7,7 +7,7 @@ date: 2025-10-05,
 labels: ['Mangas'],
 pages: '168',
 publisher: 'JBC',
-publishYear: '2022',
+publishYear: '2021',
 rating: '4',
 title: 'Dead Dead Demon''s Dededede Destruction #2',
 ---

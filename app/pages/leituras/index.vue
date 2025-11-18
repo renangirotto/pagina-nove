@@ -13,7 +13,11 @@
         <article v-for="item in items" :key="item.path">
           <nuxt-link :aria-label="item.title" :to="item.path">
             <figure aria-hidden="true">
-              <img :src="`/images/covers/${item.cover}`" alt="" />
+              <nuxt-img
+                loading="lazy"
+                :src="`/images/covers/${item.cover}`"
+                alt=""
+              />
             </figure>
           </nuxt-link>
         </article>

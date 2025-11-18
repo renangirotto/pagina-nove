@@ -111,8 +111,13 @@ useSeoMeta({
 }
 
 .layout-grid {
+  --pattern-height: 320px;
   display: grid;
   grid-template-areas: "pattern";
+
+  @include container-desktop {
+    --pattern-height: 480px;
+  }
 }
 
 .layout-page {
@@ -131,7 +136,7 @@ useSeoMeta({
 .layout-pattern {
   grid-area: pattern;
   width: 100%;
-  height: 320px;
+  height: var(--pattern-height);
   border-radius: 16px;
   margin-inline: auto;
   background: var(--color-purple-100);
@@ -139,7 +144,7 @@ useSeoMeta({
   z-index: 0;
 
   @include container-desktop {
-    height: 480px;
+    height: var(--pattern-height);
   }
 
   img {

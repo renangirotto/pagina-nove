@@ -13,7 +13,13 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-10-29',
   devtools: { enabled: true },
-  modules: ['@nuxt/fonts', '@nuxt/eslint', 'nuxt-icons', '@nuxt/content'],
+  modules: [
+    '@nuxt/content',
+    '@nuxt/eslint',
+    '@nuxt/fonts',
+    '@nuxt/image',
+    'nuxt-icons',
+  ],
   fonts: {
     defaults: {
       weights: [400, 500, 600, 700],

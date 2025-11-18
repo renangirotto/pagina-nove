@@ -2,7 +2,7 @@
   <div class="hero-read-grid" v-bind="attrs">
     <div class="hero-read-cover">
       <figure class="hero-read-figure">
-        <img class="hero-read-image" :src="cover" alt="" />
+        <nuxt-img class="hero-read-image" :src="cover" alt="" />
       </figure>
     </div>
     <div class="hero-read-info">
@@ -51,13 +51,9 @@ const attrs = useAttrs();
 
 <style lang="scss" scoped>
 .hero-read-figure {
-  max-width: 230px;
+  width: fit-content;
   padding-block-start: 32px;
   margin-inline: auto;
-
-  @include container-desktop {
-    max-width: none;
-  }
 }
 
 .hero-read-grid {
@@ -67,7 +63,7 @@ const attrs = useAttrs();
   gap: 32px 0px;
 
   @include container-desktop {
-    grid-template-columns: 340px 1fr;
+    grid-template-columns: auto 1fr;
     grid-template-rows: auto;
     gap: 0px 44px;
     padding-inline: 32px;
@@ -76,7 +72,11 @@ const attrs = useAttrs();
 
 .hero-read-image {
   width: 100%;
+  max-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.05));
   border-radius: 4px;
+
+  @include container-desktop {
+  }
 }
 
 .hero-read-info {

@@ -1,1 +1,0 @@
-import{_ as t}from"./DlAUqK2U.js";import{e as o,j as s,S as n}from"#entry";const _={},c={class:"title-page"};function r(e,a){return s(),o("h1",c,[n(e.$slots,"default")])}const m=Object.assign(t(_,[["render",r]]),{__name:"TitlePage"});export{m as _};

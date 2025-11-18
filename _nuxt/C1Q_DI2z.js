@@ -1,0 +1,1 @@
+import{A as a,D as o,f as n,w as c,H as r,E as p}from"#entry";const _=a({__name:"TitlePage",props:{customTag:{}},setup(t){const e=t.customTag||"h1";return(s,m)=>(n(),o(p(e),{class:"title-page"},{default:c(()=>[r(s.$slots,"default")]),_:3}))}}),i=Object.assign(_,{__name:"TitlePage"});export{i as _};

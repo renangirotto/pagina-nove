@@ -1,1 +1,0 @@
-import o from"./B7QNUWLG.js";import{B as a,A as e,j as c,n as t}from"#entry";const m=a({__name:"CustomIcon",props:{customClass:{},name:{}},setup(n){return(_,l)=>{const s=o;return c(),e(s,{class:t(n.customClass),name:n.name,filled:""},null,8,["class","name"])}}}),i=Object.assign(m,{__name:"CustomIcon"});export{i as _};

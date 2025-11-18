@@ -1,10 +1,16 @@
 <template>
-  <h1 class="title-page">
+  <custom-tag class="title-page">
     <slot />
-  </h1>
+  </custom-tag>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps<{
+  customTag?: string;
+}>();
+
+const CustomTag = props.customTag || "h1";
+</script>
 
 <style>
 .title-page {

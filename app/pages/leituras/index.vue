@@ -1,29 +1,27 @@
 <template>
-  <layout-container>
-    <title-page>
-      <custom-icon aria-hidden="true" name="triangle-flag" /> Leituras
-      finalizadas
-    </title-page>
+  <section>
+    <layout-container>
+      <title-page>
+        <custom-icon aria-hidden="true" name="triangle-flag" /> Leituras
+        finalizadas
+      </title-page>
 
-    <template v-for="(items, month) in readingList" :key="month">
-      <h2 class="title-group">
-        {{ month }}
-      </h2>
-      <div class="grid">
-        <article v-for="item in items" :key="item.path">
-          <nuxt-link :aria-label="item.title" :to="item.path">
-            <figure aria-hidden="true">
-              <nuxt-img
-                loading="lazy"
-                :src="`/images/covers/${item.cover}`"
-                alt=""
-              />
-            </figure>
-          </nuxt-link>
-        </article>
-      </div>
-    </template>
-  </layout-container>
+      <template v-for="(items, month) in readingList" :key="month">
+        <h2 class="title-group">
+          {{ month }}
+        </h2>
+        <grid-read>
+          <card-read
+            v-for="item in items"
+            :key="item.path"
+            :cover="item.cover"
+            :path="item.path"
+            :title="item.title"
+          />
+        </grid-read>
+      </template>
+    </layout-container>
+  </section>
 </template>
 
 <script lang="ts" setup>
@@ -87,65 +85,6 @@ const readingList = computed(() => {
 </script>
 
 <style lang="scss">
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
-  grid-auto-flow: row;
-  grid-auto-rows: 1fr;
-  gap: 8px;
-
-  @include container-tablet {
-    grid-template-columns: repeat(auto-fill, minmax(174px, 1fr));
-    gap: 12px;
-  }
-
-  @include container-desktop {
-    grid-template-columns: repeat(auto-fill, minmax(204px, 1fr));
-    gap: 16px;
-  }
-
-  &:not(:last-child) {
-    margin-block-end: 32px;
-
-    @include container-desktop {
-      margin-block-end: 64px;
-    }
-  }
-
-  article {
-    border-radius: 4px;
-    overflow: hidden;
-
-    &:hover {
-      img {
-        scale: 1.025;
-      }
-    }
-
-    a {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      aspect-ratio: 3 / 4.4;
-      padding-block: 12px;
-      padding-inline: 12px;
-      position: relative;
-    }
-
-    figure {
-      position: absolute;
-      inset: 0;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: scale 0.3s ease;
-      }
-    }
-  }
-}
-
 .title-group {
   font-size: clamp(1.375rem, 2.5vw, 1.75rem);
 

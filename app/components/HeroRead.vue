@@ -2,7 +2,7 @@
   <div class="hero-read-grid" v-bind="attrs">
     <div class="hero-read-cover">
       <figure class="hero-read-figure">
-        <nuxt-img class="hero-read-image" :src="cover" alt="" />
+        <img class="hero-read-image" :src="cover" alt="" />
       </figure>
     </div>
     <div class="hero-read-info">

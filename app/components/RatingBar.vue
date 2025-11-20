@@ -1,17 +1,22 @@
 <template>
   <div class="icons">
     <template v-for="n in filledStars" :key="'filled-' + n">
-      <custom-icon name="star"></custom-icon>
+      <custom-icon is-dynamic name="star"></custom-icon>
     </template>
 
     <custom-icon
       v-if="hasHalfStar"
       custom-class="icon-half"
+      is-dynamic
       name="half-star"
     ></custom-icon>
 
     <template v-for="n in emptyStars" :key="'empty-' + n">
-      <custom-icon custom-class="icon-empty" name="star"></custom-icon>
+      <custom-icon
+        custom-class="icon-empty"
+        is-dynamic
+        name="star"
+      ></custom-icon>
     </template>
   </div>
 </template>
@@ -46,10 +51,10 @@ const emptyStars = computed(() => {
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
 .icons {
   --icon-color-light: var(--rating-color-filled, var(--color-purple-100));
-  --icon-size: 32px;
+  --icon-size: var(--rating-icon-size, 32px);
   display: flex;
   align-items: center;
   gap: 4px;

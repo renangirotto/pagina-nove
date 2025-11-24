@@ -10,22 +10,25 @@
           <custom-icon name="menu" />
         </button>
 
-        <dialog :id="navDialogId" class="nav-dialog">
-          <div class="nav-dialog-body">
-            <ul class="nav-list">
-              <li v-for="item in navItems" :key="item.to">
-                <nuxt-link
-                  class="nav-link"
-                  :to="item.to"
-                  @click="() => dialog?.close()"
-                >
-                  <custom-icon aria-hidden="true" :name="item.icon" />
-                  {{ item.label }}
-                </nuxt-link>
-              </li>
-            </ul>
-          </div>
-        </dialog>
+        <dialog-drawer
+          :id="navDialogId"
+          class="nav-dialog"
+          :on-click-close="() => dialog?.close()"
+          title="Umas outras páginas"
+        >
+          <ul class="nav-list">
+            <li v-for="item in navItems" :key="item.to">
+              <nuxt-link
+                class="nav-link"
+                :to="item.to"
+                @click="() => dialog?.close()"
+              >
+                <custom-icon aria-hidden="true" :name="item.icon" />
+                {{ item.label }}
+              </nuxt-link>
+            </li>
+          </ul>
+        </dialog-drawer>
       </nav>
 
       <nav class="nav" data-ui-decive="desktop">
@@ -120,39 +123,17 @@ const dialog = document?.getElementById(
   background: none;
 }
 
-.nav-dialog {
-  width: 100%;
-  max-width: none;
-  height: 100dvh;
-  max-height: 100dvh;
-  border: none;
-  padding-block: 16px;
-  padding-inline: 16px;
-  inset: 0;
-  background: transparent;
-}
-
-.nav-dialog-body {
-  max-width: 380px;
-  height: 100%;
-  max-height: 100%;
-  padding-block: 24px;
-  padding-inline: 24px;
-  border-radius: 4px;
-  margin-inline-start: auto;
-  background: var(--color-yellow-grey-100);
-}
-
 .nav-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 44px;
   padding-inline-start: 0;
 
   @include container-desktop {
     flex-direction: row;
+    gap: 32px;
   }
 }
 

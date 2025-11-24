@@ -40,6 +40,7 @@
     object-fit: cover;
     width: 100%;
     height: 100%;
+    transition: scale 0.3s ease;
   }
 }
 
@@ -50,6 +51,11 @@
   grid-template-areas: "figure content";
   gap: 0px;
   border-radius: 4px;
+
+  &:not(:first-of-type) {
+    padding: 4px;
+    background: #f9f9f9;
+  }
 
   &:first-of-type {
     grid-template-columns: 1fr;
@@ -65,12 +71,24 @@
       padding-block: 24px;
       padding-inline: 24px;
       align-content: flex-end;
+      position: relative;
+      z-index: 1;
     }
 
     .card-figure {
       max-width: none;
       width: 100%;
-      max-height: 336px;
+      max-height: 352px;
+      position: relative;
+      z-index: 0;
+    }
+  }
+
+  &:hover {
+    .card-figure {
+      img {
+        scale: 1.025;
+      }
     }
   }
 

@@ -59,14 +59,13 @@ defineProps<{
   padding-inline: 8px;
   border-radius: 4px;
   border: 1px solid var(--color-purple-100);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-yellow-grey-100);
   background: var(--color-purple-100);
 
   @include container-tablet {
     --rating-icon-size: 24px;
-    font-size: 0.75rem;
   }
 
   @include container-desktop {

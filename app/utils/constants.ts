@@ -10,12 +10,12 @@ export const ROUTES = {
 export const NAV_ITEMS = [
   {
     icon: 'pen-tool',
-    label: 'notas de leitura',
+    label: 'notas',
     to: ROUTES.notes
   },
   {
-    icon: 'triangle-flag',
-    label: 'leituras finalizadas',
+    icon: 'open-book',
+    label: 'leituras',
     to: ROUTES.readings
   },
   {

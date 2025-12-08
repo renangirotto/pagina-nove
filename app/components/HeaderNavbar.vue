@@ -152,7 +152,7 @@ const dialog = document?.getElementById(
   @include container-desktop {
     --icon-size: 18px;
     font-size: 20px;
-    gap: 4px;
+    gap: 6px;
   }
 
   &:hover,

@@ -12,16 +12,16 @@
   grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
   grid-auto-flow: row;
   grid-auto-rows: 1fr;
-  gap: 8px;
+  gap: 24px 8px;
 
   @include container-tablet {
     grid-template-columns: repeat(auto-fill, minmax(174px, 1fr));
-    gap: 12px;
+    gap: 24px 12px;
   }
 
   @include container-desktop {
     grid-template-columns: repeat(auto-fill, minmax(204px, 1fr));
-    gap: 16px;
+    gap: 24px 16px;
   }
 
   &:not(:last-child) {

@@ -2,7 +2,7 @@
   <section>
     <layout-container>
       <title-page custom-tag="h2">
-        <custom-icon aria-hidden="true" name="triangle-flag" /> Últimas leituras
+        <custom-icon aria-hidden="true" name="open-book" /> Últimas leituras
       </title-page>
 
       <grid-read v-if="readingList">
@@ -10,7 +10,9 @@
           v-for="item in readingList"
           :key="item.path"
           :cover="item.cover"
+          :date="item.date"
           :path="item.path"
+          :rating="item.rating"
           :title="item.title"
         />
       </grid-read>
@@ -24,6 +26,7 @@ import type { ContentNavigationItem } from "@nuxt/content";
 interface ReadingItem extends ContentNavigationItem {
   cover: string;
   date: string;
+  rating: string;
 }
 
 useSeoMeta({
@@ -31,10 +34,11 @@ useSeoMeta({
 });
 
 const { data: leituras } = await useAsyncData("navigation-reading-list", () => {
-  return queryCollectionNavigation("leituras", ["cover", "date"]).order(
+  return queryCollectionNavigation("leituras", [
+    "cover",
     "date",
-    "DESC"
-  );
+    "rating",
+  ]).order("date", "DESC");
 });
 
 const readingList = computed(() => {
@@ -44,7 +48,12 @@ const readingList = computed(() => {
 
   const children = leituras.value[0].children as ReadingItem[];
 
-  return children.slice(0, 5);
+  return children.slice(0, 5).map((item) => {
+    return {
+      ...item,
+      date: formatDateToCard(item.date),
+    };
+  });
 });
 </script>
 

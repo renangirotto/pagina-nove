@@ -1,0 +1,1 @@
+const e="/images/covers",o={buy:"/onde-comprar",home:"/",notes:"/notas",readings:"/leituras"},n=[{icon:"pen-tool",label:"notas",to:o.notes},{icon:"open-book",label:"leituras",to:o.readings},{icon:"shopping-bag",label:"onde comprar",to:o.buy}];export{n as N,e as P,o as R};

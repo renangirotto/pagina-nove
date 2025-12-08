@@ -1,1 +1,0 @@
-const a="/images/covers",o={buy:"/onde-comprar",home:"/",notes:"/notas",readings:"/leituras"},e=[{icon:"pen-tool",label:"notas de leitura",to:o.notes},{icon:"triangle-flag",label:"leituras finalizadas",to:o.readings},{icon:"shopping-bag",label:"onde comprar",to:o.buy}];export{e as N,a as P,o as R};

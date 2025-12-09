@@ -50,8 +50,8 @@ defineProps<{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-block: 12px;
-  padding-inline: 12px;
+  padding-block: 8px;
+  padding-inline: 8px;
   z-index: 1;
 }
 

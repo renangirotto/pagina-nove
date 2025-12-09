@@ -2,7 +2,10 @@
   <article class="card-read">
     <nuxt-link :aria-label="title" class="card-link" :to="path">
       <div class="card-info">
-        <p class="card-info-pill">{{ date }}</p>
+        <div class="card-info-pills">
+          <p class="card-info-pill">{{ publisher }}</p>
+          <p class="card-info-pill">{{ seriesType }}</p>
+        </div>
         <div class="card-info-pill">
           <rating-bar :rating="rating" />
         </div>
@@ -17,9 +20,10 @@
 <script lang="ts" setup>
 defineProps<{
   cover: string;
-  date: string;
   path: string;
+  publisher: string;
   rating: string;
+  seriesType: string;
   title: string;
 }>();
 </script>
@@ -46,19 +50,24 @@ defineProps<{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-block: 8px;
-  padding-inline: 8px;
+  padding-block: 12px;
+  padding-inline: 12px;
   z-index: 1;
 }
 
+.card-info-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .card-info-pill {
-  --rating-icon-size: 16px;
+  --rating-icon-size: 20px;
   --rating-color-filled: var(--color-purple-200);
   width: fit-content;
-  padding-block: 4px;
-  padding-inline: 8px;
-  border-radius: 4px;
-  border: 1px solid var(--color-purple-100);
+  padding-block: 6px;
+  padding-inline: 12px;
+  border-radius: 32px;
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-yellow-grey-100);

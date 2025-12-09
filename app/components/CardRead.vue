@@ -63,7 +63,8 @@ defineProps<{
 
 .card-info-pill {
   --rating-icon-size: 20px;
-  --rating-color-filled: var(--color-purple-200);
+  --rating-color-empty: var(--color-purple-200);
+  --rating-color-filled: var(--color-grey-light-100);
   width: fit-content;
   padding-block: 6px;
   padding-inline: 12px;

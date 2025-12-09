@@ -43,7 +43,7 @@ const readingList = computed(() => {
 
   const children = leituras.value[0].children as ReadingItem[];
 
-  return children.slice(0, 5).map((item) => {
+  return children.slice(0, 4).map((item) => {
     return {
       ...item,
       seriesType: getSetiesType(item.collection as string | undefined),

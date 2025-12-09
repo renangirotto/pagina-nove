@@ -20,7 +20,7 @@
   }
 
   @include container-desktop {
-    grid-template-columns: repeat(auto-fill, minmax(204px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
     gap: 24px 16px;
   }
 

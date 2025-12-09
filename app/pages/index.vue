@@ -26,7 +26,7 @@ import getSetiesType from "@/utils/series-type";
 import type { ReadingItem } from "@/utils/layout-types";
 
 useSeoMeta({
-  title: `Página Nove | Um blog com textos duvidosos.`,
+  title: `Página Nove | Só mais um blog`,
 });
 
 const { data: leituras } = await useAsyncData("navigation-reading-list", () => {

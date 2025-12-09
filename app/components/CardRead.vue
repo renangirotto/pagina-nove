@@ -72,6 +72,7 @@ defineProps<{
   font-weight: 600;
   color: var(--color-yellow-grey-100);
   background: var(--color-purple-100);
+  box-shadow: 0px 2px 4px 0px rgba(#1f1f1f, 0.25);
 
   @include container-tablet {
     --rating-icon-size: 24px;

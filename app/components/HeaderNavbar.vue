@@ -59,13 +59,8 @@ const dialog = document?.getElementById(
 
 <style lang="scss" scoped>
 .header {
+  padding-block: 16px 0px;
   padding-inline: 16px;
-
-  &:not(:last-child) {
-    .header-container {
-      border-block-end: 1px solid var(--color-grey-light-100);
-    }
-  }
 }
 
 .header-container {
@@ -77,9 +72,13 @@ const dialog = document?.getElementById(
   align-items: center;
   width: 100%;
   padding-block: 16px;
+  padding-inline: 24px;
+  border-radius: 24px;
+  background: var(--color-grey-light-50);
 
   @include container-desktop {
     padding-block: 24px;
+    padding-inline: 32px;
   }
 }
 

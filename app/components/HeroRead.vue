@@ -74,9 +74,6 @@ const attrs = useAttrs();
   width: 100%;
   max-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.05));
   border-radius: 4px;
-
-  @include container-desktop {
-  }
 }
 
 .hero-read-info {
@@ -100,8 +97,8 @@ const attrs = useAttrs();
   color: var(--color-grey-light-200);
 
   @include container-desktop {
-    --rating-color-empty: var(--color-yellow-grey-100);
-    --rating-color-filled: var(--color-purple-200);
+    --rating-color-empty: var(--color-purple-200);
+    --rating-color-filled: var(--color-grey-light-100);
     flex-direction: row;
     color: var(--color-yellow-grey-100);
   }

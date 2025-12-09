@@ -14,9 +14,10 @@
             v-for="item in items"
             :key="item.path"
             :cover="item.cover"
-            :date="item.date"
             :path="item.path"
+            :publisher="item.publisher"
             :rating="item.rating"
+            :series-type="item.seriesType"
             :title="item.title"
           />
         </grid-read>
@@ -26,24 +27,18 @@
 </template>
 
 <script lang="ts" setup>
-import type { ContentNavigationItem } from "@nuxt/content";
-
-interface ReadingItem extends ContentNavigationItem {
-  cover: string;
-  date: string;
-  rating: string;
-}
+import getSetiesType from "@/utils/series-type";
+import type { ReadingItem } from "@/utils/layout-types";
 
 useSeoMeta({
   title: `Leituras | Página Nove`,
 });
 
 const { data: leituras } = await useAsyncData("navigation-reading-list", () => {
-  return queryCollectionNavigation("leituras", [
-    "cover",
-    "date",
-    "rating",
-  ]).order("date", "DESC");
+  return queryCollectionNavigation(
+    "leituras",
+    queriesCollections.leituras
+  ).order("date", "DESC");
 });
 
 const readingList = computed(() => {
@@ -78,7 +73,7 @@ const readingList = computed(() => {
 
       acc[formattedKey].push({
         ...cur,
-        date: formatDateToCard(cur.date),
+        seriesType: getSetiesType(cur.collection as string | undefined),
       });
 
       return acc;

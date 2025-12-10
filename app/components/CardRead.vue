@@ -50,15 +50,27 @@ defineProps<{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-block: 12px;
-  padding-inline: 12px;
+  padding-block: 6px 12px;
+  padding-inline: 6px 12px;
   z-index: 1;
+
+  @include container-tablet {
+    padding-block: 12px;
+    padding-inline: 12px;
+  }
 }
 
 .card-info-pills {
+  --card-info-pill-pb: 4px;
+  --card-info-pill-pi: 8px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+
+  @include container-tablet {
+    --card-info-pill-pb: 6px;
+    --card-info-pill-pi: 12px;
+  }
 }
 
 .card-info-pill {
@@ -66,8 +78,8 @@ defineProps<{
   --rating-color-empty: var(--color-purple-200);
   --rating-color-filled: var(--color-grey-light-100);
   width: fit-content;
-  padding-block: 6px;
-  padding-inline: 12px;
+  padding-block: var(--card-info-pill-pb, 6px);
+  padding-inline: var(--card-info-pill-pi, 12px);
   border-radius: 32px;
   font-size: 0.75rem;
   font-weight: 600;

@@ -1,21 +1,27 @@
 <template>
   <article class="card-note">
-    <nuxt-link to="/">
+    <nuxt-link :to="path">
       <figure class="card-figure">
         <nuxt-img src="https://placehold.co/600x400" />
       </figure>
       <div class="card-content">
-        <p class="card-date">10/09/2025</p>
+        <p class="card-date">{{ dateNote }}</p>
         <h3 class="card-title">
-          Titulo do blog <br />
-          com duas linhas
+          {{ title }}
         </h3>
       </div>
     </nuxt-link>
   </article>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineProps<{
+  cover: string;
+  dateNote: string;
+  path: string;
+  title: string;
+}>();
+</script>
 
 <style lang="scss" scoped>
 .card-content {
@@ -54,7 +60,7 @@
 
   &:not(:first-of-type) {
     padding: 4px;
-    background: #f9f9f9;
+    background: var(--color-grey-light-50);
   }
 
   &:first-of-type {

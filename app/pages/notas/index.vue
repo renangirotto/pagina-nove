@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 useSeoMeta({
-  title: `Leituras | Página Nove`,
+  title: `Notas | Página Nove`,
 });
 
 const { data: notas } = await useAsyncData("navigation-notes-list", () => {
@@ -48,38 +48,13 @@ const { data: leituras } = await useAsyncData(
 );
 
 const readingListAsNotes = computed(() => {
-  if (!leituras.value?.[0]?.children?.length) {
-    return [];
-  }
-
-  return leituras.value[0].children.filter(
-    (item) =>
-      item.dateNote !== undefined &&
-      item.dateNote !== null &&
-      item.dateNote !== ""
-  ) as ReadingAsNote[];
+  return getReadingsAsNotes(leituras?.value?.[0]?.children);
 });
 
 const notesListWithReadings = computed(() => {
-  const notesAndReadings = notesList.value.concat(readingListAsNotes.value);
-
-  notesAndReadings.sort(
-    (
-      itemA: NotesAsItem | ReadingAsNote,
-      itemB: NotesAsItem | ReadingAsNote
-    ) => {
-      const dateA = new Date(itemA.dateNote);
-      const dateB = new Date(itemB.dateNote);
-
-      return dateB.getTime() - dateA.getTime();
-    }
-  );
-
-  return notesAndReadings.map((item) => {
-    return {
-      ...item,
-      dateNote: formatDate(item.dateNote),
-    };
+  return mergeNotesReadings({
+    notes: notesList.value,
+    readings: readingListAsNotes.value,
   });
 });
 </script>

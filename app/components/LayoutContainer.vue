@@ -11,5 +11,9 @@
   width: 100%;
   max-width: var(--layout-container-width, 1088px);
   margin-inline: auto;
+
+  &:not(:last-child) {
+    margin-block-end: 64px;
+  }
 }
 </style>

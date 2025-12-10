@@ -17,12 +17,15 @@
         :title="page.title"
       />
 
-      <template v-if="page.body.value.length">
+      <template v-if="relatedNotes.length > 0"> teste </template>
+
+      <template v-if="page.dateNote">
         <div class="layout-section">
           <ContentRenderer v-if="page" :value="page" />
         </div>
       </template>
-      <template v-else>
+
+      <template v-if="!page.dateNote && relatedNotes.length === 0">
         <div class="layout-section" data-ui-content="empty">
           <h2 class="title">Notas de leitura?</h2>
           <p class="empty-text">
@@ -64,15 +67,28 @@ const artistsFormatted = computed(() => {
 });
 
 const dateFormatted = computed(() => {
-  return new Date(page.value?.date || "").toLocaleDateString("pt-BR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  return formatDate(page.value?.date || "");
 });
 
 useSeoMeta({
   title: `${page.value?.title} | Página Nove`,
+});
+
+const { data: notas } = await useAsyncData(
+  "navigation-notes-list-related",
+  () => {
+    return queryCollectionNavigation("notas", queriesCollections.notas)
+      .where("collection", "=", page.value?.collection)
+      .order("dateNote", "DESC");
+  }
+);
+
+const relatedNotes = computed(() => {
+  if (!notas.value?.[0]?.children?.length) {
+    return [];
+  }
+
+  return notas.value[0].children as NotesAsItem[];
 });
 </script>
 

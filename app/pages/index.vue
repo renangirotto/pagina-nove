@@ -23,11 +23,6 @@
 
 <script lang="ts" setup>
 import getSetiesType from "@/utils/series-type";
-import type { ReadingItem } from "@/utils/layout-types";
-
-useSeoMeta({
-  title: `Página Nove | Só mais um blog`,
-});
 
 const { data: leituras } = await useAsyncData("navigation-reading-list", () => {
   return queryCollectionNavigation(

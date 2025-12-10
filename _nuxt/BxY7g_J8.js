@@ -1,0 +1,1 @@
+import{_ as n}from"./DlAUqK2U.js";import{e as t,H as o,f as s}from"#entry";const _={},r={class:"container"};function a(e,c){return s(),t("div",r,[o(e.$slots,"default",{},void 0,!0)])}const i=Object.assign(n(_,[["render",a],["__scopeId","data-v-5b5fd4e6"]]),{__name:"LayoutContainer"});export{i as _};

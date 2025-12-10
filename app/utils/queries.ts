@@ -20,12 +20,20 @@ interface NotasCollectionAsItem {
   dateNote: string;
 }
 
+interface NotasCollectionAsRelated {
+  collection: string;
+  cover: string;
+  dateNote: string;
+}
+
 export const queriesCollections: {
   leituras: Array<keyof LeiturasCollectionAsItem>;
   leiturasAsNotes: Array<keyof LeiturasCollectionAsNotes>;
   notas: Array<keyof NotasCollectionAsItem>;
+  notasAsRelated: Array<keyof NotasCollectionAsRelated>;
 } = {
   leituras: ["collection", "cover", "date", "publisher", "rating"],
   leiturasAsNotes: ["cover", "dateNote"],
   notas: ["cover", "dateNote"],
+  notasAsRelated: ["collection", "cover", "dateNote"],
 };

@@ -17,7 +17,9 @@
         :title="page.title"
       />
 
-      <template v-if="relatedNotes"> WIP: Related notes </template>
+      <template v-if="relatedNotes && relatedNotes.length > 0">
+        WIP: Related notes
+      </template>
 
       <template v-if="page.dateNote">
         aqui
@@ -26,7 +28,7 @@
         </div>
       </template>
 
-      <template v-if="!page.dateNote && !relatedNotes">
+      <template v-if="!page.dateNote && relatedNotes?.length === 0">
         <div class="layout-section" data-ui-content="empty">
           <h2 class="title">Notas de leitura?</h2>
           <p class="empty-text">
@@ -78,9 +80,10 @@ useSeoMeta({
 const { data: notas } = await useAsyncData(
   "navigation-notes-list-related",
   () => {
-    return queryCollectionNavigation("notas", queriesCollections.notas)
-      .where("collection", "=", page.value?.collection)
-      .order("dateNote", "DESC");
+    return queryCollectionNavigation(
+      "notas",
+      queriesCollections.notasAsRelated
+    ).order("dateNote", "DESC");
   }
 );
 
@@ -89,7 +92,9 @@ const relatedNotes = computed(() => {
     return null;
   }
 
-  return notas.value[0].children as NotesAsItem[];
+  return notas.value[0].children.filter(
+    (item) => item.collection === page.value?.collection
+  ) as NotesAsItem[];
 });
 </script>
 

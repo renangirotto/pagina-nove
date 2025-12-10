@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: "Página Nove - Leituras e textos mal escritos",
+      title: "Página Nove | Leituras e textos mal escritos",
       htmlAttrs: {
         lang: "pt-br",
       },

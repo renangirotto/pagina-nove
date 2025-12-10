@@ -72,6 +72,7 @@ const attrs = useAttrs();
 
 .hero-read-image {
   width: 100%;
+  min-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.05));
   max-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.05));
   border-radius: 4px;
 }

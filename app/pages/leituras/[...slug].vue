@@ -72,7 +72,7 @@ const dateFormatted = computed(() => {
 });
 
 useSeoMeta({
-  title: `${page.value?.title} | Página Nove`,
+  title: `${page.value?.title ? `${page.value?.title} |` : ""} Página Nove`,
 });
 
 const { data: notas } = await useAsyncData(

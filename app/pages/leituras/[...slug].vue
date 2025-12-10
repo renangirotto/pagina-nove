@@ -17,15 +17,16 @@
         :title="page.title"
       />
 
-      <template v-if="relatedNotes.length > 0"> teste </template>
+      <template v-if="relatedNotes"> WIP: Related notes </template>
 
       <template v-if="page.dateNote">
+        aqui
         <div class="layout-section">
           <ContentRenderer v-if="page" :value="page" />
         </div>
       </template>
 
-      <template v-if="!page.dateNote && relatedNotes.length === 0">
+      <template v-if="!page.dateNote && !relatedNotes">
         <div class="layout-section" data-ui-content="empty">
           <h2 class="title">Notas de leitura?</h2>
           <p class="empty-text">
@@ -85,7 +86,7 @@ const { data: notas } = await useAsyncData(
 
 const relatedNotes = computed(() => {
   if (!notas.value?.[0]?.children?.length) {
-    return [];
+    return null;
   }
 
   return notas.value[0].children as NotesAsItem[];

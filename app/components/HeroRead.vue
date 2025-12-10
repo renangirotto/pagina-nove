@@ -1,8 +1,8 @@
 <template>
   <div class="hero-read-grid" v-bind="attrs">
-    <div class="hero-read-cover">
+    <div aria-hidden="true" class="hero-read-cover">
       <figure class="hero-read-figure">
-        <img class="hero-read-image" :src="cover" alt="" />
+        <nuxt-img class="hero-read-image" :src="cover" alt="" />
       </figure>
     </div>
     <div class="hero-read-info">

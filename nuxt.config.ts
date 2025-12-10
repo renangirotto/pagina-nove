@@ -2,28 +2,32 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Página Nove - Leituras e textos mal escritos',
+      title: "Página Nove - Leituras e textos mal escritos",
       htmlAttrs: {
-        lang: 'pt-br',
+        lang: "pt-br",
       },
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        {
+          rel: "icon",
+          type: "image/x-icon",
+          href: `${import.meta.env.NUXT_APP_BASE_URL ?? "/"}favicon.ico`,
+        },
       ],
     },
   },
-  compatibilityDate: '2025-10-29',
+  compatibilityDate: "2025-10-29",
   devtools: { enabled: true },
   modules: [
-    '@nuxt/content',
-    '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxt/image',
-    'nuxt-icons',
+    "@nuxt/content",
+    "@nuxt/eslint",
+    "@nuxt/fonts",
+    "@nuxt/image",
+    "nuxt-icons",
   ],
   fonts: {
     defaults: {
       weights: [400, 500, 600, 700],
-      styles: ['normal'],
+      styles: ["normal"],
     },
   },
   vite: {
@@ -35,4 +39,4 @@ export default defineNuxtConfig({
       },
     },
   },
-})
+});

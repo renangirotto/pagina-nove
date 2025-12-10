@@ -20,6 +20,7 @@
             <li v-for="item in navItems" :key="item.to">
               <nuxt-link
                 class="nav-link"
+                :target="item.target || `_self`"
                 :to="item.to"
                 @click="() => dialog?.close()"
               >
@@ -34,7 +35,11 @@
       <nav class="nav" data-ui-decive="desktop">
         <ul class="nav-list">
           <li v-for="item in navItems" :key="item.to">
-            <nuxt-link class="nav-link" :to="item.to">
+            <nuxt-link
+              class="nav-link"
+              :target="item.target || `_self`"
+              :to="item.to"
+            >
               <custom-icon aria-hidden="true" :name="item.icon" />
               {{ item.label }}
             </nuxt-link>

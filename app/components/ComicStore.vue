@@ -1,6 +1,6 @@
 <template>
   <div class="store">
-    <figure aria-hidden="true">
+    <figure aria-hidden="true" class="store-figure">
       <nuxt-img class="store-image" :src="imageUrl" alt="" />
     </figure>
     <div class="store-info">
@@ -14,9 +14,11 @@
           {{ siteUrl }}
         </a>
       </p>
-      <a class="store-link" :href="address.link" target="_blank">
-        {{ address.text }}
-      </a>
+      <p>
+        <a class="store-link" :href="address.link" target="_blank">
+          {{ address.text }}
+        </a>
+      </p>
     </div>
   </div>
 </template>
@@ -36,15 +38,30 @@ defineProps<{
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto;
+  gap: 24px 0px;
 
   @include container-desktop {
     grid-template-columns: 400px 1fr;
     grid-template-rows: auto;
+    gap: 0px 24px;
   }
 
   &:not(:last-child) {
-    margin-block-end: 40px;
+    margin-block-end: 64px;
   }
+}
+
+.store-figure {
+  border-radius: 8px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+}
+
+.store-info {
+  align-self: center;
 }
 
 .store-links {

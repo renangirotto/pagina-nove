@@ -14,7 +14,7 @@
           v-for="store in stores"
           :key="store.title"
           :address="store.address"
-          :image-url="`/lojas/${store.imageUrl}`"
+          :image-url="`https://placehold.co/600x400`"
           :instagram="store.instagram"
           :site-url="store.siteUrl"
           :title="store.title"

@@ -1,5 +1,5 @@
 ---
-artists: ['Nick Dragotta' 'Scott Snyder' 'Frank Martin']
+artists: ['Nick Dragotta', 'Scott Snyder', 'Frank Martin']
 collection: 'Absolute Batman'
 collectionVolume: 1
 cover: 'absolute-batman/cover-1.webp'

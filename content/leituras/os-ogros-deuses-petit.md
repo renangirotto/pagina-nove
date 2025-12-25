@@ -1,5 +1,5 @@
 ---
-artists: ['Hubert Boulard' 'Bertrand Gatignol']
+artists: ['Hubert Boulard', 'Bertrand Gatignol']
 collection: 'Os Ogros Deuses'
 cover: 'os-ogros-deuses/petit.webp'
 date: 2025-10-27,

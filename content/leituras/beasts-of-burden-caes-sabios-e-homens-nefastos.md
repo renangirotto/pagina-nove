@@ -1,5 +1,5 @@
 ---
-artists: ['Benjamin Dewey' 'Evan Dorkin']
+artists: ['Benjamin Dewey', 'Evan Dorkin']
 collection: 'Beasts of Burden'
 cover: 'beasts-of-burden/caes-sabios-e-homens-nefastos.webp'
 date: 2025-10-04,

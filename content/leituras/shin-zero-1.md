@@ -1,5 +1,5 @@
 ---
-artists: ['Mathieu Bablet' 'Guillaume Singelin']
+artists: ['Mathieu Bablet', 'Guillaume Singelin']
 collection: 'Shin Zero'
 collectionVolume: 1
 cover: 'shin-zero/cover-1.webp'

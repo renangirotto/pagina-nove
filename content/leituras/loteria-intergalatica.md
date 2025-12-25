@@ -1,5 +1,5 @@
 ---
-artists: ['Celio Cecare' 'Benson Chin']
+artists: ['Celio Cecare', 'Benson Chin']
 cover: 'loteria-intergalatica/cover.webp'
 date: 2025-10-05,
 labels: ['Quadrinhos']

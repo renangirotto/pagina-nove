@@ -4,5 +4,5 @@ content:
     type: collection
     path: content/leituras
     fields:
-      - { name: title, label: Título, type: string, required: true }
+      - { name: title, label: Título, required: true }
       

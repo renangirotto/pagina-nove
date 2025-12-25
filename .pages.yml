@@ -1,0 +1,8 @@
+content:
+  - name: leituras
+    label: Leituras
+    type: collection
+    path: content/leituras
+    fields:
+      - { name: title, label: Título, type: string, required: true }
+      

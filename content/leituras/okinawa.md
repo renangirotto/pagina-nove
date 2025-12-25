@@ -1,12 +1,12 @@
 ---
-artists: ['Susumu Higa'],
-cover: 'okinawa/cover.webp',
+artists: ['Susumu Higa']
+cover: 'okinawa/cover.webp'
 date: 2025-09-19,
-labels: ['Mangas'],
-pages: '544',
-publisher: 'Conrad',
-publishYear: '2025',
-rating: '4',
+labels: ['Mangas']
+pages: '544'
+publisher: 'Conrad'
+publishYear: '2025'
+rating: '4'
 title: 'Okinawa'
 ---
 

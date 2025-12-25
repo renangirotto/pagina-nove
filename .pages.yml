@@ -9,6 +9,7 @@ content:
     label: Leituras
     type: collection
     path: content/leituras
+    filename: '{primary}.md'
     fields:
       - { name: title, label: Título, type: string, required: true }
       - { name: artists, label: Artistas, type: string, list: true, required: true }

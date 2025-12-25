@@ -5,5 +5,15 @@ content:
     path: content/leituras
     fields:
       - { name: artists, label: Artistas, type: string, list: true, required: true }
+      - { name: collection, label: Coleção, type: string, required: false }
+      - { name: collectionVolume, label: Volume da Coleção, type: number, required: false }
+      - { name: cover, label: Capa (URL), type: string, required: true }
+      - { name: date, label: Data de leitura, type: date, required: true }
+      - { name: dateNote, label: Data da nota, type: date, required: false }
+      - { name: labels, label: Labels, type: string, list: true, required: true }
+      - { name: pages, label: Qtd. de Páginas, type: string, required: true }
+      - { name: publisher, label: Editora, type: string, required: true }
+      - { name: publishYear, label: Ano de Publicação, type: string, required: true }
+      - { name: rating, label: Avaliação, type: string, required: true }
       - { name: title, label: Título, type: string, required: true }
       

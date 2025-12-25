@@ -10,6 +10,7 @@ content:
     type: collection
     path: content/leituras
     fields:
+      - { name: title, label: Título, type: string, required: true }
       - { name: artists, label: Artistas, type: string, list: true, required: true }
       - { name: collection, label: Coleção, type: string, required: false }
       - { name: collectionVolume, label: Volume da Coleção, type: number, required: false }
@@ -20,7 +21,6 @@ content:
       - { name: pages, label: Qtd. de Páginas, type: string, required: true }
       - { name: publisher, label: Editora, type: string, required: true }
       - { name: publishYear, label: Ano de Publicação, type: string, required: true }
-      - { name: rating, label: Avaliação, type: string, required: true }
-      - { name: title, label: Título, type: string, required: true }
+      - { name: rating, label: Avaliação, type: string, required: true }      
     
       

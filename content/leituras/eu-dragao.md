@@ -9,5 +9,5 @@ labels:
 pages: "192"
 publisher: ComixZone
 publishYear: "2023"
-rating: 3,5
+rating: "3.5"
 ---

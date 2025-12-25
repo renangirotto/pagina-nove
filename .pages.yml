@@ -1,3 +1,9 @@
+media:
+  - name: covers
+    label: Capas
+    input: public/images/covers
+    output: /public/images/covers
+    extensions: [ webp ]
 content:
   - name: leituras
     label: Leituras
@@ -16,4 +22,5 @@ content:
       - { name: publishYear, label: Ano de Publicação, type: string, required: true }
       - { name: rating, label: Avaliação, type: string, required: true }
       - { name: title, label: Título, type: string, required: true }
+    
       

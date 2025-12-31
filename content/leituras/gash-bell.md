@@ -1,5 +1,5 @@
 ---
-title: Gash Bell!!
+title: "Gash Bell!! #1"
 artists:
   - Makoto Raiku
 collection: Gash Bell

@@ -5,6 +5,7 @@ artists:
   - Jeferson Rocha
   - Júlio da Gaita
 collection: Mad Marx
+collectionVolume: 2
 cover: mad-marx/cover-2.webp
 date: 2026-01-05
 labels:

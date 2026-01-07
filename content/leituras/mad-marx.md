@@ -9,7 +9,7 @@ cover: mad-marx/cover-1.webp
 date: 2026-01-04
 labels:
   - Quadrinhos
-pages: "44"
+pages: 44
 publisher: Mistifório
 publishYear: "2024"
 rating: "3.5"

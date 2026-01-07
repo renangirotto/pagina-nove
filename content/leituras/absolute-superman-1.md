@@ -10,7 +10,7 @@ date: 2026-01-04
 labels:
   - Quadrinhos
   - DC Comics
-pages: "64"
+pages: 64
 publisher: Panini
 publishYear: "2025"
 rating: "5"

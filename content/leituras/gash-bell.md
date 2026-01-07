@@ -8,7 +8,7 @@ cover: gash-bell/cover-1.webp
 date: 2025-12-29
 labels:
   - Mangas
-pages: "386"
+pages: 386
 publisher: MPEG
 publishYear: "2023"
 rating: "4"

@@ -10,7 +10,7 @@ cover: absolute-mulher-maravilha/cover-1.webp
 date: 2026-01-03
 labels:
   - Quadrinhos
-pages: "72"
+pages: 72
 publisher: Panini
 publishYear: "2025"
 rating: "5"

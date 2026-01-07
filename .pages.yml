@@ -19,9 +19,7 @@ content:
       - { name: date, label: Data de leitura, type: date, required: true }
       - { name: dateNote, label: Data da nota, type: date, required: false }
       - { name: labels, label: Labels, type: string, list: true, required: true }
-      - { name: pages, label: Qtd. de Páginas, type: string, required: true }
+      - { name: pages, label: Qtd. de Páginas, type: number, required: true }
       - { name: publisher, label: Editora, type: string, required: true }
       - { name: publishYear, label: Ano de Publicação, type: string, required: true }
-      - { name: rating, label: Avaliação, type: string, required: true }      
-    
-      
+      - { name: rating, label: Avaliação, type: string, required: true }

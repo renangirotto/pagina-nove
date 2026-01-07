@@ -7,7 +7,7 @@ cover: aurora-nas-sombras/cover.webp
 date: 2025-12-30
 labels:
   - Quadrinhos
-pages: "96"
+pages: 96
 publisher: DarkSide
 publishYear: "2019"
 rating: "4"

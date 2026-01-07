@@ -39,7 +39,7 @@ defineProps<{
   artists: string | null;
   cover: string;
   date: string;
-  pages: string;
+  pages: number;
   publisher: string;
   publishYear: string;
   rating: string | number;

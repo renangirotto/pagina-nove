@@ -30,3 +30,5 @@ export const NAV_ITEMS = [
     to: "https://www.instagram.com/napaginanove/",
   },
 ];
+
+export const TOTAL_AMOUNT_ON_SHELF = 238;

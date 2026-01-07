@@ -8,6 +8,7 @@ export interface NotesAsItem extends ContentNavigationItem {
 export interface ReadingItem extends ContentNavigationItem {
   cover: string;
   date: string;
+  pages: number;
   publisher: string;
   rating: string;
   seriesType: string;

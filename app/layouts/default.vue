@@ -11,13 +11,13 @@
 
 <style lang="scss" scoped>
 .layout-main {
-  padding-block: 32px;
+  padding-block: 32px 64px;
   padding-inline: 16px;
   position: relative;
   overflow: hidden;
 
   @include container-desktop {
-    padding-block: 40px;
+    padding-block: 40px 88px;
   }
 }
 

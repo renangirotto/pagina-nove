@@ -3,6 +3,7 @@ interface LeiturasCollectionAsItem {
   cover: string;
   date: string;
   dateNote?: string;
+  pages: number;
   publisher: string;
   rating: string;
   title: string;
@@ -33,7 +34,15 @@ export const queriesCollections: {
   notas: Array<keyof NotasCollectionAsItem>;
   notasAsRelated: Array<keyof NotasCollectionAsRelated>;
 } = {
-  leituras: ["collection", "cover", "date", "dateNote", "publisher", "rating"],
+  leituras: [
+    "collection",
+    "cover",
+    "date",
+    "dateNote",
+    "pages",
+    "publisher",
+    "rating",
+  ],
   leiturasAsNotes: ["cover", "dateNote"],
   notas: ["cover", "dateNote"],
   notasAsRelated: ["collection", "cover", "dateNote"],

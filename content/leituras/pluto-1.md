@@ -5,7 +5,7 @@ collectionVolume: 1
 cover: 'pluto/cover-1.webp'
 date: 2025-09-22,
 labels: ['Mangas']
-pages: '202'
+pages: 202
 publisher: 'Panini'
 publishYear: '2024'
 rating: '5'

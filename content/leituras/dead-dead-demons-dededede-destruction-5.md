@@ -5,7 +5,7 @@ collectionVolume: 5
 cover: 'dead-dead-demons-dededede-destruction/cover-5.webp'
 date: 2025-11-16,
 labels: ['Mangas']
-pages: '168'
+pages: 168
 publisher: 'JBC'
 publishYear: '2022'
 rating: '5'

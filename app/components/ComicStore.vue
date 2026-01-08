@@ -69,16 +69,30 @@ defineProps<{
   --icon-size: 12px;
   --icon-color-light: var(--color-grey-light-200);
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  gap: 4px;
+
+  @include container-desktop {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
 
   &:not(:last-child) {
     margin-block-end: 24px;
   }
+
+  .custom-icon {
+    display: none;
+
+    @include container-desktop {
+      display: initial;
+    }
+  }
 }
 
 .store-link {
-  font-size: clamp(1rem, 3vw, 1.125rem);
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
   font-weight: 600;
   color: var(--color-store-link);
   text-decoration: none;

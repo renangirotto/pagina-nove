@@ -11,26 +11,13 @@
 
 <style lang="scss" scoped>
 .layout-main {
-  padding-block: 32px 64px;
+  padding-block: 44px 64px;
   padding-inline: 16px;
   position: relative;
   overflow: hidden;
 
   @include container-desktop {
-    padding-block: 40px 88px;
-  }
-}
-
-.pattern {
-  min-width: 560px;
-  width: 100dvw;
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline: 0;
-  z-index: 0;
-
-  img {
-    width: 100%;
+    padding-block: 44px 88px;
   }
 }
 </style>

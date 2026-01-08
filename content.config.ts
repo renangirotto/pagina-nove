@@ -25,7 +25,7 @@ export default defineContentConfig({
       type: "page",
       source: "notas/*.md",
       schema: z.object({
-        collection: z.string().optional(),
+        collection: z.array(z.string()).optional(),
         cover: z.string(),
         dateNote: z.date(),
         title: z.string(),

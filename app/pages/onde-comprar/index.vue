@@ -4,17 +4,17 @@
       <title-page>
         <custom-icon aria-hidden="true" name="shopping-bag" /> Onde Comprar
       </title-page>
-      <p class="page-text">
+      <text-page>
         Se estiver por <strong>São Paulo</strong> e quiser apoiar lojas de
         quadrinhos, fica aqui a minha recomendação!
-      </p>
+      </text-page>
 
-      <div>
+      <div class="layout-stores">
         <comic-store
           v-for="store in stores"
           :key="store.title"
           :address="store.address"
-          :image-url="`https://placehold.co/600x400`"
+          :image-url="store.imageUrl"
           :instagram="store.instagram"
           :site-url="store.siteUrl"
           :title="store.title"
@@ -31,7 +31,7 @@ const stores = [
       link: "https://maps.app.goo.gl/gmN6YRBroyq5jHy56",
       text: "Praça Benedito Calixto, 158 - 1º andar - Pinheiros, São Paulo - SP, 05406-040",
     },
-    imageUrl: "monstra.webp",
+    imageUrl: "/images/stores/loja-monstra.webp",
     instagram: {
       link: "https://www.instagram.com/lojamonstra/",
       text: "@lojamonstra",
@@ -44,7 +44,7 @@ const stores = [
       link: "https://maps.app.goo.gl/4VKBfjpaYxg85tZYA",
       text: "R. Coelho Lisboa, 366 - Tatuapé, São Paulo - SP, 03323-040",
     },
-    imageUrl: "comicboom.webp",
+    imageUrl: "https://placehold.co/600x400",
     instagram: {
       link: "https://www.instagram.com/comic_boom_/",
       text: "@comic_boom_",
@@ -57,7 +57,7 @@ const stores = [
       link: "https://maps.app.goo.gl/pvoqRDo4EtXzPSkx7",
       text: "R. da Consolação, 2685 - Cerqueira César, São Paulo - SP, 01416-001",
     },
-    imageUrl: "comix.webp",
+    imageUrl: "https://placehold.co/600x400",
     instagram: {
       link: "https://www.instagram.com/comixbookshop/",
       text: "@comixbookshop",
@@ -69,11 +69,11 @@ const stores = [
 </script>
 
 <style lang="scss" scoped>
-.page-text {
-  font-size: clamp(1rem, 3vw, 1.125rem);
+.layout-stores {
+  margin-block-start: 32px;
 
-  &:not(:last-child) {
-    margin-block-end: 72px;
+  @include container-desktop {
+    margin-block-start: 64px;
   }
 }
 </style>

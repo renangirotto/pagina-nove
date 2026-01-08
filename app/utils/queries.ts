@@ -18,7 +18,7 @@ interface LeiturasCollectionAsNotes {
 }
 
 interface NotasCollectionAsItem {
-  cover: string;
+  cover: string[];
   dateNote: string;
 }
 

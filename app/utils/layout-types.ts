@@ -1,6 +1,7 @@
 import type { ContentNavigationItem } from "@nuxt/content";
 
 export interface NotesAsItem extends ContentNavigationItem {
+  collection: string[];
   cover: string;
   dateNote: string;
 }

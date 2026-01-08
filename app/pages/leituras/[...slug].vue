@@ -93,7 +93,9 @@ const relatedNotes = computed(() => {
   }
 
   return notas.value[0].children.filter(
-    (item) => item.collection === page.value?.collection
+    (item) =>
+      Array.isArray(item.collection) &&
+      item.collection.includes(page.value?.collection)
   ) as NotesAsItem[];
 });
 </script>

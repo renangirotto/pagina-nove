@@ -30,7 +30,7 @@ defineProps<{
   max-height: 100dvh;
   border: none;
   padding-block: 0px;
-  padding-inline: 0px;
+  padding-inline: 32px 0px;
   inset: 0;
   background: transparent;
   transform: translateX(calc(var(--closed) * 50%));

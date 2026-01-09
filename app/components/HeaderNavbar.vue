@@ -75,12 +75,11 @@ const dialog = document?.getElementById(
   grid-template-areas: "logo nav";
   align-items: center;
   width: 100%;
-  padding-block: 16px;
-  padding-inline: 24px;
+  padding-block: 32px 24px;
+  padding-inline: 8px;
   border-block-end: 1px solid var(--color-grey-light-100);
 
   @include container-desktop {
-    padding-block: 24px;
     padding-inline: 32px;
   }
 }

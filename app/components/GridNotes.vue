@@ -1,10 +1,14 @@
 <template>
-  <div class="grid-notes">
+  <div class="grid-notes" :data-ui-page-type="page">
     <slot />
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineProps<{
+  page?: "home";
+}>();
+</script>
 
 <style lang="scss" scoped>
 .grid-notes {
@@ -21,6 +25,15 @@
       "first first ."
       ". . .";
     gap: 24px 24px;
+  }
+
+  &[data-ui-page-type="home"] {
+    @include container-desktop {
+      grid-template-columns: calc(32% - 24px) auto;
+      grid-template-areas:
+        "first first ."
+        "first first .";
+    }
   }
 
   > *:nth-child(1) {

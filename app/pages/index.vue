@@ -5,7 +5,7 @@
         <custom-icon aria-hidden="true" name="pen-tool" /> Últimas Notas
       </title-page>
 
-      <grid-notes>
+      <grid-notes page="home">
         <card-note
           v-for="note in notesListWithReadings"
           :key="note.path"
@@ -16,7 +16,7 @@
         />
       </grid-notes>
     </layout-container>
-    <layout-container>
+    <layout-container divider>
       <title-page custom-tag="h2">
         <custom-icon aria-hidden="true" name="open-book" /> Últimas leituras
       </title-page>
@@ -35,13 +35,46 @@
       </grid-read>
     </layout-container>
     <layout-container>
-      <div class="box">
+      <BoxText variant="purple">
         <title-page custom-tag="h2">
-          <custom-icon aria-hidden="true" name="open-book" /> Este blog...
+          <custom-icon aria-hidden="true" name="info" /> Números do blog
         </title-page>
         <text-page>
-          tem servido como um diário de leitura, uma forma de eu catalogar o que
-          li e talvez compartilhar com amigos.
+          Porque números grandes (não tão grandes) parecem impactantes. Mas
+          desde o começo deste projeto eu li por volta de umas
+          <span data-ui-text-big data-ui-text-highlight>{{
+            readingList?.totalAmoutOfPages
+          }}</span>
+          <strong data-ui-text-highlight> páginas</strong>, em
+          <span data-ui-text-big data-ui-text-highlight>{{
+            readingList?.totalAmountOfReads
+          }}</span>
+          <strong data-ui-text-highlight> quadrinhos</strong>,
+          <strong data-ui-text-highlight>mangas</strong> e talvez uns
+          <strong data-ui-text-highlight>livros</strong>, de
+          <span data-ui-text-big data-ui-text-highlight>{{
+            readingList?.totalAmountOfPublishers
+          }}</span>
+          <strong data-ui-text-highlight> editoras</strong> diferentes e por
+          volta de uns
+          <span data-ui-text-big data-ui-text-highlight
+            >{{ readingList?.percentageOfReads }}%</span
+          >
+          de tudo que tenho na estante de casa para ler e para reler também,
+          porque algumas coisas li há muito tempo e por isso não coloquei ainda
+          aqui no blog.
+        </text-page>
+      </BoxText>
+    </layout-container>
+    <layout-container>
+      <BoxText>
+        <title-page custom-tag="h2">
+          <custom-icon aria-hidden="true" name="help-question" /> Sobre este
+          blog
+        </title-page>
+        <text-page>
+          Eu vejo este blog como um diário de leitura, uma forma de eu catalogar
+          o que li e talvez compartilhar com amigos.
         </text-page>
         <text-page>
           Com certeza ele é um amontoado de textos que eu não espero que alguém
@@ -71,39 +104,7 @@
           notas mentais e se tornou algo que não sei por quanto tempo vai durar,
           mas que foi e é divertido de desenvolver e manter, até não ser mais.
         </text-page>
-      </div>
-    </layout-container>
-    <layout-container>
-      <div class="box-purple">
-        <title-page custom-tag="h2">
-          <custom-icon aria-hidden="true" name="open-book" /> Números do blog
-        </title-page>
-        <text-page>
-          Porque números grandes (não tão grandes) parecem impactantes. Mas
-          desde o começo deste projeto eu li por volta de umas
-          <span data-ui-text-big data-ui-text-highlight>{{
-            readingList?.totalAmoutOfPages
-          }}</span>
-          <strong data-ui-text-highlight> páginas</strong>, em
-          <span data-ui-text-big data-ui-text-highlight>{{
-            readingList?.totalAmountOfReads
-          }}</span>
-          <strong data-ui-text-highlight> quadrinhos</strong>,
-          <strong data-ui-text-highlight>mangas</strong> e talvez uns
-          <strong data-ui-text-highlight>livros</strong>, de
-          <span data-ui-text-big data-ui-text-highlight>{{
-            readingList?.totalAmountOfPublishers
-          }}</span>
-          <strong data-ui-text-highlight> editoras</strong> diferentes e por
-          volta de uns
-          <span data-ui-text-big data-ui-text-highlight
-            >{{ readingList?.percentageOfReads }}%</span
-          >
-          de tudo que tenho na estante de casa para ler e para reler também,
-          porque algumas coisas li há muito tempo e por isso não coloquei ainda
-          aqui no blog.
-        </text-page>
-      </div>
+      </BoxText>
     </layout-container>
   </section>
 </template>
@@ -184,18 +185,4 @@ const notesListWithReadings = computed(() => {
 });
 </script>
 
-<style lang="scss">
-.box {
-  padding-block: 32px;
-  padding-inline: 32px;
-  border-radius: 16px;
-  background: var(--color-grey-light-50);
-}
-
-.box-purple {
-  padding-block: 32px;
-  padding-inline: 32px;
-  border-radius: 16px;
-  background: var(--color-purple-50);
-}
-</style>
+<style></style>

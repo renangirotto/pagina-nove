@@ -29,8 +29,8 @@ defineProps<{
   height: 100dvh;
   max-height: 100dvh;
   border: none;
-  padding-block: 16px;
-  padding-inline: 24px;
+  padding-block: 0px;
+  padding-inline: 0px;
   inset: 0;
   background: transparent;
   transform: translateX(calc(var(--closed) * 50%));
@@ -66,8 +66,8 @@ defineProps<{
   max-height: 100%;
   padding-block: 0px 24px;
   padding-inline: 24px;
-  border-radius: 4px;
   position: relative;
+  border: none;
   margin-inline-start: auto;
   background: var(--color-yellow-grey-100);
 }
@@ -77,16 +77,15 @@ defineProps<{
   cursor: pointer;
   padding-block: 12px;
   padding-inline: 12px;
-  border: 12px solid var(--color-yellow-grey-100);
+  border: none;
   border-radius: 50%;
-  position: absolute;
-  inset-block-start: 12px;
-  inset-inline: auto -36px;
-  margin-inline-start: auto;
   background: var(--color-purple-100);
 }
 
 .dialog-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-block: 32px;
   border-block-end: 1px solid var(--color-grey-light-200);
   position: relative;

@@ -14,7 +14,7 @@
           :id="navDialogId"
           class="nav-dialog"
           :on-click-close="() => dialog?.close()"
-          title="Umas outras páginas"
+          title="Outras páginas"
         >
           <ul class="nav-list">
             <li v-for="item in navItems" :key="item.to">
@@ -64,7 +64,6 @@ const dialog = document?.getElementById(
 
 <style lang="scss" scoped>
 .header {
-  padding-block: 16px 0px;
   padding-inline: 16px;
 }
 
@@ -78,8 +77,7 @@ const dialog = document?.getElementById(
   width: 100%;
   padding-block: 16px;
   padding-inline: 24px;
-  border-radius: 24px;
-  background: var(--color-grey-light-50);
+  border-block-end: 1px solid var(--color-grey-light-100);
 
   @include container-desktop {
     padding-block: 24px;

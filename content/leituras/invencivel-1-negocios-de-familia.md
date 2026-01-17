@@ -1,0 +1,17 @@
+---
+title: "Invencível #1 - Negócios De Família"
+artists:
+  - Rovert Kirkman
+  - Cory Walker
+  - Bill Crabtree
+collection: Invencível
+collectionVolume: 1
+cover: invencivel/cover-1.webp
+date: 2026-01-14
+labels:
+  - Quadrinhos
+pages: 120
+publisher: Panini
+publishYear: "2025"
+rating: "4"
+---

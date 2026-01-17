@@ -1,0 +1,17 @@
+---
+title: "Invencível #2 - Oito é Demais"
+artists:
+  - Robert Kirkman
+  - Cory Walker
+  - Bill Crabtree
+collection: Invencível
+collectionVolume: 2
+cover: invencivel/cover-2.webp
+date: 2026-01-15
+labels:
+  - Quadrinhos
+pages: 128
+publisher: Panini
+publishYear: "2025"
+rating: "4"
+---

@@ -1,7 +1,7 @@
 <template>
   <layout-container>
     <title-page>
-      <custom-icon aria-hidden="true" name="pen-tool" /> Notas
+      <custom-icon aria-hidden="true" name="pen-tool" /> Notas de leituras
     </title-page>
 
     <grid-notes>
@@ -25,7 +25,7 @@ useSeoMeta({
 const { data: notas } = await useAsyncData("navigation-notes-list", () => {
   return queryCollectionNavigation("notas", queriesCollections.notas).order(
     "dateNote",
-    "DESC"
+    "DESC",
   );
 });
 
@@ -42,9 +42,9 @@ const { data: leituras } = await useAsyncData(
   () => {
     return queryCollectionNavigation(
       "leituras",
-      queriesCollections.leiturasAsNotes
+      queriesCollections.leiturasAsNotes,
     ).order("date", "DESC");
-  }
+  },
 );
 
 const readingListAsNotes = computed(() => {

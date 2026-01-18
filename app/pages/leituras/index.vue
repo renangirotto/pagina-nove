@@ -14,6 +14,7 @@
             v-for="item in items"
             :key="item.path"
             :cover="item.cover"
+            :date="item.date"
             :path="item.path"
             :publisher="item.publisher"
             :rating="item.rating"
@@ -37,7 +38,7 @@ useSeoMeta({
 const { data: leituras } = await useAsyncData("navigation-reading-list", () => {
   return queryCollectionNavigation(
     "leituras",
-    queriesCollections.leituras
+    queriesCollections.leituras,
   ).order("date", "DESC");
 });
 
@@ -73,12 +74,13 @@ const readingList = computed(() => {
 
       acc[formattedKey].push({
         ...cur,
+        date: formatDate(cur.date || ""),
         seriesType: getSetiesType(cur.collection as string | undefined),
       });
 
       return acc;
     },
-    {} as Record<string, ReadingItem[]>
+    {} as Record<string, ReadingItem[]>,
   );
 
   return readingListByMonth;

@@ -6,8 +6,12 @@
           <p class="card-info-pill">{{ publisher }}</p>
           <p class="card-info-pill">{{ seriesType }}</p>
         </div>
-        <div class="card-info-pill">
-          <rating-bar :rating="rating" />
+        <div>
+          <div class="card-info-pill card-info-rating">
+            <rating-bar :rating="rating" />
+          </div>
+          <h3 class="card-info-title">{{ title }}</h3>
+          <p class="card-info-date">{{ date }}</p>
         </div>
       </div>
       <figure aria-hidden="true" class="card-figure">
@@ -20,6 +24,7 @@
 <script lang="ts" setup>
 defineProps<{
   cover: string;
+  date: string;
   path: string;
   publisher: string;
   rating: string;
@@ -52,12 +57,24 @@ defineProps<{
   justify-content: space-between;
   padding-block: 6px 12px;
   padding-inline: 6px 12px;
+  border-radius: 4px;
   z-index: 1;
+  color: var(--color-yellow-grey-100);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.75) 80%
+  );
 
   @include container-tablet {
-    padding-block: 12px;
-    padding-inline: 12px;
+    padding-block: 16px 24px;
+    padding-inline: 16px;
   }
+}
+
+.card-info-date {
+  font-size: 0.875rem;
 }
 
 .card-info-pills {
@@ -87,16 +104,24 @@ defineProps<{
   background: var(--color-purple-100);
   box-shadow: 0px 2px 4px 0px rgba(#1f1f1f, 0.25);
 
-  @include container-tablet {
-    --rating-icon-size: 24px;
-  }
-
   @include container-desktop {
     font-size: 0.875rem;
   }
 
   &:last-child {
     align-self: center;
+  }
+}
+
+.card-info-rating {
+  margin-block-end: 12px;
+}
+
+.card-info-title {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+
+  &:not(:last-child) {
+    margin-block-end: 4px;
   }
 }
 

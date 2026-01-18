@@ -26,6 +26,7 @@
           v-for="item in readingList.lastReadList"
           :key="item.path"
           :cover="item.cover"
+          :date="item.date"
           :path="item.path"
           :publisher="item.publisher"
           :rating="item.rating"
@@ -141,6 +142,7 @@ const readingList = computed(() => {
   const lastReadList = children.slice(0, 4).map((item) => {
     return {
       ...item,
+      date: formatDate(item.date || ""),
       seriesType: getSetiesType(item.collection as string | undefined),
     };
   });

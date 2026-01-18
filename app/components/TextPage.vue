@@ -1,7 +1,5 @@
 <template>
-  <custom-tag class="text-page">
-    <slot />
-  </custom-tag>
+  <custom-tag class="text-page"> <slot /> </custom-tag>
 </template>
 
 <script lang="ts" setup>
@@ -14,7 +12,9 @@ const CustomTag = props.customTag || "p";
 
 <style lang="scss">
 .text-page {
-  font-size: clamp(1rem, 3vw, 1.125rem);
+  font-family: "Raleway", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 500;
 
   &:not(:last-child) {
     margin-block-end: 16px;

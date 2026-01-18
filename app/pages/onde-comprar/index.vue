@@ -6,7 +6,7 @@
       </title-page>
       <text-page>
         Se estiver por <strong>São Paulo</strong> e quiser apoiar lojas de
-        quadrinhos, fica aqui a minha recomendação!
+        quadrinhos aqui da cidade, fica aqui a minha recomendação!
       </text-page>
 
       <div class="layout-stores">
@@ -41,31 +41,48 @@ const stores = [
   },
   {
     address: {
-      link: "https://maps.app.goo.gl/4VKBfjpaYxg85tZYA",
-      text: "R. Coelho Lisboa, 366 - Tatuapé, São Paulo - SP, 03323-040",
+      link: "https://maps.app.goo.gl/a4zmDTx2ugUKzSgW7",
+      text: "R. Augusta, 1371 - loja 116 - Consolação, São Paulo - SP, 01305-902",
     },
-    imageUrl: "https://placehold.co/600x400",
+    imageUrl: "/images/stores/ugra.webp",
     instagram: {
-      link: "https://www.instagram.com/comic_boom_/",
-      text: "@comic_boom_",
+      link: "https://www.instagram.com/ugra_press/",
+      text: "@ugra_press",
     },
-    siteUrl: "https://comicboom.com.br/",
-    title: "Comic boom!",
+    siteUrl: "https://www.ugrapress.com.br/",
+    title: "Ugra",
   },
-  {
-    address: {
-      link: "https://maps.app.goo.gl/pvoqRDo4EtXzPSkx7",
-      text: "R. da Consolação, 2685 - Cerqueira César, São Paulo - SP, 01416-001",
-    },
-    imageUrl: "https://placehold.co/600x400",
-    instagram: {
-      link: "https://www.instagram.com/comixbookshop/",
-      text: "@comixbookshop",
-    },
-    siteUrl: "https://www.comix.com.br/",
-    title: "Comix Book Shop",
-  },
+  // {
+  //   address: {
+  //     link: "https://maps.app.goo.gl/4VKBfjpaYxg85tZYA",
+  //     text: "R. Coelho Lisboa, 366 - Tatuapé, São Paulo - SP, 03323-040",
+  //   },
+  //   imageUrl: "https://placehold.co/600x400",
+  //   instagram: {
+  //     link: "https://www.instagram.com/comic_boom_/",
+  //     text: "@comic_boom_",
+  //   },
+  //   siteUrl: "https://comicboom.com.br/",
+  //   title: "Comic boom!",
+  // },
+  // {
+  //   address: {
+  //     link: "https://maps.app.goo.gl/pvoqRDo4EtXzPSkx7",
+  //     text: "R. da Consolação, 2685 - Cerqueira César, São Paulo - SP, 01416-001",
+  //   },
+  //   imageUrl: "https://placehold.co/600x400",
+  //   instagram: {
+  //     link: "https://www.instagram.com/comixbookshop/",
+  //     text: "@comixbookshop",
+  //   },
+  //   siteUrl: "https://www.comix.com.br/",
+  //   title: "Comix Book Shop",
+  // },
 ];
+
+useSeoMeta({
+  title: `Onde comprar | Página Nove`,
+});
 </script>
 
 <style lang="scss" scoped>

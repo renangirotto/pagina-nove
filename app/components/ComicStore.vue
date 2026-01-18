@@ -65,9 +65,9 @@ defineProps<{
 }
 
 .store-links {
-  --color-store-link: var(--color-grey-light-200);
+  --color-store-link: var(--color-grey-light-400);
   --icon-size: 12px;
-  --icon-color-light: var(--color-grey-light-200);
+  --icon-color-light: var(--color-grey-light-400);
   display: flex;
   flex-direction: column;
   gap: 4px;

@@ -35,46 +35,40 @@
       </grid-read>
     </layout-container>
     <layout-container>
-      <BoxText variant="purple">
-        <title-page custom-tag="h2">
-          <custom-icon aria-hidden="true" name="info" /> Números do blog
-        </title-page>
-        <text-page>
-          Porque números grandes (não tão grandes) parecem impactantes. Mas
-          desde o começo deste projeto eu li por volta de umas
-          <span data-ui-text-big data-ui-text-highlight>{{
-            readingList?.totalAmoutOfPages
-          }}</span>
-          <strong data-ui-text-highlight> páginas</strong>, em
-          <span data-ui-text-big data-ui-text-highlight>{{
-            readingList?.totalAmountOfReads
-          }}</span>
-          <strong data-ui-text-highlight> quadrinhos</strong>,
-          <strong data-ui-text-highlight>mangas</strong> e talvez uns
-          <strong data-ui-text-highlight>livros</strong>, de
-          <span data-ui-text-big data-ui-text-highlight>{{
+      <title-page custom-tag="h2">
+        Números grande que parecem importantes
+      </title-page>
+      <div class="big-numbers">
+        <p class="big-number">
+          <span>li por volta de</span>
+          <span data-ui-text-big>{{ readingList?.totalAmountOfReads }}</span>
+          <span>quadrinhos, mangas e livros</span>
+        </p>
+        <p class="big-number">
+          <span>um total de</span>
+          <span data-ui-text-big>{{ readingList?.totalAmoutOfPages }}</span>
+          <span>páginas folheadas</span>
+        </p>
+        <p class="big-number">
+          <span>comprados de</span>
+          <span data-ui-text-big>{{
             readingList?.totalAmountOfPublishers
           }}</span>
-          <strong data-ui-text-highlight> editoras</strong> diferentes e por
-          volta de uns
-          <span data-ui-text-big data-ui-text-highlight
-            >{{ readingList?.percentageOfReads }}%</span
-          >
-          de tudo que tenho na estante de casa para ler e para reler também,
-          porque algumas coisas li há muito tempo e por isso não coloquei ainda
-          aqui no blog.
-        </text-page>
-      </BoxText>
+          <span>editoras</span>
+        </p>
+        <p class="big-number">
+          sendo isso
+          <span data-ui-text-big>{{ readingList?.percentageOfReads }}%</span>
+          da minha coleção atual
+        </p>
+      </div>
     </layout-container>
     <layout-container>
       <BoxText>
-        <title-page custom-tag="h2">
-          <custom-icon aria-hidden="true" name="help-question" /> Sobre este
-          blog
-        </title-page>
+        <title-page custom-tag="h2"> Sobre este blog </title-page>
         <text-page>
-          Eu vejo este blog como um diário de leitura, uma forma de eu catalogar
-          o que li e talvez compartilhar com amigos.
+          Este blog é, primeiro de tudo, um diário de leituras, uma forma de eu
+          catalogar o que li e talvez compartilhar com amigos.
         </text-page>
         <text-page>
           Com certeza ele é um amontoado de textos que eu não espero que alguém
@@ -115,7 +109,7 @@ import getSetiesType from "@/utils/series-type";
 const { data: notas } = await useAsyncData("navigation-notes-list-home", () => {
   return queryCollectionNavigation("notas", queriesCollections.notas).order(
     "dateNote",
-    "DESC"
+    "DESC",
   );
 });
 
@@ -132,9 +126,9 @@ const { data: leituras } = await useAsyncData(
   () => {
     return queryCollectionNavigation(
       "leituras",
-      queriesCollections.leituras
+      queriesCollections.leituras,
     ).order("date", "DESC");
-  }
+  },
 );
 
 const readingList = computed(() => {
@@ -165,7 +159,7 @@ const readingList = computed(() => {
   return {
     lastReadList,
     percentageOfReads: Math.round(
-      (children.length * 100) / TOTAL_AMOUNT_ON_SHELF
+      (children.length * 100) / TOTAL_AMOUNT_ON_SHELF,
     ),
     totalAmoutOfPages: totalAmoutOfPages.toLocaleString("pt-BR"),
     totalAmountOfPublishers: publishersList.length,
@@ -185,4 +179,32 @@ const notesListWithReadings = computed(() => {
 });
 </script>
 
-<style></style>
+<style lang="scss">
+.big-numbers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+
+  @include container-desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.big-number {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: 500;
+
+  [data-ui-text-big] {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-purple-200);
+    line-height: 1;
+  }
+}
+</style>

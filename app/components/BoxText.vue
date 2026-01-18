@@ -15,7 +15,7 @@ defineProps<{
   padding-block: 32px;
   padding-inline: 32px;
   border-radius: 16px;
-  background: var(--box-background, var(--color-grey-light-50));
+  background: var(--box-background, var(--color-grey-light-100));
 
   &[data-ui-variant="purple"] {
     --box-background: var(--color-purple-50);

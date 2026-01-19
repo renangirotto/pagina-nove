@@ -1,7 +1,7 @@
 <template>
   <layout-container>
     <title-page>
-      <custom-icon aria-hidden="true" name="pen-tool" /> Notas de leituras
+      <custom-icon aria-hidden="true" name="pen-tool" /> Notas de leitura
     </title-page>
 
     <grid-notes>

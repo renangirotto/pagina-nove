@@ -15,6 +15,7 @@ const CustomTag = props.customTag || "p";
   font-family: "Raleway", sans-serif;
   font-size: 1.125rem;
   font-weight: 500;
+  line-height: 1.8;
 
   &:not(:last-child) {
     margin-block-end: 32px;

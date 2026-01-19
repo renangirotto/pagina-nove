@@ -55,7 +55,7 @@
           <span data-ui-text-big>{{
             readingList?.totalAmountOfPublishers
           }}</span>
-          <span>editoras</span>
+          <span>editoras diferentes</span>
         </p>
         <p class="big-number">
           sendo isso

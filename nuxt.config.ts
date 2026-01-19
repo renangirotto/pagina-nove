@@ -19,7 +19,8 @@ export default defineNuxtConfig({
   content: {
     renderer: {
       alias: {
-        a: "LinkPage",
+        a: "CustomLink",
+        strong: "CustomStrong",
         p: "TextPage",
       },
       anchorLinks: { h2: false, h3: false, h4: false },

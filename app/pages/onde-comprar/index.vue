@@ -5,8 +5,8 @@
         <custom-icon aria-hidden="true" name="shopping-bag" /> Onde Comprar
       </title-page>
       <text-page>
-        Se estiver por <strong>São Paulo</strong> e quiser apoiar lojas de
-        quadrinhos aqui da cidade, fica aqui a minha recomendação!
+        Se você estiver em <strong>São Paulo</strong> e quiser apoiar lojas de
+        quadrinhos da cidade, fica aqui a minha recomendação!
       </text-page>
 
       <div class="layout-stores">

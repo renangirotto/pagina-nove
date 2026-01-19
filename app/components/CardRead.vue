@@ -55,8 +55,8 @@ defineProps<{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-block: 6px 12px;
-  padding-inline: 6px 12px;
+  padding-block: 16px 24px;
+  padding-inline: 16px;
   border-radius: 4px;
   z-index: 1;
   color: var(--color-yellow-grey-100);
@@ -98,15 +98,11 @@ defineProps<{
   padding-block: var(--card-info-pill-pb, 6px);
   padding-inline: var(--card-info-pill-pi, 12px);
   border-radius: 32px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-yellow-grey-100);
   background: var(--color-purple-100);
   box-shadow: 0px 2px 4px 0px rgba(#1f1f1f, 0.25);
-
-  @include container-desktop {
-    font-size: 0.875rem;
-  }
 
   &:last-child {
     align-self: center;

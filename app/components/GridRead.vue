@@ -9,13 +9,12 @@
 <style lang="scss" scoped>
 .grid-read {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   grid-auto-flow: row;
   grid-auto-rows: 1fr;
   gap: 24px 8px;
 
   @include container-tablet {
-    grid-template-columns: repeat(auto-fill, minmax(174px, 1fr));
     gap: 24px 12px;
   }
 

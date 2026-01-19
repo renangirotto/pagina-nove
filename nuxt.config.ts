@@ -16,7 +16,22 @@ export default defineNuxtConfig({
     },
   },
   compatibilityDate: "2025-10-29",
+  content: {
+    renderer: {
+      alias: {
+        a: "LinkPage",
+        p: "TextPage",
+      },
+      anchorLinks: { h2: false, h3: false, h4: false },
+    },
+  },
   devtools: { enabled: true },
+  fonts: {
+    defaults: {
+      weights: [400, 500, 600, 700],
+      styles: ["normal"],
+    },
+  },
   modules: [
     "@nuxt/content",
     "@nuxt/eslint",
@@ -24,12 +39,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-icons",
   ],
-  fonts: {
-    defaults: {
-      weights: [400, 500, 600, 700],
-      styles: ["normal"],
-    },
-  },
   vite: {
     css: {
       preprocessorOptions: {

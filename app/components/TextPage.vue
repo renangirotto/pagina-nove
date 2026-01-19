@@ -17,7 +17,11 @@ const CustomTag = props.customTag || "p";
   font-weight: 500;
 
   &:not(:last-child) {
-    margin-block-end: 16px;
+    margin-block-end: 32px;
+
+    &:has(+ :not(p)) {
+      margin-block-end: 64px;
+    }
   }
 
   [data-ui-text-big] {

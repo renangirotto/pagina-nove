@@ -15,6 +15,7 @@
   gap: 24px 8px;
 
   @include container-tablet {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 24px 12px;
   }
 

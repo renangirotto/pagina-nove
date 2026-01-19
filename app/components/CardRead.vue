@@ -129,7 +129,7 @@ defineProps<{
 }
 
 .card-read {
-  aspect-ratio: 3 / 4.4;
+  aspect-ratio: 3 / 4.2;
 
   &:hover {
     img {

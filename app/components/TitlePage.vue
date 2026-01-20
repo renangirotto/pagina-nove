@@ -12,16 +12,21 @@ const props = defineProps<{
 const CustomTag = props.customTag || "h1";
 </script>
 
-<style>
+<style lang="scss" scoped>
 .title-page {
   --icon-size: clamp(1.375rem, 2.5vw, 1.75rem);
 
-  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-size: clamp(2.25rem, 3vw, 40px);
   font-style: bold;
   font-weight: 700;
+  text-align: var(--title-page-text-align, left);
 
   &:not(:last-child) {
-    margin-block-end: 24px;
+    margin-block-end: 16px;
+
+    &:has(+ p) {
+      margin-block-end: 24px;
+    }
   }
 }
 </style>

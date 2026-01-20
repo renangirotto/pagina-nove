@@ -14,18 +14,19 @@
         </p>
       </div>
       <h2 class="hero-read-title">{{ title }}</h2>
+      <hr class="hero-read-divider" />
       <div class="hero-read-texts">
         <template v-if="artists">
           <span>
             por
             {{ artists }}
           </span>
-          <span>|</span>
+          <custom-icon name="medical-cross-symbol" />
         </template>
         <span>{{ pages }} páginas</span>
-        <span>|</span>
+        <custom-icon name="medical-cross-symbol" />
         <span> Editora {{ publisher }} </span>
-        <span>|</span>
+        <custom-icon name="medical-cross-symbol" />
         <span>Ano {{ publishYear }}</span>
       </div>
     </div>
@@ -56,6 +57,21 @@ const attrs = useAttrs();
   margin-inline: auto;
 }
 
+.hero-read-divider {
+  width: 120px;
+  margin-inline: auto;
+  border: 1px solid var(--color-grey-light-100);
+  background: transparent;
+
+  @include container-desktop {
+    display: none;
+  }
+
+  &:not(:last-child) {
+    margin-block-end: 24px;
+  }
+}
+
 .hero-read-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -72,16 +88,24 @@ const attrs = useAttrs();
 
 .hero-read-image {
   width: 100%;
-  min-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.05));
-  max-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.05));
+  min-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.085));
+  max-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.085));
   border-radius: 4px;
+
+  @include container-desktop {
+    min-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.05));
+    max-height: calc(var(--pattern-height) + (var(--pattern-height) * 0.05));
+  }
 }
 
 .hero-read-info {
+  --icon-size: 12px;
+  --icon-color-light: var(--color-grey-light-200);
   align-content: center;
   text-align: center;
 
   @include container-desktop {
+    --icon-color-light: var(--color-yellow-grey-100);
     max-height: 480px;
     color: var(--color-yellow-grey-100);
     text-align: left;
@@ -95,7 +119,7 @@ const attrs = useAttrs();
   gap: 8px;
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--color-grey-light-200);
+  color: var(--color-grey-light-400);
 
   @include container-desktop {
     --rating-color-empty: var(--color-purple-200);
@@ -105,7 +129,11 @@ const attrs = useAttrs();
   }
 
   &:not(:last-child) {
-    margin-block-end: 12px;
+    margin-block-end: 24px;
+
+    @include container-desktop {
+      margin-block-end: 12px;
+    }
   }
 
   span {
@@ -133,14 +161,18 @@ const attrs = useAttrs();
 }
 
 .hero-read-title {
-  font-size: var(--title, 2rem);
+  font-size: var(--title, 2.25rem);
 
   @include container-desktop {
     --title: 2.75rem;
   }
 
   &:not(:last-child) {
-    margin-block-end: 16px;
+    margin-block-end: 24px;
+
+    @include container-desktop {
+      margin-block-end: 16px;
+    }
   }
 }
 </style>

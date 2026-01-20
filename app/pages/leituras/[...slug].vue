@@ -82,9 +82,9 @@ const { data: notas } = await useAsyncData(
   () => {
     return queryCollectionNavigation(
       "notas",
-      queriesCollections.notasAsRelated
+      queriesCollections.notasAsRelated,
     ).order("dateNote", "DESC");
-  }
+  },
 );
 
 const relatedNotes = computed(() => {
@@ -95,7 +95,7 @@ const relatedNotes = computed(() => {
   return notas.value[0].children.filter(
     (item) =>
       Array.isArray(item.collection) &&
-      item.collection.includes(page.value?.collection)
+      item.collection.includes(page.value?.collection),
   ) as NotesAsItem[];
 });
 </script>

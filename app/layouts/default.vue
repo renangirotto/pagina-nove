@@ -12,7 +12,7 @@
 <style lang="scss" scoped>
 .layout-main {
   padding-block: 44px 64px;
-  padding-inline: 24px;
+  padding-inline: 16px;
   position: relative;
   overflow: hidden;
 

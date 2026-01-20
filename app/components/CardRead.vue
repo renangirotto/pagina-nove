@@ -114,7 +114,7 @@ defineProps<{
 }
 
 .card-info-title {
-  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  font-size: 1.5rem;
 
   &:not(:last-child) {
     margin-block-end: 4px;
@@ -129,7 +129,11 @@ defineProps<{
 }
 
 .card-read {
-  aspect-ratio: 3 / 4.2;
+  aspect-ratio: 3 / 3.8;
+
+  @include container-desktop {
+    aspect-ratio: 3 / 4.4;
+  }
 
   &:hover {
     img {

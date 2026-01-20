@@ -1,9 +1,7 @@
 <template>
   <section>
     <layout-container>
-      <title-page>
-        <custom-icon aria-hidden="true" name="open-book" /> Leituras
-      </title-page>
+      <title-page> Leituras do blog </title-page>
 
       <template v-for="(items, month) in readingList" :key="month">
         <h2 class="title-group">
@@ -89,7 +87,7 @@ const readingList = computed(() => {
 
 <style lang="scss">
 .title-group {
-  font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.75rem, 2.5vw, 2rem);
 
   &:not(:last-child) {
     margin-block-end: 16px;

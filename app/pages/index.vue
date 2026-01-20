@@ -1,9 +1,7 @@
 <template>
   <section>
     <layout-container>
-      <title-page>
-        <custom-icon aria-hidden="true" name="pen-tool" /> Últimas Notas
-      </title-page>
+      <title-page> Últimas Notas </title-page>
 
       <grid-notes page="home">
         <card-note
@@ -17,9 +15,7 @@
       </grid-notes>
     </layout-container>
     <layout-container divider>
-      <title-page custom-tag="h2">
-        <custom-icon aria-hidden="true" name="open-book" /> Últimas leituras
-      </title-page>
+      <title-page custom-tag="h2"> Últimas leituras </title-page>
 
       <grid-read v-if="readingList?.lastReadList">
         <card-read
@@ -36,7 +32,7 @@
       </grid-read>
     </layout-container>
     <layout-container>
-      <title-page custom-tag="h2">
+      <title-page class="big-numbers-title" custom-tag="h2">
         Números grande que parecem importantes
       </title-page>
       <div class="big-numbers">
@@ -190,6 +186,10 @@ const notesListWithReadings = computed(() => {
   @include container-desktop {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.big-numbers-title {
+  --title-page-text-align: center;
 }
 
 .big-number {

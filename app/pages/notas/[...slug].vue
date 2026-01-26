@@ -1,5 +1,9 @@
 <template>
-  <layout-container>
+  <layout-container class="layout-notes">
+    <div class="hero-note">
+      <title-page>{{ page?.title }}</title-page>
+      <p>{{ page?.dateNote }}</p>
+    </div>
     <ContentRenderer v-if="page" :value="page" />
   </layout-container>
 </template>
@@ -16,4 +20,8 @@ useSeoMeta({
 });
 </script>
 
-<style></style>
+<style lang="scss">
+.layout-notes {
+  padding-inline: 16px;
+}
+</style>

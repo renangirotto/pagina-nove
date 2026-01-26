@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     renderer: {
       alias: {
         a: "CustomLink",
+        blockquote: "CustomBlockquote",
         strong: "CustomStrong",
         p: "TextPage",
       },

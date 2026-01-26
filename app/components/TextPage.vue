@@ -14,13 +14,15 @@ const CustomTag = props.customTag || "p";
 .text-page {
   font-family: "Raleway", sans-serif;
   font-size: 1.125rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.8;
 
   &:not(:last-child) {
     margin-block-end: 32px;
 
-    &:has(+ :not(p)) {
+    &:has(+ h1),
+    &:has(+ h2),
+    &:has(+ h3) {
       margin-block-end: 64px;
     }
   }

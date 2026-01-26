@@ -25,11 +25,7 @@
   }
 
   &:not(:last-child) {
-    margin-block-end: 32px;
-
-    @include container-desktop {
-      margin-block-end: 64px;
-    }
+    margin-block-end: 64px;
   }
 }
 </style>

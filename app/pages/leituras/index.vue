@@ -87,7 +87,7 @@ const readingList = computed(() => {
 
 <style lang="scss">
 .title-group {
-  font-size: clamp(1.75rem, 2.5vw, 2rem);
+  font-size: clamp(2rem, 2.5vw, 2.25rem);
 
   &:not(:last-child) {
     margin-block-end: 16px;

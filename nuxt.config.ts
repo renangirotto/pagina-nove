@@ -21,8 +21,8 @@ export default defineNuxtConfig({
       alias: {
         a: "CustomLink",
         blockquote: "CustomBlockquote",
-        strong: "CustomStrong",
         p: "TextPage",
+        strong: "CustomStrong",
       },
       anchorLinks: { h2: false, h3: false, h4: false },
     },

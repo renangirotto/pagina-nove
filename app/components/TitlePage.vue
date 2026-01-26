@@ -16,7 +16,7 @@ const CustomTag = props.customTag || "h1";
 .title-page {
   --icon-size: clamp(1.375rem, 2.5vw, 1.75rem);
 
-  font-size: clamp(2.25rem, 3vw, 40px);
+  font-size: var(--title-page-font-size, clamp(2.25rem, 3vw, 2.5rem));
   font-style: bold;
   font-weight: 700;
   text-align: var(--title-page-text-align, left);

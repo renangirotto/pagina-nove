@@ -11,6 +11,7 @@
   box-decoration-break: clone;
   display: inline;
   padding-inline: 2px;
+  border-radius: 4px;
   color: #a34d14;
   background: rgb(from #ffca80 r g b / 0.25);
 }

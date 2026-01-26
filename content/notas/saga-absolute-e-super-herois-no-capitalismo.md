@@ -8,7 +8,10 @@ dateNote: 2026-01-21
 title: "Saga Absolute e super-heróis no capitalismo"
 ---
 
-Ano passado eu não esperava, depois de alguns vários anos, estar comprando quadrinhos de super-heróis. Muito menos [Superman](/leituras/absolute-superman-1/), [Mulher-Maravilha](/leituras/absolute-mulher-maravilha-1/) e [Batman](/leituras/absolute-batman-1//), ainda mais mensais da Panini.
+::custom-img{src="https://placehold.co/600x400" alt="Descrição"}
+::
+
+Ano passado eu não esperava, depois de alguns vários anos, estar comprando quadrinhos mensais de super-heróis. Muito menos [Superman](/leituras/absolute-superman-1/), [Mulher-Maravilha](/leituras/absolute-mulher-maravilha-1/) e [Batman](/leituras/absolute-batman-1/).
 
 Eu particularmente não leio muito quadrinhos e sagas de super-heróis, lembro que a última saga que acompanhei de maneira ativa foi **Dr. Estranho: Os Últimos dias da Magia**, sendo até hoje uma das minhas sagas favoritas. Mas geralmente quadrinhos de super-heróis não me atraem, e eu não estou necessariamente falando que acho as histórias ruins ou chatas.
 
@@ -29,19 +32,37 @@ Além disso, super-heróis explodiram novamente uma "produtificação" acelerada
 Esse capitalismo do entretenimento fez com que eu começasse a olhar para a rotina de leitura de quadrinhos de super-heróis como algo estranho, com narrativas entediantes e personagens sem propósito, só rendo reciclados a cada ano. Não me entenda mal, realmente existem histórias que são ótimas, mas o consumo de volumes mensais durante muito tempo morreu para mim, não valia o tempo e muito menos o investimento financeiro.
 
 ::title-page{customTag="h2"}
-Invencível e a super-normalidade
+Invencível e a super-casualidade
 ::
 
-Depois de muito tempo estacionado na minha estante, na fila de próximas leituras, eu peguei um dia e tirei para ler os 2 primeiros volumes de [Invencível](/leituras/invencivel-1). Eu nunca vi a série animada, mas já vi tantos cortes nas redes sociais que quando fui ler já sabia de vários acontecimentos, só não sabia a ordem que iriam acontecer, mas isso não me tirou o interesse na leitura.
+Depois de muito tempo estacionado na minha estando na fila de próximas leituras, eu peguei um dia e tirei para ler os 2 primeiros volumes de Invencível. Eu nunca vi a série animada, mas já vi tantos cortes nas redes sociais que quando fui ler sabia de vários acontecimentos, só não sabia a ordem que iriam acontecer, mas isso não me tirou o interesse na leitura.
 
-Uma das coisas que mais me cativou a leitura e me tirou algumas boas risadas não estavam inicialmente nas histórias em si, mas nos textos de introdução dos volumes, escritos por **Kurt Busiek**. Especificamente, na introdução do Vol. 1, onde entre xingamentos ao autor e comentários sobre a obra, uma parte do texto me chamou atenção:
+Uma das coisas que mais me cativou a leitura e me tirou algumas boas risadas não estavam inicialmente nas histórias em si, mas nos textos de introdução dos volumes, escritos por **Kurt Busiek**. Especificamente, na introdução de [Invencível #1 - Negócios De Família](/leituras/invencivel-1-negocios-de-familia), entre xingamentos ao autor e comentários sobre a obra, uma parte do texto me chamou atenção:
 
 > Acho que minha personagem favorita é a mãe do Mark. Sua aceitação casual da vida em família, sua tensão quando seus “garotos” estão fora do alcance, até na CNN (canal de notícias internacionais), sua maneira prática de lidar com o fantástico… isso é o que faz este gibi funcionar.
 
 O mundo de Invencível é cheio dos clichês de super-heróis, sem se esquecer nem por um segundo que o mundo ainda é mundo. Os alienígenas, super poderes, vilões caricatos, não ofuscam um mundo frágil, com pessoas “não-super” envolvidas, com rotinas de estudos e contas a pagar. E nossa, como ele faz isso bem.
 
-A narrativa do dia a dia de Mark (personagem principal) é uma mistura de herdar super-poderes, ao mesmo tempo que trabalha em uma rede de _fast food_. Derrotar vilões e salvar pessoas, enquanto juntar dinheiro para pagar a faculdade. É sobre as dificuldades de ser Invencível, o herói e de também ser Mark, o rapaz de classe média americana.
+A narrativa do dia a dia de Mark (personagem principal) é uma do processo de herdar super-poderes, de derrotar vilões e salvar vidas, enquanto juntar dinheiro para pagar a faculdade em um emprego precarizado. É sobre as dificuldades de ser Invencível, o herói e de também ser Mark, o rapaz de classe média americana.
 
-Essa aproximação da nossa realidade, pelo menos nestes 2 primeiros volumes, me fez gostar muito da série, mas Invencível não necessariamente havia na época me convencido a voltar a ler o gênero de super-heróis mais clássicos, pelo menos não as edições mensais.
+Essa aproximação da nossa realidade, pelo menos nestes 2 primeiros volumes, está me fazendo gostar muito da série, mas Invencível não necessariamente me convenceu na época a voltar a ler o gênero de super-heróis, pelo menos não as mensais… Assim, claramente voltei, afinal este é um texto para falar sobre as mensais do universo Absoluto.
 
-Até ler o Universo Absoluto.
+::title-page{customTag="h2"}
+Absolutamente ótimos quadrinhos
+::
+
+Se algo no universo Absoluto bebe da experiência de ler invencível é trazer problemas reais para suas narrativas, de uma maneira nada cômica, bem mais pesada e com uma violência crua.
+
+A leitura das histórias é divertidíssima e não perde a essência dos personagens ao fazer isso. Muito pelo contrário, vejo que essa nova narrativa busca estressar o máximo que pode sobre os conflitos individuais dos nossos heróis e como seu amadurecimento se torna desafiador em um universo que flerta com diferentes níveis de terror.
+
+Com certeza o que me fez gostar da leitura destes quadrinhos é a sua comparação, às vezes direta, às vezes indireta, com relações politicas sociais dos últimos anos, principalmente entre o imperialismo estadunidense e a crescente onda de conservadorismo.
+
+Absolute Superman flerta do começo ao fim com a relação de trabalho e imigração, sobre como classes elitistas preferem se afundar em sua ignorância de segregação, mesmo que isso seja sua ruína, e sobre como o lucro corporativista cria violência e terror. Kal El vem mais do que nunca neste primeiro volume ser um salvador, um símbolo não apenas de esperança, mas de revolta contra a estrutura de exploração.
+
+Absolute Batman acerta muito ao fazer Bruce ser um trabalhador comum, ele lida com a realidade que outras pessoas marginalizadas passam e não precisa se sustentar na narrativa de rotinas de bilionários da sua persona não herói, isso dá espaço para a história exagerar muito na violência, na forma, nos atos. Batman é mais do que nunca carregado de raiva, de agressividade e de motivo, ele combate o crime porque sabe que as pessoas que busca proteger estão abandonadas por um sistema politicamente falho e despreparado.
+
+Absolute Mulher-Maravilha talvez seja o que menos criar discursos narrativos direto ao ponto sobre problemas do mundo, mas usa bem a história para falar sobre o abandono, o acolhimento e, de forma mais sutil, sobre a relação de Diana com um mundo de narrativas masculinas. Jogada ao inferno para ser criada por uma bruxa? Eu não esperava menos quando Diana conflita com figuras masculinas militares americanas, deixando claro o quanto sua superioridade ignorante só mostra sua incapacidade de lidar com os conflitos daquela história.
+
+Com certeza a Saga Absolute foi uma surpresa agradável, pelo menos nestes primeiros volumes. Batman eu não vou mentir, já peguei alguns spoilers da série na gringa e estou lendo só para ver ele batendo em monstros e fascistas, mas eu com certeza vou continuar fazendo as coleções dos demais personagens.
+
+Não sei se Absolue Flash, Lanterna Verde e Caçador de Marte vão seguir a mesma premissa narrativa, mas vou arriscar, vou comprar pelo menos o volume 1 de todos e se gostar essa vai ser a primeira saga de mensais da DC que coleciono na vida. Quem diria que super-heróis enfrentando narrativas do capitalismo seria algo tão interessante.

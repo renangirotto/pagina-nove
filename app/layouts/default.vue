@@ -17,7 +17,7 @@
   overflow: hidden;
 
   @include container-desktop {
-    padding-block: 44px 88px;
+    padding-block: 64px 88px;
   }
 }
 </style>

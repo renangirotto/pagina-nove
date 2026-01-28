@@ -33,7 +33,9 @@ useSeoMeta({
 
 <style lang="scss">
 .layout-notes {
-  padding-inline: 16px;
+  @include container-desktop {
+    padding-inline: 16px;
+  }
 }
 
 .layout-notes-content {

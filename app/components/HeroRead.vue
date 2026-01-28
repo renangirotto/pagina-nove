@@ -99,7 +99,7 @@ const attrs = useAttrs();
 }
 
 .hero-read-info {
-  --icon-size: 12px;
+  --icon-size: 8px;
   --icon-color-light: var(--color-grey-light-200);
   align-content: center;
   text-align: center;

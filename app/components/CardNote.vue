@@ -5,20 +5,30 @@
         <nuxt-img :src="cover" />
       </figure>
       <div class="card-content">
-        <p class="card-date">{{ dateNote }}</p>
-        <h3 class="card-title">
-          {{ title }}
-        </h3>
+        <template v-if="tags && tags.length > 0">
+          <div class="card-tags">
+            <tag-pill v-for="tag in tags" :key="tag">{{ tag }}</tag-pill>
+          </div>
+        </template>
+        <div>
+          <p class="card-date">{{ dateNote }}</p>
+          <h3 class="card-title">
+            {{ title }}
+          </h3>
+        </div>
       </div>
     </nuxt-link>
   </article>
 </template>
 
 <script lang="ts" setup>
+import TagPill from "./TagPill.vue";
+
 defineProps<{
   cover: string;
   dateNote: string;
   path: string;
+  tags?: string[];
   title: string;
 }>();
 </script>
@@ -26,11 +36,13 @@ defineProps<{
 <style lang="scss" scoped>
 .card-content {
   grid-area: content;
-  align-content: center;
   padding-inline-start: 12px;
-}
 
-.card-date {
+  &:has(.card-tags) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .card-figure {

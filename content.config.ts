@@ -28,6 +28,7 @@ export default defineContentConfig({
         collection: z.array(z.string()).optional(),
         cover: z.string(),
         dateNote: z.date(),
+        tags: z.array(z.string()).optional(),
         title: z.string(),
       }),
     }),

@@ -9,6 +9,7 @@
         :cover="note.cover"
         :date-note="note.dateNote"
         :path="note.path"
+        :tags="note.tags"
         :title="note.title"
       />
     </grid-notes>

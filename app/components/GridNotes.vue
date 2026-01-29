@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 defineProps<{
-  page?: "home";
+  page?: "home" | "read";
 }>();
 </script>
 
@@ -19,7 +19,7 @@ defineProps<{
   gap: 24px 0px;
 
   @include container-desktop {
-    grid-template-columns: calc(32% - 24px) repeat(2, auto);
+    grid-template-columns: repeat(2, calc(30% - 24px)) auto;
     grid-template-areas:
       "first first ."
       "first first ."
@@ -29,10 +29,17 @@ defineProps<{
 
   &[data-ui-page-type="home"] {
     @include container-desktop {
-      grid-template-columns: calc(32% - 24px) auto;
+      grid-template-columns: repeat(2, calc(30% - 24px)) auto;
       grid-template-areas:
         "first first ."
         "first first .";
+    }
+  }
+
+  &[data-ui-page-type="read"] {
+    @include container-desktop {
+      grid-template-columns: repeat(2, calc(50% - 24px));
+      grid-template-areas: "first .";
     }
   }
 

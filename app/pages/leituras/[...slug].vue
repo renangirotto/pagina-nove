@@ -18,7 +18,20 @@
       />
 
       <template v-if="relatedNotes && relatedNotes.length > 0">
-        WIP: Related notes
+        <div>
+          <title-page custom-tag="h2"> Notas relacionadas </title-page>
+          <grid-notes page="read">
+            <card-note
+              v-for="note in relatedNotes"
+              :key="note.path"
+              :cover="note.cover"
+              :date-note="note.dateNote"
+              :path="note.path"
+              :tags="note.tags"
+              :title="note.title"
+            />
+          </grid-notes>
+        </div>
       </template>
 
       <template v-if="page.dateNote">
@@ -92,12 +105,23 @@ const relatedNotes = computed(() => {
     return null;
   }
 
-  return notas.value[0].children.filter(
-    (item) =>
-      Array.isArray(item.collection) &&
-      item.collection.includes(page.value?.collection),
-  ) as NotesAsItem[];
+  return notas.value[0].children
+    .filter(
+      (item) =>
+        Array.isArray(item.collection) &&
+        item.collection.includes(page.value?.collection),
+    )
+    .map((item) => {
+      return {
+        ...item,
+        dateNote: formatDate(
+          typeof item?.dateNote === "string" ? item.dateNote : "",
+        ),
+      };
+    }) as NotesAsItem[];
 });
+
+console.log(relatedNotes);
 </script>
 
 <style lang="scss" scoped>
@@ -149,11 +173,11 @@ const relatedNotes = computed(() => {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, auto);
-  gap: 32px 0px;
+  gap: 88px 0px;
   z-index: 1;
 
   @include container-desktop {
-    gap: 64px 0px;
+    gap: 96px 0px;
   }
 }
 

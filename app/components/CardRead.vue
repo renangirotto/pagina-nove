@@ -3,13 +3,13 @@
     <nuxt-link :aria-label="title" class="card-link" :to="path">
       <div class="card-info">
         <div class="card-info-pills">
-          <p class="card-info-pill">{{ publisher }}</p>
-          <p class="card-info-pill">{{ seriesType }}</p>
+          <tag-pill>{{ publisher }}</tag-pill>
+          <tag-pill>{{ seriesType }}</tag-pill>
         </div>
         <div>
-          <div class="card-info-pill card-info-rating">
+          <tag-pill is="div" custom-class="card-info-rating">
             <rating-bar :rating="rating" />
-          </div>
+          </tag-pill>
           <h3 class="card-info-title">{{ title }}</h3>
           <p class="card-info-date">{{ date }}</p>
         </div>
@@ -51,6 +51,8 @@ defineProps<{
 }
 
 .card-info {
+  --tag-pill-padding-block: 4px;
+  --tag-pill-padding-inline: 8px;
   grid-area: card;
   display: flex;
   flex-direction: column;
@@ -68,6 +70,8 @@ defineProps<{
   );
 
   @include container-tablet {
+    --tag-pill-padding-block: 6px;
+    --tag-pill-padding-inline: 12px;
     padding-block: 16px 24px;
     padding-inline: 16px;
   }
@@ -78,38 +82,15 @@ defineProps<{
 }
 
 .card-info-pills {
-  --card-info-pill-pb: 4px;
-  --card-info-pill-pi: 8px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-
-  @include container-tablet {
-    --card-info-pill-pb: 6px;
-    --card-info-pill-pi: 12px;
-  }
-}
-
-.card-info-pill {
-  --rating-icon-size: 20px;
-  --rating-color-empty: var(--color-purple-200);
-  --rating-color-filled: var(--color-grey-light-100);
-  width: fit-content;
-  padding-block: var(--card-info-pill-pb, 6px);
-  padding-inline: var(--card-info-pill-pi, 12px);
-  border-radius: 32px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-yellow-grey-100);
-  background: var(--color-purple-100);
-  box-shadow: 0px 2px 4px 0px rgba(#1f1f1f, 0.25);
-
-  &:last-child {
-    align-self: center;
-  }
 }
 
 .card-info-rating {
+  --rating-icon-size: 20px;
+  --rating-color-empty: var(--color-purple-200);
+  --rating-color-filled: var(--color-grey-light-100);
   margin-block-end: 12px;
 }
 

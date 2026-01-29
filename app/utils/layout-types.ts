@@ -4,6 +4,7 @@ export interface NotesAsItem extends ContentNavigationItem {
   collection: string[];
   cover: string;
   dateNote: string;
+  tags?: string[];
 }
 
 export interface ReadingItem extends ContentNavigationItem {

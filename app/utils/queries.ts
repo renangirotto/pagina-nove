@@ -20,12 +20,14 @@ interface LeiturasCollectionAsNotes {
 interface NotasCollectionAsItem {
   cover: string[];
   dateNote: string;
+  tags: string[];
 }
 
 interface NotasCollectionAsRelated {
   collection: string;
   cover: string;
   dateNote: string;
+  tags: string[];
 }
 
 export const queriesCollections: {
@@ -44,6 +46,6 @@ export const queriesCollections: {
     "rating",
   ],
   leiturasAsNotes: ["cover", "dateNote"],
-  notas: ["cover", "dateNote"],
-  notasAsRelated: ["collection", "cover", "dateNote"],
+  notas: ["cover", "dateNote", "tags"],
+  notasAsRelated: ["collection", "cover", "dateNote", "tags"],
 };

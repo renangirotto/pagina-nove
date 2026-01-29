@@ -5,9 +5,6 @@
       <time class="hero-note-time" :datetime="page?.dateNote">{{
         dateFormatted
       }}</time>
-      <!-- <figure class="hero-note-figure">
-        <nuxt-img src="https://placehold.co/600x400" />
-      </figure> -->
     </div>
     <div class="layout-notes-content">
       <ContentRenderer v-if="page" :value="page" />

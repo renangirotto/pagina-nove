@@ -33,7 +33,7 @@
     </layout-container>
     <layout-container>
       <title-page class="big-numbers-title" custom-tag="h2">
-        Números grande que parecem importantes
+        Números grandes que parecem importantes
       </title-page>
       <div class="big-numbers">
         <p class="big-number">
@@ -60,7 +60,7 @@
         </p>
       </div>
     </layout-container>
-    <layout-container>
+    <!-- <layout-container>
       <BoxText>
         <title-page custom-tag="h2"> Sobre este blog </title-page>
         <text-page>
@@ -96,7 +96,7 @@
           mas que foi e é divertido de desenvolver e manter, até não ser mais.
         </text-page>
       </BoxText>
-    </layout-container>
+    </layout-container> -->
   </section>
 </template>
 

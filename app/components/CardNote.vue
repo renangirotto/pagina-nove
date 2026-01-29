@@ -2,7 +2,7 @@
   <article class="card-note">
     <nuxt-link :to="path">
       <figure class="card-figure">
-        <nuxt-img src="https://placehold.co/600x400" />
+        <nuxt-img :src="cover" />
       </figure>
       <div class="card-content">
         <p class="card-date">{{ dateNote }}</p>
@@ -44,6 +44,7 @@ defineProps<{
   img {
     display: block;
     object-fit: cover;
+    object-position: top;
     width: 100%;
     height: 100%;
     transition: scale 0.3s ease;
@@ -57,6 +58,7 @@ defineProps<{
   grid-template-areas: "figure content";
   gap: 0px;
   border-radius: 4px;
+  overflow: hidden;
 
   &:not(:first-of-type) {
     padding: 4px;
@@ -79,6 +81,11 @@ defineProps<{
       align-content: flex-end;
       position: relative;
       z-index: 1;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.5) 50%
+      );
     }
 
     .card-figure {
@@ -87,6 +94,10 @@ defineProps<{
       max-height: 352px;
       position: relative;
       z-index: 0;
+    }
+
+    .card-title {
+      --card-note-title: clamp(1.5rem, 3vw, 2rem);
     }
   }
 
@@ -100,9 +111,11 @@ defineProps<{
 
   a {
     display: contents;
+    color: var(--color-yellow-grey-100);
   }
 }
 
 .card-title {
+  font-size: var(--card-note-title, clamp(1.5rem, 2.5vw, 1.75rem));
 }
 </style>

@@ -1,9 +1,7 @@
 <template>
   <section>
     <layout-container>
-      <title-page>
-        <custom-icon aria-hidden="true" name="shopping-bag" /> Onde Comprar
-      </title-page>
+      <title-page> Onde Comprar </title-page>
       <text-page>
         Se você estiver em <strong>São Paulo</strong> e quiser apoiar lojas de
         quadrinhos da cidade, fica aqui a minha recomendação!

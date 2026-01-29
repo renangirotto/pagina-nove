@@ -3,12 +3,12 @@ collection:
   - Absolute Batman
   - Absolute Mulher-Maravilha
   - Absolute Superman
-cover: "a"
+cover: "/images/notes/sobre-ler-super-herois-e-a-saga-absolute/page-batman.png"
 dateNote: 2026-01-21
-title: "Saga Absolute e super-heróis no capitalismo"
+title: "Sobre ler super-heróis e a Saga Absolute"
 ---
 
-::custom-img{src="https://placehold.co/600x400" alt="Descrição"}
+::custom-img{caption="Capa variante em Absolute Batman #1" src="/images/notes/sobre-ler-super-herois-e-a-saga-absolute/page-batman.png"}
 ::
 
 Ano passado eu não esperava, depois de alguns vários anos, estar comprando quadrinhos mensais de super-heróis. Muito menos [Superman](/leituras/absolute-superman-1/), [Mulher-Maravilha](/leituras/absolute-mulher-maravilha-1/) e [Batman](/leituras/absolute-batman-1/).
@@ -43,9 +43,12 @@ Uma das coisas que mais me cativou a leitura e me tirou algumas boas risadas nã
 
 O mundo de Invencível é cheio dos clichês de super-heróis, sem se esquecer nem por um segundo que o mundo ainda é mundo. Os alienígenas, super poderes, vilões caricatos, não ofuscam um mundo frágil, com pessoas “não-super” envolvidas, com rotinas de estudos e contas a pagar. E nossa, como ele faz isso bem.
 
+::custom-img{caption="Pág. nº 61 de Invencível #1 - Negócios De Família" src="/images/notes/sobre-ler-super-herois-e-a-saga-absolute/page-invencivel.png"}
+::
+
 A narrativa do dia a dia de Mark (personagem principal) é uma do processo de herdar super-poderes, de derrotar vilões e salvar vidas, enquanto juntar dinheiro para pagar a faculdade em um emprego precarizado. É sobre as dificuldades de ser Invencível, o herói e de também ser Mark, o rapaz de classe média americana.
 
-Essa aproximação da nossa realidade, pelo menos nestes 2 primeiros volumes, está me fazendo gostar muito da série, mas Invencível não necessariamente me convenceu na época a voltar a ler o gênero de super-heróis, pelo menos não as mensais… Assim, claramente voltei, afinal este é um texto para falar sobre as mensais do universo Absoluto.
+Essa aproximação da nossa realidade, pelo menos nestes 2 primeiros volumes, está me fazendo gostar muito da série, mas Invencível não havia necessariamente me convencido a voltar a ler o gênero de super-heróis, pelo menos não as mensais… Assim, claramente voltei, afinal este é um texto para falar sobre as mensais do universo Absoluto.
 
 ::title-page{customTag="h2"}
 Absolutamente ótimos quadrinhos
@@ -57,11 +60,17 @@ A leitura das histórias é divertidíssima e não perde a essência dos persona
 
 Com certeza o que me fez gostar da leitura destes quadrinhos é a sua comparação, às vezes direta, às vezes indireta, com relações politicas sociais dos últimos anos, principalmente entre o imperialismo estadunidense e a crescente onda de conservadorismo.
 
-Absolute Superman flerta do começo ao fim com a relação de trabalho e imigração, sobre como classes elitistas preferem se afundar em sua ignorância de segregação, mesmo que isso seja sua ruína, e sobre como o lucro corporativista cria violência e terror. Kal El vem mais do que nunca neste primeiro volume ser um salvador, um símbolo não apenas de esperança, mas de revolta contra a estrutura de exploração.
+::custom-img{caption="Pág. nº 11 de Absolute Superman #1" src="/images/notes/sobre-ler-super-herois-e-a-saga-absolute/page-superman.png"}
+::
 
-Absolute Batman acerta muito ao fazer Bruce ser um trabalhador comum, ele lida com a realidade que outras pessoas marginalizadas passam e não precisa se sustentar na narrativa de rotinas de bilionários da sua persona não herói, isso dá espaço para a história exagerar muito na violência, na forma, nos atos. Batman é mais do que nunca carregado de raiva, de agressividade e de motivo, ele combate o crime porque sabe que as pessoas que busca proteger estão abandonadas por um sistema politicamente falho e despreparado.
+**Absolute Superman** flerta do começo ao fim com a relação de trabalho e imigração, sobre como classes elitistas preferem se afundar em sua ignorância de segregação, mesmo que isso seja sua ruína, e sobre como o lucro corporativista cria violência e terror. Kal El vem mais do que nunca neste primeiro volume ser um salvador, um símbolo não apenas de esperança, mas de revolta contra a estrutura de exploração.
 
-Absolute Mulher-Maravilha talvez seja o que menos criar discursos narrativos direto ao ponto sobre problemas do mundo, mas usa bem a história para falar sobre o abandono, o acolhimento e, de forma mais sutil, sobre a relação de Diana com um mundo de narrativas masculinas. Jogada ao inferno para ser criada por uma bruxa? Eu não esperava menos quando Diana conflita com figuras masculinas militares americanas, deixando claro o quanto sua superioridade ignorante só mostra sua incapacidade de lidar com os conflitos daquela história.
+**Absolute Batman** acerta muito ao fazer Bruce ser um trabalhador comum, ele lida com a realidade que outras pessoas marginalizadas passam e não precisa se sustentar na narrativa de rotinas de bilionários da sua persona não herói, isso dá espaço para a história exagerar muito na violência, na forma, nos atos. Batman é mais do que nunca carregado de raiva, de agressividade e de motivo, ele combate o crime porque sabe que as pessoas que busca proteger estão abandonadas por um sistema politicamente falho e despreparado.
+
+**Absolute Mulher-Maravilha** talvez seja a história que menos cria discursos direto ao ponto sobre problemas do mundo, mas usa bem a história para falar sobre o abandono, o acolhimento e, de forma mais sutil, sobre a relação de Diana com um mundo de narrativas masculinas. Jogada ao inferno para ser criada por uma bruxa? Eu não esperava menos quando Diana conflita com figuras masculinas militares americanas, deixando claro o quanto sua superioridade ignorante só mostra sua incapacidade de lidar com os conflitos daquela história.
+
+::custom-img{caption="Pág. nº 57 de Absolute Mulher-Maravilha #1" src="/images/notes/sobre-ler-super-herois-e-a-saga-absolute/page-mulher-maravilha.png"}
+::
 
 Com certeza a Saga Absolute foi uma surpresa agradável, pelo menos nestes primeiros volumes. Batman eu não vou mentir, já peguei alguns spoilers da série na gringa e estou lendo só para ver ele batendo em monstros e fascistas, mas eu com certeza vou continuar fazendo as coleções dos demais personagens.
 

@@ -17,6 +17,7 @@ defineProps<{
 .custom-img {
   figcaption {
     padding-block-start: 8px;
+    font-size: 0.875rem;
     font-style: italic;
     font-weight: 500;
     color: var(--color-grey-light-1100);

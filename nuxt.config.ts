@@ -42,6 +42,10 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-icons",
   ],
+  nitro: {
+    preset: "github-pages",
+  },
+  ssr: true,
   vite: {
     css: {
       preprocessorOptions: {

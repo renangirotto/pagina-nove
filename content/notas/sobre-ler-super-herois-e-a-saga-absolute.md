@@ -31,6 +31,9 @@ Além disso, super-heróis explodiram novamente uma "produtificação" acelerada
 
 Esse capitalismo do entretenimento fez com que eu começasse a olhar para a rotina de leitura de quadrinhos de super-heróis como algo estranho, com narrativas entediantes e personagens sem propósito, só rendo reciclados a cada ano. Não me entenda mal, realmente existem histórias que são ótimas, mas o consumo de volumes mensais durante muito tempo morreu para mim, não valia o tempo e muito menos o investimento financeiro.
 
+::box-spoiler{spoiler="Absolute Batman #1, Absolute Mulher-Maravilha #1, Absolute Superman #1 e Invencível #1 - Negócios De Família"}
+::
+
 ::title-page{customTag="h2"}
 Invencível e a super-casualidade
 ::

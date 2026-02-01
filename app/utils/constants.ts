@@ -9,22 +9,19 @@ export const ROUTES = {
 
 export const NAV_ITEMS = [
   {
-    icon: "pen-tool",
     label: "notas",
     to: ROUTES.notes,
   },
   {
-    icon: "open-book",
     label: "leituras",
     to: ROUTES.readings,
   },
   {
-    icon: "shopping-bag",
     label: "onde comprar",
     to: ROUTES.buy,
   },
   {
-    icon: "instagram",
+    // icon: "instagram",
     label: "@napaginanove",
     target: "_blank",
     to: "https://www.instagram.com/napaginanove/",

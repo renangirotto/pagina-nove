@@ -24,7 +24,11 @@
                 :to="item.to"
                 @click="() => dialog?.close()"
               >
-                <custom-icon aria-hidden="true" :name="item.icon" />
+                <!-- <custom-icon
+                  v-if="item.icon"
+                  aria-hidden="true"
+                  :name="item.icon"
+                /> -->
                 {{ item.label }}
               </nuxt-link>
             </li>
@@ -40,7 +44,11 @@
               :target="item.target || `_self`"
               :to="item.to"
             >
-              <custom-icon aria-hidden="true" :name="item.icon" />
+              <!-- <custom-icon
+                v-if="item.icon"
+                aria-hidden="true"
+                :name="item.icon"
+              /> -->
               {{ item.label }}
             </nuxt-link>
           </li>
@@ -58,18 +66,19 @@ const navItems = NAV_ITEMS;
 const navDialogId = "nav-dialog";
 
 const dialog = document?.getElementById(
-  navDialogId
+  navDialogId,
 ) as HTMLDialogElement | null;
 </script>
 
 <style lang="scss" scoped>
 .header {
   padding-inline: 16px;
+  background: var(--color-grey-light-50);
 }
 
 .header-container {
   display: grid;
-  grid-template-columns: 80px 1fr;
+  grid-template-columns: 96px 1fr;
   grid-template-rows: auto;
   gap: 0px 16px;
   grid-template-areas: "logo nav";
@@ -77,10 +86,10 @@ const dialog = document?.getElementById(
   width: 100%;
   padding-block: 32px 24px;
   padding-inline: 8px;
-  border-block-end: 1px solid var(--color-grey-light-100);
 
   @include container-desktop {
-    padding-inline: 32px;
+    grid-template-columns: 120px 1fr;
+    padding-inline: 0px;
   }
 }
 
@@ -146,18 +155,29 @@ const dialog = document?.getElementById(
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 24px;
-  font-weight: 500;
+  padding-block: 12px;
+  padding-inline: 24px;
+  border-bottom: 4px solid var(--nav-lin-border-color, transparent);
+  border-radius: 4px;
+  font-size: 1.5rem;
+  font-weight: 400;
   text-decoration: none;
+  transition: all 0.25s ease;
 
   @include container-desktop {
     --icon-size: 18px;
-    font-size: 20px;
+    padding-block: 8px;
+    padding-inline: 16px;
+    font-size: 1.375rem;
     gap: 6px;
   }
 
   &:hover,
   &:focus-within {
+    color: var(--color-grey-light-1100);
+    background: var(--color-grey-light-100);
+    --nav-lin-border-color: var(--color-grey-light-200);
+
     @include container-desktop {
       --icon-color-dark: var(--color-purple-200);
       --icon-color-light: var(--color-purple-100);
@@ -167,6 +187,9 @@ const dialog = document?.getElementById(
   &.router-link-active {
     --icon-color-dark: var(--color-purple-200);
     --icon-color-light: var(--color-purple-100);
+    --nav-lin-border-color: var(--color-purple-100);
+    color: var(--color-purple-200);
+    background: var(--color-purple-50);
   }
 }
 </style>

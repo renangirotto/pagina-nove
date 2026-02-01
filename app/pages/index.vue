@@ -40,7 +40,7 @@
         <p class="big-number">
           <span>li por volta de</span>
           <span data-ui-text-big>{{ readingList?.totalAmountOfReads }}</span>
-          <span>quadrinhos, mangas e livros</span>
+          <span>quadrinhos ou mangas</span>
         </p>
         <p class="big-number">
           <span>um total de</span>

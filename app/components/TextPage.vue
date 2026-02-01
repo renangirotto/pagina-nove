@@ -13,8 +13,8 @@ const CustomTag = props.customTag || "p";
 <style lang="scss">
 .text-page {
   font-family: "Raleway", sans-serif;
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: var(--text-page-font-size, 1.125rem);
+  font-weight: var(--text-page-font-weight, 600);
   line-height: 1.8;
 
   &:not(:last-child) {
@@ -22,7 +22,8 @@ const CustomTag = props.customTag || "p";
 
     &:has(+ h1),
     &:has(+ h2),
-    &:has(+ h3) {
+    &:has(+ h3),
+    &:has(+ .box-spoiler) {
       margin-block-end: 64px;
     }
   }

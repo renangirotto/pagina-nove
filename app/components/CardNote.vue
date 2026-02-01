@@ -109,7 +109,7 @@ defineProps<{
     }
 
     .card-title {
-      --card-note-title: clamp(1.5rem, 3vw, 2rem);
+      --card-note-title: clamp(1.75rem, 3vw, 2rem);
     }
   }
 

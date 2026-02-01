@@ -1,0 +1,17 @@
+---
+title: "Invencível #3 - Perfeitos Estranhos"
+artists:
+  - Robert Kirkman
+  - Ryan Ottley
+  - Bill Crabtree
+collection: Invencível
+collectionVolume: 3
+cover: invencivel/cover-3.webp
+date: 2026-01-30
+labels:
+  - Quadrinhos
+pages: 136
+publisher: Panini
+publishYear: "2025"
+rating: "5"
+---

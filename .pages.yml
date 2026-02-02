@@ -21,5 +21,11 @@ content:
       - { name: labels, label: Labels, type: string, list: true, required: true }
       - { name: pages, label: Qtd. de Páginas, type: number, required: true }
       - { name: publisher, label: Editora, type: string, required: true }
+      - name: publisher
+        label: Editora
+        type: select
+        options:
+          creatable: true
+          values: [ ComixZone, Conrad, DarkSide, JBC, Mino, Mistifório, Monstra, MPEG, Panini, Pé-de-Cabra, Pipoca & Nanquim, Suma, Veneta ]
       - { name: publishYear, label: Ano de Publicação, type: string, required: true }
       - { name: rating, label: Avaliação, type: string, required: true }

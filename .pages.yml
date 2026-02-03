@@ -1,8 +1,13 @@
 media:
   - name: covers
-    label: Capas
+    label: Capas de Leituras
     input: public/images/covers
     output: /public/images/covers
+    extensions: [ webp ]
+  - name: covers-notes
+    label: Capas de Notas
+    input: public/images/notes
+    output: /public/images/notes
     extensions: [ webp ]
 content:
   - name: leituras
@@ -28,3 +33,14 @@ content:
           values: [ ComixZone, Conrad, DarkSide, JBC, Mino, Mistifório, Monstra, MPEG, Panini, Pé-de-Cabra, Pipoca & Nanquim, Suma, Veneta ]
       - { name: publishYear, label: Ano de Publicação, type: string, required: true }
       - { name: rating, label: Avaliação, type: string, required: true }
+  - name: notas
+    label: Notas
+    type: collection
+    path: content/notas
+    filename: '{primary}.md'
+    fields: 
+      - { name: title, label: Título, type: string, required: true }      
+      - { name: collection, label: Coleções, type: string, list: true, required: false }
+      - { name: cover, label: Capa (URL), type: string, required: true }
+      - { name: dateNote, label: Data da nota, type: date, required: true }
+      - { name: tags, label: Tags da Nota, type: string,, list: true, required: false }

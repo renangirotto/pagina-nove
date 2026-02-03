@@ -44,3 +44,6 @@ content:
       - { name: cover, label: Capa (URL), type: string, required: true }
       - { name: dateNote, label: Data da nota, type: date, required: true }
       - { name: tags, label: Tags da Nota, type: string,, list: true, required: false }
+      - name: body
+        label: Body
+        type: rich-text

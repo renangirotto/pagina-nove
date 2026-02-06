@@ -1,14 +1,16 @@
 ---
-artists: ['Inio Asano']
-collection: 'Dead Dead Demon''s Dededede Destruction'
+title: "Dead Dead Demon's Dededede Destruction #1"
+artists:
+  - Inio Asano
+collection: Dead Dead Demon's Dededede Destruction
 collectionVolume: 1
-cover: 'dead-dead-demons-dededede-destruction/cover-1.webp'
-date: 2025-09-21,
-labels: ['Mangas']
+cover: dead-dead-demons-dededede-destruction/cover-1.webp
+date: 2025-09-20
+labels:
+  - Mangas
 pages: 200
-publisher: 'JBC'
-publishYear: '2021'
-rating: '5'
-title: 'Dead Dead Demon''s Dededede Destruction #1'
+publisher:
+  - JBC
+publishYear: "2021"
+rating: "5"
 ---
-

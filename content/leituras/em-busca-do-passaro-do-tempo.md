@@ -8,7 +8,8 @@ date: 2026-01-13
 labels:
   - Quadrinhos
 pages: 224
-publisher: ComixZone
+publisher:
+  - ComixZone
 publishYear: "2024"
 rating: "5"
 ---

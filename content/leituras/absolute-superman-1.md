@@ -11,7 +11,8 @@ labels:
   - Quadrinhos
   - DC Comics
 pages: 64
-publisher: Panini
+publisher:
+  - Panini
 publishYear: "2025"
 rating: "5"
 ---

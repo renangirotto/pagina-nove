@@ -8,7 +8,8 @@ date: 2025-12-30
 labels:
   - Quadrinhos
 pages: 96
-publisher: DarkSide
+publisher:
+  - DarkSide
 publishYear: "2019"
 rating: "4"
 ---

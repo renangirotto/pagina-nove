@@ -10,7 +10,7 @@ labels:
   - Mangas
 pages: 418
 publisher:
-  - JBC
+  - Panini
 publishYear: "2025"
 rating: "5"
 ---

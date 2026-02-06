@@ -9,7 +9,8 @@ date: 2025-12-29
 labels:
   - Mangas
 pages: 386
-publisher: MPEG
+publisher:
+  - MPEG
 publishYear: "2023"
 rating: "4"
 ---

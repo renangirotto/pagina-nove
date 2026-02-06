@@ -30,6 +30,7 @@ content:
         type: select
         options:
           creatable: true
+          multiple: true
           values: [ ComixZone, Conrad, DarkSide, JBC, Mino, Mistifório, Monstra, MPEG, Panini, Pé-de-Cabra, Pipoca & Nanquim, Suma, Veneta ]
       - { name: publishYear, label: Ano de Publicação, type: string, required: true }
       - { name: rating, label: Avaliação, type: string, required: true }

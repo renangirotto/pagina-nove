@@ -10,7 +10,8 @@ date: 2026-01-04
 labels:
   - Quadrinhos
 pages: 44
-publisher: Mistifório
+publisher:
+  - Mistifório
 publishYear: "2024"
 rating: "3.5"
 ---

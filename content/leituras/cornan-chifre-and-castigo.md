@@ -8,7 +8,6 @@ labels:
   - Quadrinhos
 pages: 88
 publisher:
-  - Elefantes Press
   - Escória Comix
 publishYear: "2024"
 rating: "5"

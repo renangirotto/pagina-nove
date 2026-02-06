@@ -11,7 +11,8 @@ date: 2026-01-03
 labels:
   - Quadrinhos
 pages: 72
-publisher: Panini
+publisher:
+  - Panini
 publishYear: "2025"
 rating: "5"
 ---

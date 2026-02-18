@@ -7,6 +7,12 @@ import "@styles/colors.css";
 import "@styles/typography.css";
 
 import HeaderNavbar from "@components/HeaderNavbar.astro";
+
+const { title } = Astro.props;
+
+const PageTitle = title
+  ? `${title} | Página Nove`
+  : "Página Nove | Quadinhos e textos mal escritos.";
 ---
 
 <!doctype html>
@@ -16,7 +22,8 @@ import HeaderNavbar from "@components/HeaderNavbar.astro";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+
+    <title>{PageTitle}</title>
   </head>
   <body>
     <HeaderNavbar />

@@ -34,7 +34,7 @@ if (!entry) {
 const { Content } = await render(entry);
 ---
 
-<Layout>
+<Layout title={note.data.title}>
   <LayoutContainer class="layout-notes">
     <div class="hero-note">
       <TitlePage>{note.data.title}</TitlePage>

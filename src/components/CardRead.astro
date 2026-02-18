@@ -2,7 +2,7 @@
 import RatingBar from "@components/RatingBar.astro";
 import TagPill from "@components/TagPill.astro";
 
-const { cover, date, publisher, rating, seriesType, slug, title } = Astro.props;
+const { cover, date, label, publisher, rating, slug, title } = Astro.props;
 ---
 
 <article class="card-read">
@@ -10,7 +10,7 @@ const { cover, date, publisher, rating, seriesType, slug, title } = Astro.props;
     <div class="card-info">
       <div class="card-info-pills">
         <TagPill>{publisher}</TagPill>
-        <TagPill>{seriesType}</TagPill>
+        <TagPill>{label}</TagPill>
       </div>
       <div>
         <TagPill class="card-info-rating" tag="div">

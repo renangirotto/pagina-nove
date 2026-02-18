@@ -11,6 +11,7 @@ export default function formatEntryToCardRead(
     cover: entry.data.cover,
     date: formatDate(entry.data.date),
     id: entry.id,
+    label: entry.data.label,
     publisher: entry.data.publisher,
     rating: entry.data.rating,
     seriesType: getSeriesType(entry.data.collection),

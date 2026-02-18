@@ -9,6 +9,8 @@ import TitlePage from "@components/TitlePage.astro";
 
 import Layout from "@layouts/Layout.astro";
 
+import "@styles/content.css";
+
 import formatDate from "@utils/format-date";
 
 export async function getStaticPaths() {
@@ -42,7 +44,7 @@ const { Content } = await render(entry);
         >{dateFormatted}</time
       >
     </div>
-    <div class="layout-notes-content">
+    <div class="layout-notes-content" data-ui-content-renderer>
       <Content
         components={{
           p: TextPage,
@@ -62,54 +64,6 @@ const { Content } = await render(entry);
   .layout-notes-content {
     max-width: 860px;
     margin-inline: auto;
-
-    :global(a) {
-      box-decoration-break: clone;
-      display: inline-flex;
-      padding-inline: 2px;
-      border-radius: 4px;
-      font-family: "Raleway Variable", sans-serif;
-      font-weight: 700;
-      text-decoration-thickness: 2px;
-      color: var(--color-purple-200);
-      transition: background 0.25s ease-in-out;
-
-      &:hover {
-        background: rgb(from var(--color-purple-200) r g b / 0.25);
-      }
-    }
-
-    :global(strong) {
-      box-decoration-break: clone;
-      display: inline-flex;
-      padding-inline: 2px;
-      border-radius: 4px;
-      font-weight: 700;
-      color: #a34d14;
-      background: rgb(from #ffca80 r g b / 0.25);
-    }
-
-    :global(blockquote) {
-      border-inline-start: 4px solid var(--color-purple-100);
-      padding-block: 8px;
-      padding-inline: 12px 16px;
-      font-family: "Raleway Variable", sans-serif;
-      font-size: 1.125rem;
-      font-style: italic;
-      font-weight: 600;
-      color: var(--color-grey-light-1100);
-      line-height: 1.8;
-
-      &:not(:last-child) {
-        margin-block-end: 32px;
-
-        &:has(+ h1),
-        &:has(+ h2),
-        &:has(+ h3) {
-          margin-block-end: 64px;
-        }
-      }
-    }
   }
 
   .hero-note {

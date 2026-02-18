@@ -1,6 +1,8 @@
 import { z, defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 
+import { LabelSchema, PublishersSchema, RatingSchema } from "./collections";
+
 const notes = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/data/notes" }),
   schema: z.object({
@@ -21,11 +23,11 @@ const readings = defineCollection({
     cover: z.string(),
     date: z.date(),
     dateNote: z.date().optional(),
-    labels: z.array(z.string()),
+    label: LabelSchema,
     pages: z.number(),
-    publisher: z.array(z.string()),
+    publisher: PublishersSchema,
     publishYear: z.string(),
-    rating: z.string(),
+    rating: RatingSchema,
     title: z.string(),
   }),
 });

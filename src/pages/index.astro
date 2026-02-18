@@ -48,11 +48,9 @@ const publishersList = allReadings.reduce(
   (acc: string[], cur: CollectionEntry<"readings">) => {
     const publisher = cur.data.publisher;
 
-    publisher.forEach((publisher) => {
-      if (!acc.includes(publisher)) {
-        acc.push(publisher);
-      }
-    });
+    if (!acc.includes(publisher)) {
+      acc.push(publisher);
+    }
 
     return acc;
   },

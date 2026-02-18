@@ -4,6 +4,7 @@ import { defineConfig } from "astro/config";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import AutoImport from "astro-auto-import";
 import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
 
@@ -29,6 +30,15 @@ export default defineConfig({
     },
   },
   integrations: [
+    AutoImport({
+      imports: [
+        // Import a component’s default export
+        // generates:
+        // import A from './src/components/A.astro';
+        "./src/components/BoxSpoiler.astro",
+        "./src/components/TitlePage.astro",
+      ],
+    }),
     icon({
       svgoOptions: {
         multipass: true,

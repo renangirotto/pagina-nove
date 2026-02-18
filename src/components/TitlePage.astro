@@ -1,0 +1,28 @@
+---
+const { class: className, tag, ...rest } = Astro.props;
+
+const CustomTag = tag || "h1";
+---
+
+<CustomTag class:list={["title-page", className]} {...rest}>
+  <slot />
+</CustomTag>
+
+<style lang="scss">
+  .title-page {
+    --icon-size: clamp(1.375rem, 2.5vw, 1.75rem);
+
+    font-size: var(--title-page-font-size, clamp(2.25rem, 3vw, 2.5rem));
+    font-style: bold;
+    font-weight: 700;
+    text-align: var(--title-page-text-align, left);
+
+    &:not(:last-child) {
+      margin-block-end: 16px;
+
+      &:has(+ p) {
+        margin-block-end: 24px;
+      }
+    }
+  }
+</style>

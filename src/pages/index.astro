@@ -1,0 +1,163 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { ReadingItem } from "@utils/layout-types";
+
+import { getCollection } from "astro:content";
+
+import CardNote from "@components/CardNote.astro";
+import CardRead from "@components/CardRead.astro";
+import GridNotes from "@components/GridNotes.astro";
+import GridRead from "@components/GridRead.astro";
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TitlePage from "@components/TitlePage.astro";
+
+import Layout from "@layouts/Layout.astro";
+
+import { TOTAL_AMOUNT_ON_SHELF } from "@utils/constants";
+import formatEntryToCardNote from "@utils/format-entry-to-card-note";
+import formatEntryToCardRead from "@utils/format-entry-to-card-read";
+import getReadingsWithNotes from "@utils/get-readings-with-notes";
+import mergeNotesReadings from "@utils/merge-notes-readings";
+
+const allNotes = await getCollection("notes");
+const allReadings = await getCollection("readings");
+
+// * ----------------
+// * Notes control
+// * ----------------
+const readingsWithAsNotes = getReadingsWithNotes(allReadings);
+
+const listWithNotesAndReadingNotes = mergeNotesReadings({
+  notes: allNotes,
+  readings: readingsWithAsNotes,
+}).slice(0, 3);
+
+const listToRender = listWithNotesAndReadingNotes.map((item) =>
+  formatEntryToCardNote(item),
+);
+
+// * ----------------
+// * Readings control
+// * ----------------
+
+const percentageOfReads = Math.round(
+  (allReadings.length * 100) / TOTAL_AMOUNT_ON_SHELF,
+);
+
+const publishersList = allReadings.reduce(
+  (acc: string[], cur: CollectionEntry<"readings">) => {
+    const publisher = cur.data.publisher;
+
+    publisher.forEach((publisher) => {
+      if (!acc.includes(publisher)) {
+        acc.push(publisher);
+      }
+    });
+
+    return acc;
+  },
+  [],
+);
+
+const recentReadings = allReadings
+  .sort(
+    (a: CollectionEntry<"readings">, b: CollectionEntry<"readings">) =>
+      new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  )
+  .slice(0, 4)
+  .map((entry: CollectionEntry<"readings">) => {
+    return formatEntryToCardRead(entry);
+  });
+
+const totalAmountOfPublishers = publishersList.length;
+
+const totalAmountOfReads = allReadings.length;
+
+const totalAmoutOfPages = allReadings
+  .reduce((acc: number, cur: CollectionEntry<"readings">) => {
+    return acc + cur.data.pages;
+  }, 0)
+  .toLocaleString("pt-BR");
+---
+
+<Layout>
+  <section>
+    <LayoutContainer>
+      <TitlePage> Notas de leitura </TitlePage>
+      <GridNotes page="home">
+        {listToRender.map((item) => <CardNote {...item} />)}
+      </GridNotes>
+    </LayoutContainer>
+    <LayoutContainer divider>
+      <TitlePage tag="h2"> Últimas leituras </TitlePage>
+      <GridRead>
+        {
+          (recentReadings as ReadingItem[]).map((read) => (
+            <CardRead {...read} />
+          ))
+        }
+      </GridRead>
+    </LayoutContainer>
+    <LayoutContainer>
+      <TitlePage class="big-numbers-title" tag="h2">
+        Números grandes que parecem importantes
+      </TitlePage>
+      <div class="big-numbers">
+        <p class="big-number">
+          <span>li por volta de</span>
+          <span data-ui-text-big>{totalAmountOfReads}</span>
+          <span>quadrinhos ou mangas</span>
+        </p>
+        <p class="big-number">
+          <span>um total de</span>
+          <span data-ui-text-big>{totalAmoutOfPages}</span>
+          <span>páginas folheadas</span>
+        </p>
+        <p class="big-number">
+          <span>comprados de</span>
+          <span data-ui-text-big>{totalAmountOfPublishers}</span>
+          <span>editoras diferentes</span>
+        </p>
+        <p class="big-number">
+          sendo isso
+          <span data-ui-text-big>{percentageOfReads}%</span>
+          da minha coleção atual
+        </p>
+      </div>
+    </LayoutContainer>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .big-numbers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+
+    @include container-desktop {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .big-numbers-title {
+    --title-page-text-align: center;
+  }
+
+  .big-number {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.25rem;
+    text-align: center;
+    font-weight: 500;
+
+    [data-ui-text-big] {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--color-purple-200);
+      line-height: 1;
+    }
+  }
+</style>

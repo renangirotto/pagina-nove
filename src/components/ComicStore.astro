@@ -1,0 +1,107 @@
+---
+import CustomIcon from "@components/CustomIcon.astro";
+
+const { address, imageUrl, instagram, siteUrl, title } = Astro.props;
+---
+
+<div class="store">
+  <figure aria-hidden="true" class="store-figure">
+    <img class="store-image" src={imageUrl} alt="" />
+  </figure>
+  <div class="store-info">
+    <h3 class="store-title">{title}</h3>
+    <p class="store-links">
+      <a class="store-link" href={instagram.link} target="_blank">
+        {instagram.text}
+      </a>
+      <CustomIcon name="medical-cross-symbol" />
+      <a class="store-link" href={siteUrl} target="_blank">
+        {siteUrl}
+      </a>
+    </p>
+    <p>
+      <a class="store-link" href={address.link} target="_blank">
+        {address.text}
+      </a>
+    </p>
+  </div>
+</div>
+
+<style lang="scss">
+  .store {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 24px 0px;
+
+    @include container-desktop {
+      grid-template-columns: 400px 1fr;
+      grid-template-rows: auto;
+      gap: 0px 24px;
+    }
+
+    &:not(:last-child) {
+      margin-block-end: 64px;
+    }
+  }
+
+  .store-figure {
+    border-radius: 8px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .store-info {
+    align-self: center;
+  }
+
+  .store-links {
+    --color-store-link: var(--color-grey-light-400);
+    --icon-size: 12px;
+    --icon-color-light: var(--color-grey-light-400);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    @include container-desktop {
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+
+    &:not(:last-child) {
+      margin-block-end: 24px;
+    }
+
+    .custom-icon {
+      display: none;
+
+      @include container-desktop {
+        display: initial;
+      }
+    }
+  }
+
+  .store-link {
+    font-size: clamp(1.125rem, 3vw, 1.25rem);
+    font-weight: 600;
+    color: var(--color-store-link);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-within {
+      text-decoration: underline;
+    }
+  }
+
+  .store-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+
+    &:not(:last-child) {
+      margin-block-end: 4px;
+    }
+  }
+</style>

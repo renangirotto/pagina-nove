@@ -1,0 +1,105 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { ReadingItem } from "@utils/layout-types";
+
+import { getCollection } from "astro:content";
+
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TitlePage from "@components/TitlePage.astro";
+
+import Layout from "@layouts/Layout.astro";
+
+import formatEntryToCardRead from "@utils/format-entry-to-card-read";
+import GridRead from "@components/GridRead.astro";
+import CardRead from "@components/CardRead.astro";
+
+type MonthReadingMap = Record<string, {
+  monthDate: string;
+  monthName: string;
+  list: ReadingItem[];
+}>
+
+function formatMonthKey(yyyyMm: string): string {
+  const date = new Date(`${yyyyMm}-01`);
+
+  const formatter = new Intl.DateTimeFormat("pt-BR", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+  const dateFormatted = formatter.format(date).replace(" de ", " ");
+
+  return dateFormatted.charAt(0).toUpperCase() + dateFormatted.slice(1);
+}
+
+const allReadings = await getCollection("readings");
+
+const sortedReadings = allReadings.sort((a: CollectionEntry<'readings'>, b: CollectionEntry<'readings'>) => {
+  const dateA = new Date(a.data.date);
+  const dateB = new Date(b.data.date);
+
+  if (dateA < dateB) return 1;
+  if (dateA > dateB) return -1;
+  return 0;
+});
+
+const readingListByMonth = sortedReadings.reduce(
+  (acc: MonthReadingMap, cur: CollectionEntry<'readings'>) => {
+    const date = new Date(cur.data.date);
+    const yyyyMm = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`;
+    const formattedKey = formatMonthKey(yyyyMm);
+    const monthDate = yyyyMm;
+
+    if (!acc[formattedKey]) {
+      acc[formattedKey] = {
+        monthDate: monthDate,
+        monthName: formattedKey,
+        list: []
+      };
+    }
+
+    acc[formattedKey].list.push(formatEntryToCardRead(cur));
+
+    return acc;
+  },
+  {} as Record<string, {
+    monthDate: string;
+    monthName: string;
+    list: Array<ReadingItem>;
+  }>,
+);
+
+const readingListArray = Object.values(readingListByMonth as Record<string, {
+    monthDate: string;
+    monthName: string;
+    list: Array<ReadingItem>;
+  }>).sort((a, b) => b.monthDate.localeCompare(a.monthDate));
+---
+
+<Layout>
+  <section>
+    <LayoutContainer>
+      <TitlePage> Leituras do blog </TitlePage>
+
+      {
+        readingListArray.map((item) => (
+          <h2 class="title-group">{item.monthName}</h2>
+          <GridRead>
+            {(item.list as ReadingItem[]).map(read => <CardRead {...read} />)}
+          </GridRead>
+        ))
+      }
+    </LayoutContainer>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .title-group {
+    font-size: clamp(2rem, 2.5vw, 2.25rem);
+
+    &:not(:last-child) {
+      margin-block-end: 16px;
+    }
+  }
+</style>

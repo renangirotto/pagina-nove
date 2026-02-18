@@ -1,0 +1,36 @@
+---
+import ComicStore from "@components/ComicStore.astro";
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TextPage from "@components/TextPage.astro";
+import TitlePage from "@components/TitlePage.astro";
+
+import stores from "@data/stores.json";
+
+import Layout from "@layouts/Layout.astro";
+---
+
+<Layout>
+  <section>
+    <LayoutContainer>
+      <TitlePage> Onde Comprar </TitlePage>
+      <TextPage>
+        Se você estiver em <strong>São Paulo</strong> e quiser apoiar lojas de quadrinhos
+        da cidade, fica aqui a minha recomendação!
+      </TextPage>
+
+      <div class="layout-stores">
+        {stores.map((store) => <ComicStore {...store} />)}
+      </div>
+    </LayoutContainer>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .layout-stores {
+    margin-block-start: 32px;
+
+    @include container-desktop {
+      margin-block-start: 64px;
+    }
+  }
+</style>

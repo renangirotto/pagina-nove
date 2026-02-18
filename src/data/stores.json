@@ -1,0 +1,28 @@
+[
+  {
+    "address": {
+      "link": "https://maps.app.goo.gl/gmN6YRBroyq5jHy56",
+      "text": "Praça Benedito Calixto, 158 - 1º andar - Pinheiros, São Paulo - SP, 05406-040"
+    },
+    "imageUrl": "/images/stores/loja-monstra.webp",
+    "instagram": {
+      "link": "https://www.instagram.com/lojamonstra/",
+      "text": "@lojamonstra"
+    },
+    "siteUrl": "https://lojamonstra.com.br/",
+    "title": "Loja Monstra"
+  },
+  {
+    "address": {
+      "link": "https://maps.app.goo.gl/a4zmDTx2ugUKzSgW7",
+      "text": "R. Augusta, 1371 - loja 116 - Consolação, São Paulo - SP, 01305-902"
+    },
+    "imageUrl": "/images/stores/ugra.webp",
+    "instagram": {
+      "link": "https://www.instagram.com/ugra_press/",
+      "text": "@ugra_press"
+    },
+    "siteUrl": "https://www.ugrapress.com.br/",
+    "title": "Ugra"
+  }
+]

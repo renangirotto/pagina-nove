@@ -1,0 +1,138 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import { getCollection, getEntry, render } from "astro:content";
+
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TextPage from "@components/TextPage.astro";
+import TitlePage from "@components/TitlePage.astro";
+
+import Layout from "@layouts/Layout.astro";
+
+import formatDate from "@utils/format-date";
+
+export async function getStaticPaths() {
+  const allNotes = await getCollection("notes");
+
+  const allNotesSlugs = allNotes.map((note: CollectionEntry<"notes">) => {
+    return { params: { slug: note.id }, props: { note } };
+  });
+
+  return allNotesSlugs;
+}
+
+const { note } = Astro.props as { note: CollectionEntry<"notes"> };
+
+const dateFormatted = formatDate(note.data.dateNote);
+
+const entry = await getEntry("notes", note.id);
+
+if (!entry) {
+  throw new Error(`Could not find note ${note.id}`);
+}
+
+const { Content } = await render(entry);
+---
+
+<Layout>
+  <LayoutContainer class="layout-notes">
+    <div class="hero-note">
+      <TitlePage>{note.data.title}</TitlePage>
+      <time class="hero-note-time" datetime={`${note.data.dateNote}`}
+        >{dateFormatted}</time
+      >
+    </div>
+    <div class="layout-notes-content">
+      <Content
+        components={{
+          p: TextPage,
+        }}
+      />
+    </div>
+  </LayoutContainer>
+</Layout>
+
+<style lang="scss">
+  .layout-notes {
+    @include container-desktop {
+      padding-inline: 16px;
+    }
+  }
+
+  .layout-notes-content {
+    max-width: 860px;
+    margin-inline: auto;
+
+    :global(a) {
+      box-decoration-break: clone;
+      display: inline-flex;
+      padding-inline: 2px;
+      border-radius: 4px;
+      font-family: "Raleway Variable", sans-serif;
+      font-weight: 700;
+      text-decoration-thickness: 2px;
+      color: var(--color-purple-200);
+      transition: background 0.25s ease-in-out;
+
+      &:hover {
+        background: rgb(from var(--color-purple-200) r g b / 0.25);
+      }
+    }
+
+    :global(strong) {
+      box-decoration-break: clone;
+      display: inline-flex;
+      padding-inline: 2px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #a34d14;
+      background: rgb(from #ffca80 r g b / 0.25);
+    }
+
+    :global(blockquote) {
+      border-inline-start: 4px solid var(--color-purple-100);
+      padding-block: 8px;
+      padding-inline: 12px 16px;
+      font-family: "Raleway Variable", sans-serif;
+      font-size: 1.125rem;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--color-grey-light-1100);
+      line-height: 1.8;
+
+      &:not(:last-child) {
+        margin-block-end: 32px;
+
+        &:has(+ h1),
+        &:has(+ h2),
+        &:has(+ h3) {
+          margin-block-end: 64px;
+        }
+      }
+    }
+  }
+
+  .hero-note {
+    --title-page-font-size: clamp(2.5rem, 3.5vw, 3rem);
+    margin-block-end: 48px;
+  }
+
+  .hero-note-figure {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .hero-note-time {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-grey-light-1100);
+
+    &:not(:last-child) {
+      margin-block-end: 24px;
+    }
+  }
+</style>

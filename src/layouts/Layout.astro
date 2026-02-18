@@ -1,0 +1,41 @@
+---
+import "@fontsource-variable/outfit";
+import "@fontsource-variable/raleway";
+
+import "@styles/reset.css";
+import "@styles/colors.css";
+import "@styles/typography.css";
+
+import HeaderNavbar from "@components/HeaderNavbar.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+  </head>
+  <body>
+    <HeaderNavbar />
+    <main class="layout-main">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style lang="scss">
+  .layout-main {
+    padding-block: 44px 64px;
+    padding-inline: 16px;
+    position: relative;
+    overflow: hidden;
+
+    @include container-desktop {
+      padding-block: 64px 88px;
+    }
+  }
+</style>

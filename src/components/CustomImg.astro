@@ -1,0 +1,34 @@
+---
+const { alt, caption, src } = Astro.props;
+---
+
+<figure class="custom-img">
+  <img src={src} alt={alt} />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style lang="scss">
+  .custom-img {
+    figcaption {
+      padding-block-start: 8px;
+      font-size: 0.875rem;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--color-grey-light-1100);
+      text-align: right;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    &:not(:last-child) {
+      margin-block-end: 40px;
+
+      @include container-desktop {
+        margin-block-end: 64px;
+      }
+    }
+  }
+</style>

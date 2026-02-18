@@ -1,0 +1,27 @@
+---
+const { class: className, tag, ...rest } = Astro.props;
+
+const CustomTag = tag || "p";
+---
+
+<CustomTag :is="is" class:list={["tag-pill", className]} {...rest}>
+  <slot />
+</CustomTag>
+
+<style lang="scss">
+  .tag-pill {
+    width: fit-content;
+    padding-block: var(--tag-pill-padding-block, 6px);
+    padding-inline: var(--tag-pill-padding-inline, 12px);
+    border-radius: 32px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-yellow-grey-100);
+    background: var(--color-purple-100);
+    box-shadow: 0px 2px 4px 0px rgba(#1f1f1f, 0.25);
+
+    &:last-child {
+      align-self: center;
+    }
+  }
+</style>

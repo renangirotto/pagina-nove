@@ -1,0 +1,177 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import { getCollection } from "astro:content";
+
+import CardNote from "@components/CardNote.astro";
+import GridNotes from "@components/GridNotes.astro";
+import HeroRead from "@components/HeroRead.astro";
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TitlePage from "@components/TitlePage.astro";
+
+import Layout from "@layouts/Layout.astro";
+
+import { PATH_IMG_COVERS } from "@utils/constants";
+import formatDate from "@utils/format-date";
+import formatEntryToCardNote from "@utils/format-entry-to-card-note";
+
+type CardNoteData = {
+  cover: any;
+  dateNote: string;
+  slug: string;
+  tags: any;
+  title: any;
+}
+
+export async function getStaticPaths() {
+  const allReadings = await getCollection("readings");
+
+  const allReadingsSlugs = allReadings.map(
+    (read: CollectionEntry<"readings">) => {
+      return { params: { slug: read.id }, props: { read } };
+    },
+  );
+
+  return allReadingsSlugs;
+}
+
+const { read } = Astro.props as { read: CollectionEntry<"readings"> };
+
+function formatArtists(artists: string[]) {
+  if (artists.length === 1) return `${artists}`;
+
+  return (
+    artists?.slice(0, artists.length - 1).join(", ") + " e " + artists.at(-1)
+  );
+}
+
+const heroData = {
+  artists: formatArtists(read.data.artists),
+  cover: `${PATH_IMG_COVERS}/${read.data.cover}`,
+  date: formatDate(read.data.date),
+  pages: read.data.pages,
+  publisher: read.data.publisher.join(","),
+  publishYear: read.data.publishYear,
+  rating: read.data.rating,
+  title: read.data.title,
+};
+
+// * ----------------
+// * Notes control
+// * ----------------
+const relatedNotes = await getCollection("notes", (entry) => {
+  return entry.data.collection?.includes(read.id) || false;
+});
+
+console.log("relatedNotes: ", relatedNotes);
+
+const relatedNotesToRender: CardNoteData[] = [];
+
+if (relatedNotes.length > 0) {
+  relatedNotes.forEach((item) => {
+    relatedNotesToRender.push(formatEntryToCardNote(item));
+  });
+}
+---
+
+<Layout>
+  <LayoutContainer class="layout-grid">
+    <div class="layout-pattern">
+      <figure class="cover-pattern">
+        <img src="/images/pattern.svg" />
+      </figure>
+    </div>
+    <div class="layout-page">
+      <HeroRead {...heroData} />
+    </div>
+
+    {
+      relatedNotesToRender.length > 0 && (
+        <TitlePage>Notas relacionadas </TitlePage>
+        <GridNotes page="read">
+          {relatedNotesToRender.map((item) => (
+            <CardNote {...item} />
+          ))}
+        </GridNotes>
+      )
+    }
+  </LayoutContainer>
+</Layout>
+
+<style lang="scss" scoped>
+  .empty-text {
+    font-size: 1rem;
+    text-wrap: balance;
+
+    strong {
+      font-size: 1.125rem;
+    }
+
+    &:has(strong) {
+      &:not(:last-child) {
+        margin-block-end: 8px;
+      }
+    }
+  }
+
+  .layout-section {
+    &[data-ui-content="empty"] {
+      padding-block: 32px;
+      padding-inline: 32px;
+      border-radius: 16px;
+      text-align: center;
+      background: var(--color-grey-light-100);
+
+      .title {
+        --title: 1.75rem;
+
+        @include container-desktop {
+          --title: 2.25rem;
+        }
+      }
+    }
+  }
+
+  .layout-grid {
+    --pattern-height: 320px;
+    display: grid;
+    grid-template-areas: "pattern";
+
+    @include container-desktop {
+      --pattern-height: 480px;
+    }
+  }
+
+  .layout-page {
+    grid-area: pattern;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto);
+    gap: 88px 0px;
+    z-index: 1;
+
+    @include container-desktop {
+      gap: 96px 0px;
+    }
+  }
+
+  .layout-pattern {
+    grid-area: pattern;
+    width: 100%;
+    height: var(--pattern-height);
+    border-radius: 16px;
+    margin-inline: auto;
+    background: var(--color-purple-100);
+    overflow: hidden;
+    z-index: 0;
+
+    @include container-desktop {
+      height: var(--pattern-height);
+    }
+
+    img {
+      width: 100%;
+      opacity: 0.25;
+    }
+  }
+</style>

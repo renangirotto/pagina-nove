@@ -1,0 +1,67 @@
+---
+import CustomIcon from "@components/CustomIcon.astro";
+
+const MAX_RATING = 5;
+
+const { rating } = Astro.props;
+
+const ratingAsNumber = Number(rating);
+
+const filledStars = Math.floor(ratingAsNumber);
+
+const decimalPart = ratingAsNumber - filledStars;
+
+const hasHalfStar = decimalPart >= 0.5 - 1e-6;
+
+function getEmptyStartAmount() {
+  let count = MAX_RATING;
+  count -= filledStars;
+
+  if (hasHalfStar) {
+    count -= 1;
+  }
+
+  return count;
+}
+
+const emptyStars = getEmptyStartAmount();
+---
+
+<div class="icons">
+  {
+    Array(filledStars)
+      .fill("")
+      .map(() => <CustomIcon isDynamic={true} name="star" />)
+  }
+
+  {
+    hasHalfStar && (
+      <CustomIcon class="icon-half" isDynamic={true} name="half-star" />
+    )
+  }
+
+  {
+    Array(emptyStars)
+      .fill("")
+      .map(() => <CustomIcon class="icon-empty" isDynamic={true} name="star" />)
+  }
+</div>
+
+<style lang="scss" scoped>
+  .icons {
+    --icon-color-light: var(--rating-color-filled, var(--color-purple-100));
+    --icon-size: var(--rating-icon-size, 32px);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .icon-empty {
+    --icon-color-light: var(--rating-color-empty, var(--color-grey-light-100));
+  }
+
+  .icon-half {
+    --icon-color-dark: var(--rating-color-filled, var(--color-purple-100));
+    --icon-color-light: var(--rating-color-empty, var(--color-grey-light-100));
+  }
+</style>

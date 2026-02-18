@@ -1,0 +1,203 @@
+---
+import CustomIcon from "@components/CustomIcon.astro";
+import DialogDrawer from "@components/DialogDrawer.astro";
+import LayoutContainer from "@components/LayoutContainer.astro";
+import LogoSvg from "@components/LogoSvg.astro";
+
+import { NAV_ITEMS, ROUTES } from "@utils/constants";
+
+const { pathname } = Astro.url;
+---
+
+<header class="header">
+  <LayoutContainer class="header-container">
+    <a class="header-logo" href={ROUTES.home}>
+      <LogoSvg />
+    </a>
+
+    <nav class="nav" data-ui-decive="mobile">
+      <button class="nav-button" id="nav-button-mobile">
+        <CustomIcon name="menu" />
+      </button>
+
+      <DialogDrawer id="dialog-nav" class="nav-dialog" title="Outras páginas">
+        <ul class="nav-list">
+          {
+            NAV_ITEMS.map((item) => (
+              <li>
+                <a
+                  class="nav-link nav-link-mobile"
+                  data-ui-nav-link-active={item.href === pathname || null}
+                  href={item.href}
+                  target={item.target || `_self`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </DialogDrawer>
+    </nav>
+
+    <nav class="nav" data-ui-decive="desktop">
+      <ul class="nav-list">
+        {
+          NAV_ITEMS.map((item) => (
+            <li>
+              <a
+                class="nav-link"
+                data-ui-nav-link-active={item.href === pathname || null}
+                href={item.href}
+                target={item.target || `_self`}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </LayoutContainer>
+</header>
+
+<script>
+  const buttonNavMobile = document.getElementById("nav-button-mobile");
+  const dialog = document.getElementById("dialog-nav");
+
+  buttonNavMobile?.addEventListener("click", () => {
+    (dialog as HTMLDialogElement)?.showModal();
+  });
+
+  const mobileLinks = document.querySelectorAll(".nav-link-mobile");
+
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      (dialog as HTMLDialogElement)?.close();
+    });
+  });
+</script>
+
+<style lang="scss">
+  .header {
+    padding-inline: 16px;
+    background: var(--color-grey-light-50);
+  }
+
+  .header-container {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    grid-template-rows: auto;
+    gap: 0px 16px;
+    grid-template-areas: "logo nav";
+    align-items: center;
+    width: 100%;
+    padding-block: 32px 24px;
+    padding-inline: 8px;
+
+    @include container-desktop {
+      grid-template-columns: 120px 1fr;
+      padding-inline: 0px;
+    }
+  }
+
+  .header-logo {
+    grid-area: logo;
+  }
+
+  .nav {
+    grid-area: nav;
+    justify-self: end;
+    font-size: 20px;
+
+    &[data-ui-decive="mobile"] {
+      @include container-desktop {
+        display: none;
+      }
+    }
+
+    &[data-ui-decive="desktop"] {
+      display: none;
+
+      @include container-desktop {
+        display: block;
+      }
+    }
+  }
+
+  .nav-button {
+    --icon-size: 24px;
+    --icon-size: 24px;
+    --icon-color-light: var(--color-grey-dark-100);
+
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 8px;
+    padding-inline: 8px;
+    border: none;
+    border-radius: 4px;
+    background: none;
+  }
+
+  .nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 44px;
+    padding-inline-start: 0;
+
+    @include container-desktop {
+      flex-direction: row;
+      gap: 32px;
+    }
+  }
+
+  .nav-link {
+    --icon-size: 24px;
+    --icon-color-dark: var(--color-grey-light-200);
+    --icon-color-light: var(--color-grey-light-100);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-block: 12px;
+    padding-inline: 24px;
+    border-bottom: 4px solid var(--nav-lin-border-color, transparent);
+    border-radius: 4px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.25s ease;
+
+    @include container-desktop {
+      --icon-size: 18px;
+      padding-block: 8px;
+      padding-inline: 16px;
+      font-size: 1.375rem;
+      gap: 6px;
+    }
+
+    &:hover,
+    &:focus-within {
+      color: var(--color-grey-light-1100);
+      background: var(--color-grey-light-100);
+      --nav-lin-border-color: var(--color-grey-light-200);
+
+      @include container-desktop {
+        --icon-color-dark: var(--color-purple-200);
+        --icon-color-light: var(--color-purple-100);
+      }
+    }
+
+    &[data-ui-nav-link-active="true"] {
+      --icon-color-dark: var(--color-purple-200);
+      --icon-color-light: var(--color-purple-100);
+      --nav-lin-border-color: var(--color-purple-100);
+      color: var(--color-purple-200);
+      background: var(--color-purple-50);
+    }
+  }
+</style>

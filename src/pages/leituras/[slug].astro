@@ -63,8 +63,6 @@ const relatedNotes = await getCollection("notes", (entry) => {
   return entry.data.collection?.includes(read.id) || false;
 });
 
-console.log("relatedNotes: ", relatedNotes);
-
 const relatedNotesToRender: CardNoteData[] = [];
 
 if (relatedNotes.length > 0) {

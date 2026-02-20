@@ -32,10 +32,8 @@ export default defineConfig({
   integrations: [
     AutoImport({
       imports: [
-        // Import a component’s default export
-        // generates:
-        // import A from './src/components/A.astro';
         "./src/components/BoxSpoiler.astro",
+        "./src/components/CustomImg.astro",
         "./src/components/TitlePage.astro",
       ],
     }),

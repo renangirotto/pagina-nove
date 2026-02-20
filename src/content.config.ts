@@ -21,6 +21,7 @@ const readings = defineCollection({
     collection: z.string().optional(),
     collectionVolume: z.number().optional(),
     cover: z.string(),
+    coverNote: z.string().optional(),
     date: z.date(),
     dateNote: z.date().optional(),
     label: LabelSchema,
@@ -29,6 +30,7 @@ const readings = defineCollection({
     publishYear: z.string(),
     rating: RatingSchema,
     title: z.string(),
+    titleNote: z.string().optional(),
   }),
 });
 

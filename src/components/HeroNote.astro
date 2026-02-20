@@ -1,0 +1,28 @@
+---
+import TitlePage from "./TitlePage.astro";
+
+const { date, dateFormatted, title } = Astro.props;
+---
+
+<div class="hero-note">
+  <TitlePage>{title}</TitlePage>
+  <time class="hero-note-time" datetime={`${date}`}>{dateFormatted}</time>
+</div>
+
+<style lang="scss">
+  .hero-note {
+    --title-page-font-size: clamp(2.5rem, 3.5vw, 3rem);
+    margin-block-end: 48px;
+  }
+
+  .hero-note-time {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-grey-light-1100);
+
+    &:not(:last-child) {
+      margin-block-end: 24px;
+    }
+  }
+</style>

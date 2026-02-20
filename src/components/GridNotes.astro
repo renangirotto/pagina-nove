@@ -20,7 +20,6 @@ const PageType = page || null;
       grid-template-columns: repeat(2, calc(30% - 24px)) auto;
       grid-template-areas:
         "first first ."
-        "first first ."
         ". . .";
       gap: 24px 24px;
     }
@@ -28,9 +27,7 @@ const PageType = page || null;
     &[data-ui-page-type="home"] {
       @include container-desktop {
         grid-template-columns: repeat(2, calc(30% - 24px)) auto;
-        grid-template-areas:
-          "first first ."
-          "first first .";
+        grid-template-areas: "first first .";
       }
     }
 

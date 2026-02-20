@@ -3,9 +3,10 @@ import type { CollectionEntry } from "astro:content";
 
 import { getCollection, getEntry, render } from "astro:content";
 
+import HeroNote from "@components/HeroNote.astro";
 import LayoutContainer from "@components/LayoutContainer.astro";
+import NotesContent from "@components/NotesContent.astro";
 import TextPage from "@components/TextPage.astro";
-import TitlePage from "@components/TitlePage.astro";
 
 import Layout from "@layouts/Layout.astro";
 
@@ -38,19 +39,18 @@ const { Content } = await render(entry);
 
 <Layout title={note.data.title}>
   <LayoutContainer class="layout-notes">
-    <div class="hero-note">
-      <TitlePage>{note.data.title}</TitlePage>
-      <time class="hero-note-time" datetime={`${note.data.dateNote}`}
-        >{dateFormatted}</time
-      >
-    </div>
-    <div class="layout-notes-content" data-ui-content-renderer>
+    <HeroNote
+      date={note.data.dateNote}
+      dateFormatted={dateFormatted}
+      title={note.data.title}
+    />
+    <NotesContent>
       <Content
         components={{
           p: TextPage,
         }}
       />
-    </div>
+    </NotesContent>
   </LayoutContainer>
 </Layout>
 
@@ -58,35 +58,6 @@ const { Content } = await render(entry);
   .layout-notes {
     @include container-desktop {
       padding-inline: 16px;
-    }
-  }
-
-  .layout-notes-content {
-    max-width: 860px;
-    margin-inline: auto;
-  }
-
-  .hero-note {
-    --title-page-font-size: clamp(2.5rem, 3.5vw, 3rem);
-    margin-block-end: 48px;
-  }
-
-  .hero-note-figure {
-    width: 100%;
-
-    img {
-      width: 100%;
-    }
-  }
-
-  .hero-note-time {
-    display: block;
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--color-grey-light-1100);
-
-    &:not(:last-child) {
-      margin-block-end: 24px;
     }
   }
 </style>

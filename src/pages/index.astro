@@ -58,10 +58,35 @@ const publishersList = allReadings.reduce(
 );
 
 const recentReadings = allReadings
-  .sort(
-    (a: CollectionEntry<"readings">, b: CollectionEntry<"readings">) =>
-      new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-  )
+  .sort((a: CollectionEntry<"readings">, b: CollectionEntry<"readings">) => {
+    const dateCompare =
+      new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+
+    if (dateCompare !== 0) return dateCompare;
+
+    if (a.data.collection === b.data.collection) {
+      const volumeA = a.data.collectionVolume;
+      const volumeB = b.data.collectionVolume;
+
+      if (volumeA && volumeB) {
+        const numA =
+          typeof volumeA === "string" ? parseFloat(volumeA) : volumeA;
+        const numB =
+          typeof volumeB === "string" ? parseFloat(volumeB) : volumeB;
+
+        if (!isNaN(numA) && !isNaN(numB)) {
+          return numB - numA;
+        }
+
+        return String(volumeA).localeCompare(String(volumeB));
+      }
+
+      if (volumeA && !volumeB) return -1;
+      if (!volumeA && volumeB) return 1;
+    }
+
+    return 0;
+  })
   .slice(0, 4)
   .map((entry: CollectionEntry<"readings">) => {
     return formatEntryToCardRead(entry);

@@ -12,6 +12,7 @@ export const PublishersSchema = z.enum([
   "Mistifório",
   "Monstra",
   "MPEG",
+  "Mythos",
   "Panini",
   "Pé-de-Cabra",
   "Pipoca & Nanquim",

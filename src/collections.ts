@@ -1,5 +1,25 @@
 import { z } from "zod";
 
+export const ComicCollectionsSchema = z
+  .enum([
+    "20th Century Boys - Edição Definitiva",
+    "Absolute Batman",
+    "Absolute Mulher-Maravilha",
+    "Absolute Superman",
+    "Beasts of Burden",
+    "Dead Dead Demon's Dededede Destruction",
+    "Gash Bell",
+    "Hajime no Ippo",
+    "Hellboy Omnibus",
+    "Invencível",
+    "Jojo's Bizarre Adventure: Phantom Blood",
+    "Mad Marx",
+    "Os Ogros Deuses",
+    "Pluto: Edição de Luxo",
+    "Shin Zero",
+  ])
+  .optional();
+
 export const LabelSchema = z.enum(["Quadrinho", "Manga"]);
 
 export const PublishersSchema = z.enum([

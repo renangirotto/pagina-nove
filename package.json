@@ -12,7 +12,7 @@
     "@astrojs/mdx": "^4.3.13",
     "@fontsource-variable/outfit": "^5.2.8",
     "@fontsource-variable/raleway": "^5.2.8",
-    "astro": "^5.17.1",
+    "astro": "^5.18.0",
     "astro-auto-import": "^0.5.1",
     "astro-icon": "^1.1.5",
     "sass": "^1.97.3"

@@ -13,6 +13,11 @@ const slugs = {
   ["readings"]: `${ROUTES.readings}`,
 };
 
+const slugsTarget = {
+  ["notes"]: ``,
+  ["readings"]: `#read-note`,
+};
+
 const tags = {
   ["notes"]: [],
   ["readings"]: ["Leitura"],
@@ -27,7 +32,7 @@ export default function formatEntryToCardNote(entry: CardsNotesEntry) {
   return {
     cover: entry.data[covers[entry.collection]],
     dateNote: formatDate(entry.data.dateNote),
-    slug: `${slugs[entry.collection]}${entry.id}/`,
+    slug: `${slugs[entry.collection]}${entry.id}/${slugsTarget[entry.collection]}`,
     tags: tags[entry.collection],
     title: entry.data[title[entry.collection]],
   };

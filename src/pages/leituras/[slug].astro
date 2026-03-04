@@ -99,7 +99,8 @@ if (relatedNotes.length > 0) {
     </div>
 
     {read.data.dateNote &&
-      <HeroNote
+      <section class="layout-note" id="read-note" tabindex="-1">
+        <HeroNote
         date={read.data.dateNote}
         dateFormatted={dateNoteFormatted}
         title={read.data.titleNote}
@@ -111,6 +112,7 @@ if (relatedNotes.length > 0) {
           }}
         />
       </NotesContent>
+      </section>
     }
 
 
@@ -151,6 +153,10 @@ if (relatedNotes.length > 0) {
     @include container-desktop {
       --pattern-height: 480px;
     }
+  }
+
+  .layout-note {
+    outline: transparent;
   }
 
   .layout-page {

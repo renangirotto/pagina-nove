@@ -30,7 +30,7 @@ const readingsWithAsNotes = getReadingsWithNotes(allReadings);
 const listWithNotesAndReadingNotes = mergeNotesReadings({
   notes: allNotes,
   readings: readingsWithAsNotes,
-}).slice(0, 2);
+}).slice(0, 6);
 
 const listToRender = listWithNotesAndReadingNotes.map((item) =>
   formatEntryToCardNote(item),
@@ -106,8 +106,8 @@ const totalAmoutOfPages = allReadings
 <Layout>
   <section>
     <LayoutContainer>
-      <TitlePage> Notas de leitura </TitlePage>
-      <GridNotes page="home">
+      <TitlePage> Notas de leituras recentes </TitlePage>
+      <GridNotes>
         {listToRender.map((item) => <CardNote {...item} />)}
       </GridNotes>
     </LayoutContainer>

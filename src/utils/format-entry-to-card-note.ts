@@ -35,5 +35,6 @@ export default function formatEntryToCardNote(entry: CardsNotesEntry) {
     slug: `${slugs[entry.collection]}${entry.id}/${slugsTarget[entry.collection]}`,
     tags: tags[entry.collection],
     title: entry.data[title[entry.collection]],
+    titleIssue: entry.collection === "readings" ? entry.data.title : null,
   };
 }

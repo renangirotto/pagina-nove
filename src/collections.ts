@@ -4,6 +4,7 @@ export const ComicCollectionsSchema = z
   .enum([
     "20th Century Boys - Edição Definitiva",
     "Absolute Batman",
+    "Absolute Caçador de Marte",
     "Absolute Mulher-Maravilha",
     "Absolute Superman",
     "Beasts of Burden",
@@ -14,6 +15,7 @@ export const ComicCollectionsSchema = z
     "Invencível",
     "Jojo's Bizarre Adventure: Phantom Blood",
     "Mad Marx",
+    "Mutantes Shaolin",
     "Os Ogros Deuses",
     "Pluto: Edição de Luxo",
     "Shin Zero",

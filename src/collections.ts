@@ -5,6 +5,7 @@ export const ComicCollectionsSchema = z
     "20th Century Boys - Edição Definitiva",
     "Absolute Batman",
     "Absolute Caçador de Marte",
+    "Absolute Lanterna Verde",
     "Absolute Mulher-Maravilha",
     "Absolute Superman",
     "Beasts of Burden",

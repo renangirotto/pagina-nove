@@ -1,4 +1,10 @@
-<div class="grid-read">
+---
+const { page } = Astro.props;
+
+const PageType = page || null;
+---
+
+<div class="grid-read" data-ui-page-type={PageType}>
   <slot />
 </div>
 
@@ -22,6 +28,12 @@
 
     &:not(:last-child) {
       margin-block-end: 64px;
+    }
+
+    &[data-ui-page-type="home"] {
+      &:not(:last-child) {
+        margin-block-end: 0px;
+      }
     }
   }
 </style>

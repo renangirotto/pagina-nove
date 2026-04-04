@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import type { ReadingItem } from "@utils/layout-types";
 
 import { getCollection } from "astro:content";
 
@@ -13,7 +12,7 @@ import TitlePage from "@components/TitlePage.astro";
 
 import Layout from "@layouts/Layout.astro";
 
-import { TOTAL_AMOUNT_ON_SHELF } from "@utils/constants";
+import { ROUTES, TOTAL_AMOUNT_ON_SHELF } from "@utils/constants";
 import formatEntryToCardNote from "@utils/format-entry-to-card-note";
 import formatEntryToCardRead from "@utils/format-entry-to-card-read";
 import getReadingsWithNotes from "@utils/get-readings-with-notes";
@@ -105,21 +104,33 @@ const totalAmoutOfPages = allReadings
 
 <Layout>
   <section>
-    <LayoutContainer>
-      <TitlePage> Notas de leituras recentes </TitlePage>
+    <LayoutContainer divider>
+      <div class="title-container">
+        <TitlePage class="title"> Notas recentes </TitlePage>
+        <a class="link-list-all" data-ui-device="desktop" href={ROUTES.notes}
+          >Todas as notas</a
+        >
+      </div>
       <GridNotes>
         {listToRender.map((item) => <CardNote {...item} />)}
       </GridNotes>
+      <a class="link-list-all" data-ui-device="mobile" href={ROUTES.notes}
+        >Todas as notas</a
+      >
     </LayoutContainer>
     <LayoutContainer divider>
-      <TitlePage tag="h2"> Últimas leituras </TitlePage>
-      <GridRead>
-        {
-          (recentReadings as ReadingItem[]).map((read) => (
-            <CardRead {...read} />
-          ))
-        }
+      <div class="title-container">
+        <TitlePage class="title" tag="h2"> Últimas leituras </TitlePage>
+        <a class="link-list-all" data-ui-device="desktop" href={ROUTES.notes}
+          >Todas as leituras</a
+        >
+      </div>
+      <GridRead page="home">
+        {recentReadings.map((read) => <CardRead {...read} />)}
       </GridRead>
+      <a class="link-list-all" data-ui-device="mobile" href={ROUTES.notes}
+        >Todas as leituras</a
+      >
     </LayoutContainer>
     <LayoutContainer>
       <TitlePage class="big-numbers-title" tag="h2">
@@ -181,6 +192,67 @@ const totalAmoutOfPages = allReadings
       font-weight: 700;
       color: var(--color-purple-200);
       line-height: 1;
+    }
+  }
+
+  .link-list-all {
+    display: block;
+    width: fit-content;
+    padding-block: 12px;
+    padding-inline: 24px;
+    border-bottom: 4px solid
+      var(--link-border-color, var(--color-grey-light-200));
+    border-radius: 4px;
+    font-size: 1.25rem;
+    color: var(--color-grey-light-1100);
+    text-box-trim: trim-both;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    background: var(--color-grey-light-100);
+
+    &:hover,
+    &:focus-within {
+      --link-border-color: var(--color-purple-100);
+      color: var(--color-purple-200);
+      background: var(--color-purple-50);
+    }
+
+    &[data-ui-device="desktop"] {
+      display: none;
+      font-size: 1.125rem;
+
+      @include container-desktop {
+        display: block;
+      }
+    }
+
+    &[data-ui-device="mobile"] {
+      display: block;
+      margin-block-start: 24px;
+      margin-inline: auto;
+
+      @include container-desktop {
+        display: none;
+      }
+    }
+  }
+
+  .title {
+    &:not(:last-child) {
+      margin-block-end: 0px;
+    }
+  }
+
+  .title-container {
+    @include container-desktop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    &:not(:last-child) {
+      margin-block-end: 24px;
     }
   }
 </style>

@@ -5,6 +5,7 @@ import type { ReadingItem } from "@utils/layout-types";
 import { getCollection } from "astro:content";
 
 import LayoutContainer from "@components/LayoutContainer.astro";
+import TextPage from '@components/TextPage.astro';
 import TitlePage from "@components/TitlePage.astro";
 
 import Layout from "@layouts/Layout.astro";
@@ -97,10 +98,14 @@ const readingListArray = Object.values(readingListByMonth as Record<string, {
   }>).sort((a, b) => b.monthDate.localeCompare(a.monthDate));
 ---
 
-<Layout title="Leituras do blog">
+<Layout title="Todas as leituras">
   <section>
     <LayoutContainer>
-      <TitlePage> Leituras do blog </TitlePage>
+      <TitlePage> Todas as leituras </TitlePage>
+
+      <TextPage>
+        Aqui tem todas as minhas leituras desde que comecei com este blog, o que é muito legal para ver como eu gasto dinheiro com papel. Na verdade, tudo isso aqui é investimento em cultura de qualidade... e uns super-heróis também.
+      </TextPage>
 
       {
         readingListArray.map((item) => (

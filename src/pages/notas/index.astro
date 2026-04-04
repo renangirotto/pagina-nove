@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import CardNote from "@components/CardNote.astro";
 import GridNotes from "@components/GridNotes.astro";
 import LayoutContainer from "@components/LayoutContainer.astro";
+import TextPage from "@components/TextPage.astro";
 import TitlePage from "@components/TitlePage.astro";
 
 import Layout from "@layouts/Layout.astro";
@@ -31,6 +32,11 @@ const listToRender = listWithNotesAndReadingNotes.map((item) =>
   <section>
     <LayoutContainer>
       <TitlePage> Notas de leitura </TitlePage>
+      <TextPage>
+        Tem dias que parece um desafio enorme escrever alguns textos para essa
+        parte do blog, principalmente com a cabeça cansada depois da rotina do
+        trabalho. Tem dias que eu sou apenas preguiçoso.
+      </TextPage>
       <GridNotes>
         {listToRender.map((item) => <CardNote {...item} />)}
       </GridNotes>

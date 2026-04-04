@@ -24,6 +24,7 @@ const readings = defineCollection({
   schema: z.object({
     artists: z.array(z.string()),
     collection: ComicCollectionsSchema,
+    collectionLastIssue: z.boolean().optional(),
     collectionVolume: z.number().optional(),
     cover: z.string(),
     coverNote: z.string().optional(),

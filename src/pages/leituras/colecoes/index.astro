@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+
+import CardCollection from "@components/CardCollection.astro";
+import GridRead from "@components/GridRead.astro";
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TextPage from "@components/TextPage.astro";
+import TitlePage from "@components/TitlePage.astro";
+
+import Layout from "@layouts/Layout.astro";
+
+import { ROUTES } from "@utils/constants";
+import formatDate from "@utils/format-date";
+
+const allReadings = await getCollection("readings");
+
+const slugify = (str: string) =>
+  str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/gi, "")
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-{2,}/g, "-");
+
+const grouped = allReadings.reduce(
+  (acc, reading) => {
+    const { collection } = reading.data;
+    if (!collection) return acc;
+    if (!acc[collection]) acc[collection] = [];
+    acc[collection].push(reading);
+    return acc;
+  },
+  {} as Record<string, typeof allReadings>,
+);
+
+const collections = Object.entries(grouped)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([name, readings]) => {
+    const latest = readings.sort(
+      (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+    )[0];
+    return {
+      cover: latest.data.cover,
+      date: formatDate(latest.data.date),
+      finished: latest.data.collectionLastIssue,
+      label: latest.data.label,
+      publisher: [latest.data.publisher],
+      slug: `${ROUTES.collections}${slugify(name)}`,
+      title: name,
+    };
+  });
+---
+
+<Layout title="Leituras por coleções">
+  <section>
+    <LayoutContainer>
+      <TitlePage> Leituras por coleções </TitlePage>
+      <TextPage>
+        Não estranhe se em algumas coleções como Hellboy todos os volumes terem
+        5 estrelas, tem certas coisas que sou fanboy e não tenho vergonha de
+        adminitir.
+      </TextPage>
+      <GridRead>
+        {collections.map((collection) => <CardCollection {...collection} />)}
+      </GridRead>
+    </LayoutContainer>
+  </section>
+</Layout>

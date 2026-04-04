@@ -2,6 +2,7 @@ export const PATH_IMG_COVERS = "/images/covers";
 
 export const ROUTES = {
   buy: "/onde-comprar/",
+  collections: "/leituras/colecoes/",
   home: "/",
   notes: "/notas/",
   readings: "/leituras/",
@@ -15,6 +16,10 @@ export const NAV_ITEMS = [
   {
     href: ROUTES.readings,
     label: "leituras",
+  },
+  {
+    href: ROUTES.collections,
+    label: "coleções",
   },
   {
     href: ROUTES.buy,

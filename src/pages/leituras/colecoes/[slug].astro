@@ -1,0 +1,77 @@
+---
+import { getCollection } from "astro:content";
+
+import CardRead from "@components/CardRead.astro";
+import GridRead from "@components/GridRead.astro";
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TextPage from "@components/TextPage.astro";
+import TitlePage from "@components/TitlePage.astro";
+
+import Layout from "@layouts/Layout.astro";
+
+import formatDate from "@utils/format-date";
+import formatEntryToCardRead from "@utils/format-entry-to-card-read";
+
+export async function getStaticPaths() {
+  const slugify = (str: string) =>
+    str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9\s-]/gi, "")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/-{2,}/g, "-");
+
+  const allReadings = await getCollection("readings");
+
+  const grouped = await allReadings.reduce(
+    (acc, reading) => {
+      const { collection } = reading.data;
+      if (!collection) return acc;
+      if (!acc[collection]) acc[collection] = [];
+      acc[collection].push(reading);
+      return acc;
+    },
+    {} as Record<string, typeof allReadings>,
+  );
+
+  return Object.entries(grouped).map(([name, readings]) => ({
+    params: { slug: slugify(name) },
+    props: {
+      title: name,
+      readings: readings.sort(
+        (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+      ),
+    },
+  }));
+}
+
+const { title, readings } = Astro.props;
+
+const latest = readings[0];
+const isFinished = latest.data.collectionLastIssue === true;
+const startDate = formatDate(readings[readings.length - 1].data.date);
+const finishedDate = formatDate(latest.data.date);
+---
+
+<Layout title={title}>
+  <section>
+    <LayoutContainer>
+      <TitlePage>{title}</TitlePage>
+      {isFinished ? (
+        <TextPage>Comecei com a leitura desta coleção em {startDate} e finalizei em {finishedDate}.</TextPage>
+      ) : (
+        <TextPage>Comecei com a leitura desta coleção em {startDate} e é uma coleção que ainda não finalizei.</TextPage>
+      )}
+
+      <GridRead>
+        {
+          readings.map((reading) => (
+            <CardRead {...formatEntryToCardRead(reading)} />
+          ))
+        }
+      </GridRead>
+    </LayoutContainer>
+  </section>
+</Layout>

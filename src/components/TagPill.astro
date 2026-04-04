@@ -14,10 +14,11 @@ const CustomTag = tag || "p";
     padding-block: var(--tag-pill-padding-block, 6px);
     padding-inline: var(--tag-pill-padding-inline, 12px);
     border-radius: var(--tag-pull-border-radius, 32px);
-    font-size: var(--tag-pull-font-size, 0.875rem);
+    font-size: var(--tag-pill-font-size, 0.875rem);
     font-weight: 600;
-    color: var(--color-yellow-grey-100);
-    background: var(--color-purple-100);
+    color: var(--tag-pill-color, var(--color-yellow-grey-100));
+    text-box-trim: trim-both;
+    background: var(--tag-pill-background, var(--color-purple-100));
     box-shadow: 0px 2px 4px 0px rgba(#1f1f1f, 0.25);
 
     &:last-child {

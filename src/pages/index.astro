@@ -121,14 +121,14 @@ const totalAmoutOfPages = allReadings
     <LayoutContainer divider>
       <div class="title-container">
         <TitlePage class="title" tag="h2"> Últimas leituras </TitlePage>
-        <a class="link-list-all" data-ui-device="desktop" href={ROUTES.notes}
+        <a class="link-list-all" data-ui-device="desktop" href={ROUTES.readings}
           >Todas as leituras</a
         >
       </div>
       <GridRead page="home">
         {recentReadings.map((read) => <CardRead {...read} />)}
       </GridRead>
-      <a class="link-list-all" data-ui-device="mobile" href={ROUTES.notes}
+      <a class="link-list-all" data-ui-device="mobile" href={ROUTES.readings}
         >Todas as leituras</a
       >
     </LayoutContainer>

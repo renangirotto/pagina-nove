@@ -2,16 +2,12 @@
 import RatingBar from "@components/RatingBar.astro";
 import TagPill from "@components/TagPill.astro";
 
-const { cover, date, label, publisher, rating, slug, title } = Astro.props;
+const { cover, date, rating, slug, title } = Astro.props;
 ---
 
 <article class="card-read">
   <a aria-label={title} class="card-link" href={slug}>
     <div class="card-info">
-      <div class="card-info-pills">
-        <TagPill>{publisher}</TagPill>
-        <TagPill>{label}</TagPill>
-      </div>
       <div>
         <TagPill class="card-info-rating" tag="div">
           <RatingBar rating={rating} />
@@ -49,7 +45,7 @@ const { cover, date, label, publisher, rating, slug, title } = Astro.props;
     grid-area: card;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding-block: 16px 24px;
     padding-inline: 16px;
     border-radius: 4px;
@@ -72,23 +68,32 @@ const { cover, date, label, publisher, rating, slug, title } = Astro.props;
 
   .card-info-date {
     font-size: 0.875rem;
-  }
-
-  .card-info-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    text-shadow:
+      4px 4px 0px var(--color-grey-dark-200),
+      -1px -1px 0 var(--color-grey-dark-200),
+      1px -1px 0 var(--color-grey-dark-200),
+      -1px 1px 0 var(--color-grey-dark-200),
+      1px 1px 0 var(--color-grey-dark-200);
   }
 
   .card-info-rating {
-    --rating-icon-size: 20px;
+    --rating-icon-size: 22px;
     --rating-color-empty: var(--color-purple-200);
     --rating-color-filled: var(--color-grey-light-100);
+    --tag-pill-padding-inline: 8px;
+    --tag-pill-background: var(--color-orange-100);
     margin-block-end: 12px;
+    transform: rotate(-1.5deg);
   }
 
   .card-info-title {
     font-size: 1.5rem;
+    text-shadow:
+      4px 4px 0px var(--color-grey-dark-200),
+      -1px -1px 0 var(--color-grey-dark-200),
+      1px -1px 0 var(--color-grey-dark-200),
+      -1px 1px 0 var(--color-grey-dark-200),
+      1px 1px 0 var(--color-grey-dark-200);
 
     &:not(:last-child) {
       margin-block-end: 4px;

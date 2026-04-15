@@ -43,7 +43,9 @@ const emptyStars = getEmptyStartAmount();
   {
     Array(emptyStars)
       .fill("")
-      .map(() => <CustomIcon class="icon-empty" isDynamic={true} name="star" />)
+      .map(() => (
+        <CustomIcon class="icon-empty" isDynamic={true} name="empty-star" />
+      ))
   }
 </div>
 

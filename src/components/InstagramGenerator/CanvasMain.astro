@@ -1,0 +1,33 @@
+<main class="canvas-main">
+  <div class="canvas-viewport">
+    <slot />
+  </div>
+</main>
+
+<style is:global>
+  .canvas-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    background-image: radial-gradient(
+      rgba(158, 148, 250, 0.04) 1px,
+      transparent 1px
+    );
+    background-size: 28px 28px;
+  }
+
+  .canvas-viewport {
+    width: var(--preview-w);
+    height: var(--preview-h);
+    position: relative;
+    flex-shrink: 0;
+    border-radius: 2px;
+    box-shadow:
+      0 0 0 1px rgba(158, 148, 250, 0.15),
+      0 32px 80px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+  }
+</style>

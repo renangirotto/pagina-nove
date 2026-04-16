@@ -1,0 +1,179 @@
+<aside class="sidebar">
+  <header class="sidebar-header">
+    <p class="sidebar-eyebrow">Página Nove</p>
+    <h1 class="sidebar-title">Instagram Builder</h1>
+  </header>
+
+  <section class="sidebar-section">
+    <h2 class="section-label">Params</h2>
+    <div class="info-row">
+      <span class="info-key">type</span>
+      <span class="info-val" id="info-type">—</span>
+    </div>
+    <div class="info-row">
+      <span class="info-key">target</span>
+      <span class="info-val" id="info-target">—</span>
+    </div>
+  </section>
+
+  <section class="sidebar-section">
+    <h2 class="section-label">Exportar</h2>
+    <button id="download-btn" class="btn-download" disabled>
+      Baixar imagem
+    </button>
+    <p class="hint-text">PNG · 1080 × 1350 px</p>
+  </section>
+
+  <div id="error-box" class="error-box" hidden>
+    <p id="error-text"></p>
+  </div>
+
+  <footer class="sidebar-footer">
+    <p class="footer-hint">
+      Acesse com <code>?type=reading&target=slug</code>
+    </p>
+    <p class="footer-hint">
+      Tipos: <code>reading</code> · <code>review</code> · <code>article</code>
+    </p>
+  </footer>
+</aside>
+
+<style is:global>
+  .sidebar {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 28px 20px;
+    overflow-y: auto;
+  }
+
+  .sidebar-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 4px;
+  }
+
+  .sidebar-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 0.8125rem;
+  }
+
+  .info-key {
+    color: var(--text-muted);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .info-val {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-align: right;
+    word-break: break-all;
+    font-family: monospace;
+  }
+
+  .btn-download {
+    width: 100%;
+    padding: 10px 16px;
+    background: var(--purple);
+    color: #1f1f1f;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      opacity 0.15s,
+      transform 0.1s;
+  }
+
+  .btn-download:hover:not(:disabled) {
+    opacity: 0.88;
+  }
+
+  .btn-download:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  .btn-download:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .hint-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .error-box {
+    background: #220e0e;
+    border: 1px solid #5c2020;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.8125rem;
+    color: #ff7070;
+    line-height: 1.5;
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-hint {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .footer-hint code {
+    font-size: 0.65rem;
+    color: var(--purple);
+    background: rgba(158, 148, 250, 0.1);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+</style>

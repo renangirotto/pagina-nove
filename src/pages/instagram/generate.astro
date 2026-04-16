@@ -1,0 +1,490 @@
+---
+import { getCollection } from "astro:content";
+
+import CanvasMain from "@components/InstagramGenerator/CanvasMain.astro";
+import Sidebar from "@components/InstagramGenerator/Sidebar.astro";
+import TemplateArticle from "@components/InstagramGenerator/TemplateArticle.astro";
+import TemplateReading from "@components/InstagramGenerator/TemplateReading.astro";
+import TemplateReview from "@components/InstagramGenerator/TemplateReview.astro";
+
+import { PATH_IMG_COVERS } from "@utils/constants";
+
+import "@fontsource-variable/outfit";
+
+const allReadings = await getCollection("readings");
+const allNotes = await getCollection("notes");
+
+// Escape < to prevent </script> from breaking the HTML parser
+function safeJson(data: unknown): string {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
+const readings = allReadings.map((r) => ({
+  id: r.id,
+  title: r.data.title,
+  artists: r.data.artists,
+  cover: `${PATH_IMG_COVERS}/${r.data.cover}`,
+  date: r.data.date.toISOString(),
+  pages: r.data.pages,
+  publisher: r.data.publisher,
+  publishYear: r.data.publishYear,
+  rating: r.data.rating,
+  label: r.data.label,
+  collection: r.data.collection ?? null,
+  collectionVolume: r.data.collectionVolume ?? null,
+  titleNote: r.data.titleNote ?? null,
+  coverNote: r.data.coverNote ?? null,
+  dateNote: r.data.dateNote?.toISOString() ?? null,
+}));
+
+const notes = allNotes.map((n) => ({
+  id: n.id,
+  title: n.data.title,
+  cover: n.data.cover,
+  dateNote: n.data.dateNote.toISOString(),
+  tags: n.data.tags ?? [],
+}));
+
+const collectionDataJson = safeJson({ readings, notes });
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram Builder | Página Nove</title>
+  </head>
+
+  <body>
+    <div class="builder">
+      <Sidebar />
+      <CanvasMain>
+        <TemplateArticle />
+        <TemplateReading />
+        <TemplateReview />
+      </CanvasMain>
+    </div>
+
+    <!-- Collection data passed from server — read by the processed script below -->
+    <script
+      is:inline
+      type="application/json"
+      id="collection-data"
+      set:html={collectionDataJson}
+    />
+
+    <script>
+      import html2canvas from "html2canvas";
+
+      // ─────────────────────────────────────────────────────────
+      // Data
+      // ─────────────────────────────────────────────────────────
+
+      const { readings, notes } = JSON.parse(
+        document.getElementById("collection-data")!.textContent!,
+      );
+
+      // ─────────────────────────────────────────────────────────
+      // Utils
+      // ─────────────────────────────────────────────────────────
+
+      function formatDate(iso: string) {
+        return new Date(iso).toLocaleDateString("pt-BR", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          timeZone: "UTC",
+        });
+      }
+
+      function formatArtists(artists: string[]) {
+        if (artists.length === 1) return artists[0];
+        return artists.slice(0, -1).join(", ") + " e " + artists.at(-1);
+      }
+
+      function renderStars(rating: string, size = "52px") {
+        const r = parseFloat(rating);
+        const full = Math.floor(r);
+        const half = r - full >= 0.5;
+        const empty = 5 - full - (half ? 1 : 0);
+        const base = `font-family:'Outfit Variable',sans-serif;font-size:${size};line-height:1;`;
+
+        let html = "";
+        for (let i = 0; i < full; i++)
+          html += `<span style="${base}color:#9e94fa">★</span>`;
+        if (half)
+          html += `<span style="${base}color:#9e94fa;opacity:0.55">★</span>`;
+        for (let i = 0; i < empty; i++)
+          html += `<span style="${base}color:rgba(255,255,255,0.15)">★</span>`;
+        return html;
+      }
+
+      // ─────────────────────────────────────────────────────────
+      // DOM helpers
+      // ─────────────────────────────────────────────────────────
+
+      function el<T extends HTMLElement>(id: string): T {
+        return document.getElementById(id) as T;
+      }
+
+      // ─────────────────────────────────────────────────────────
+      // Template population
+      // ─────────────────────────────────────────────────────────
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      function populateReading(entry: any) {
+        el<HTMLImageElement>("r-cover").src = entry.cover;
+        el("r-stars").innerHTML = renderStars(entry.rating, "48px");
+        el("r-title").textContent = entry.title;
+        el("r-artists").textContent = "por " + formatArtists(entry.artists);
+        el("r-meta").textContent = [
+          "Editora " + entry.publisher,
+          entry.publishYear,
+          entry.pages + " páginas",
+        ].join(" · ");
+        el("r-date").textContent = formatDate(entry.date);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      function populateReview(entry: any) {
+        // Use coverNote if available, otherwise the main cover
+        const cover = entry.coverNote || entry.cover;
+        el<HTMLImageElement>("rv-cover").src = cover;
+        el("rv-stars").innerHTML = renderStars(entry.rating, "64px");
+        el("rv-rating-num").textContent = entry.rating + " / 5";
+        el("rv-title").textContent = entry.title;
+        el("rv-artists").textContent = "por " + formatArtists(entry.artists);
+        el("rv-meta").textContent = entry.publisher + " · " + entry.publishYear;
+        el("rv-date").textContent = formatDate(entry.date);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      function populateArticle(entry: any) {
+        el<HTMLImageElement>("art-bg").src = entry.cover;
+        el("art-title").textContent = entry.title;
+        el("art-date").textContent = formatDate(entry.dateNote);
+
+        const tagsEl = el("art-tags");
+        tagsEl.innerHTML = "";
+        ((entry.tags as string[]) || []).forEach((tag) => {
+          const pill = document.createElement("span");
+          pill.style.cssText =
+            "font-family:'Outfit Variable',sans-serif;" +
+            "font-size:20px;font-weight:700;color:#ff79c6;" +
+            "letter-spacing:0.06em;text-transform:uppercase;";
+          pill.textContent = "#" + tag;
+          tagsEl.appendChild(pill);
+        });
+      }
+
+      // ─────────────────────────────────────────────────────────
+      // State
+      // ─────────────────────────────────────────────────────────
+
+      let currentType = "";
+      let currentTarget = "";
+      let activeTemplate: HTMLElement | null = null;
+
+      function showError(msg: string) {
+        el("error-text").textContent = msg;
+        el("error-box").hidden = false;
+      }
+
+      // ─────────────────────────────────────────────────────────
+      // Init
+      // ─────────────────────────────────────────────────────────
+
+      function init() {
+        const params = new URLSearchParams(window.location.search);
+        currentType = params.get("type") || "";
+        currentTarget = params.get("target") || "";
+
+        el("info-type").textContent = currentType || "—";
+        el("info-target").textContent = currentTarget || "—";
+
+        if (!currentType || !currentTarget) {
+          showError("Parâmetros ?type= e ?target= são necessários.");
+          return;
+        }
+
+        const validTypes = ["reading", "review", "article"];
+        if (!validTypes.includes(currentType)) {
+          showError(
+            `Tipo inválido: "${currentType}". Use: reading, review ou article.`,
+          );
+          return;
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let entry: any = null;
+        let templateId = "";
+
+        if (currentType === "reading" || currentType === "review") {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          entry = (readings as any[]).find((r) => r.id === currentTarget);
+          if (!entry) {
+            showError(`Leitura não encontrada: "${currentTarget}"`);
+            return;
+          }
+          if (currentType === "reading") {
+            templateId = "tmpl-reading";
+            populateReading(entry);
+          } else {
+            templateId = "tmpl-review";
+            populateReview(entry);
+          }
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          entry = (notes as any[]).find((n) => n.id === currentTarget);
+          if (!entry) {
+            showError(`Nota não encontrada: "${currentTarget}"`);
+            return;
+          }
+          templateId = "tmpl-article";
+          populateArticle(entry);
+        }
+
+        activeTemplate = el(templateId);
+        activeTemplate.hidden = false;
+        el<HTMLButtonElement>("download-btn").disabled = false;
+      }
+
+      // ─────────────────────────────────────────────────────────
+      // Download via html2canvas
+      // ─────────────────────────────────────────────────────────
+
+      el("download-btn").addEventListener("click", async () => {
+        if (!activeTemplate) return;
+
+        const btn = el<HTMLButtonElement>("download-btn");
+        btn.disabled = true;
+        btn.textContent = "Gerando…";
+
+        // Remove preview scale so html2canvas captures at full 1080×1350
+        const prevTransform = activeTemplate.style.transform;
+        const prevTransformOrigin = activeTemplate.style.transformOrigin;
+        activeTemplate.style.transform = "none";
+        activeTemplate.style.transformOrigin = "top left";
+
+        try {
+          await document.fonts.ready;
+
+          const canvas = await html2canvas(activeTemplate, {
+            scale: 1,
+            width: 1080,
+            height: 1350,
+            useCORS: true,
+            logging: false,
+            backgroundColor: null,
+          });
+
+          const link = document.createElement("a");
+          link.download = `paginanove-${currentType}-${currentTarget}.png`;
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        } catch (err) {
+          console.error("html2canvas error:", err);
+          showError("Erro ao gerar imagem. Veja o console para detalhes.");
+        } finally {
+          activeTemplate.style.transform = prevTransform;
+          activeTemplate.style.transformOrigin = prevTransformOrigin;
+          btn.disabled = false;
+          btn.textContent = "Baixar imagem";
+        }
+      });
+
+      init();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     Image canvas templates — 1080 × 1350 px
+     Using is:global so dynamically injected
+     elements (stars, tag pills) also inherit.
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .image-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 1350px;
+    background: #0f0f14;
+    font-family: "Outfit Variable", sans-serif;
+    transform: scale(0.4);
+    transform-origin: top left;
+    overflow: hidden;
+    color: #ffffff;
+  }
+
+  /* ── Shared background image (all 3 types) ── */
+
+  .t-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* ── Shared structural pieces ── */
+
+  .t-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 56px;
+    flex-shrink: 0;
+  }
+
+  .t-brand {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+  }
+
+  .t-badge {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 100px;
+  }
+
+  .t-badge--reading {
+    background: #9e94fa;
+    color: #1f1f1f;
+  }
+
+  .t-badge--review {
+    background: #ffb86c;
+    color: #1f1f1f;
+  }
+
+  .t-badge--article {
+    background: #ff79c6;
+    color: #1f1f1f;
+  }
+
+  .t-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .t-stars--xl {
+    margin-bottom: 20px;
+  }
+
+  .t-title {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #ffffff;
+  }
+
+  .t-title--article {
+    font-size: 64px;
+    line-height: 1.05;
+  }
+
+  .t-divider {
+    width: 64px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 28px 0;
+    flex-shrink: 0;
+  }
+
+  .t-artists {
+    font-size: 26px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .t-meta {
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: 10px;
+  }
+
+  .t-rating-num {
+    font-size: 36px;
+    font-weight: 700;
+    color: #9e94fa;
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+
+  .t-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 56px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+  }
+
+  .t-url {
+    font-size: 18px;
+    font-weight: 700;
+    color: #9e94fa;
+    letter-spacing: 0.04em;
+  }
+
+  .t-date {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+  }
+</style>
+
+<style>
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     Page UI (scoped)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  :root {
+    --sidebar-w: 280px;
+    --purple: #9e94fa;
+    --bg-dark: #111116;
+    --bg-sidebar: #17171f;
+    --border: #252530;
+    --text: #e7e7ef;
+    --text-muted: #5a5a6e;
+    --font: "Outfit Variable", sans-serif;
+    /* preview: 1080 × 1350 at scale 0.4 = 432 × 540 */
+    --preview-w: 432px;
+    --preview-h: 540px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+    font-family: var(--font);
+    background: var(--bg-dark);
+    color: var(--text);
+  }
+
+  .builder {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+</style>

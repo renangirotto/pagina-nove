@@ -1,60 +1,27 @@
 <div id="tmpl-review" class="image-canvas" hidden>
-  <img id="rv-cover" class="t-bg-img" src="" alt="" crossorigin="anonymous" />
-  <div class="t-review-overlay"></div>
+  <img
+    class="social-img-pattern"
+    src="/images/social-article-pattern.png"
+    alt=""
+    crossorigin="anonymous"
+  />
 
-  <div class="t-review-inner">
-    <div class="t-header">
-      <span class="t-brand">PÁGINA NOVE</span>
-      <span class="t-badge t-badge--review">REVIEW</span>
-    </div>
+  <img
+    id="rv-cover"
+    class="social-img-bg"
+    src=""
+    alt=""
+    crossorigin="anonymous"
+  />
 
-    <div class="t-review-body">
-      <div id="rv-stars" class="t-stars t-stars--xl"></div>
-      <p id="rv-rating-num" class="t-rating-num"></p>
-      <h2 id="rv-title" class="t-title"></h2>
-      <div class="t-divider"></div>
-      <p id="rv-artists" class="t-artists"></p>
-      <p id="rv-meta" class="t-meta"></p>
-    </div>
-
-    <div class="t-footer t-footer--review">
-      <span class="t-url">paginanove.com.br</span>
-      <span id="rv-date" class="t-date"></span>
+  <div class="social-inner">
+    <div class="social-body">
+      <h2 id="rv-title" class="social-title"></h2>
+      <div
+        id="rv-stars"
+        class="t-stars t-stars--xl social-tag social-tag--orange"
+      >
+      </div>
     </div>
   </div>
 </div>
-
-<style is:global>
-  .t-review-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(10, 10, 16, 0.05) 0%,
-      rgba(10, 10, 16, 0.1) 25%,
-      rgba(10, 10, 16, 0.7) 52%,
-      rgba(10, 10, 16, 0.96) 70%,
-      rgba(10, 10, 16, 1) 100%
-    );
-  }
-
-  .t-review-inner {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .t-review-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 64px 48px;
-  }
-
-  .t-footer--review {
-    border-top: 1px solid rgba(255, 183, 108, 0.2);
-  }
-</style>

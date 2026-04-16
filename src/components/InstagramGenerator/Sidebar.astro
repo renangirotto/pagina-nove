@@ -1,17 +1,17 @@
 <aside class="sidebar">
   <header class="sidebar-header">
     <p class="sidebar-eyebrow">Página Nove</p>
-    <h1 class="sidebar-title">Instagram Builder</h1>
+    <h1 class="sidebar-title">Social Media Builder</h1>
   </header>
 
   <section class="sidebar-section">
     <h2 class="section-label">Params</h2>
     <div class="info-row">
-      <span class="info-key">type</span>
+      <span class="info-key">type:</span>
       <span class="info-val" id="info-type">—</span>
     </div>
     <div class="info-row">
-      <span class="info-key">target</span>
+      <span class="info-key">target:</span>
       <span class="info-val" id="info-target">—</span>
     </div>
   </section>
@@ -38,7 +38,7 @@
   </footer>
 </aside>
 
-<style is:global>
+<style is:global lang="scss">
   .sidebar {
     width: var(--sidebar-w);
     flex-shrink: 0;
@@ -88,10 +88,13 @@
 
   .info-row {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    flex-direction: column;
     gap: 8px;
     font-size: 0.8125rem;
+
+    &:not(:last-child) {
+      margin-block-end: 8px;
+    }
   }
 
   .info-key {
@@ -104,7 +107,6 @@
     color: var(--text);
     font-weight: 600;
     font-size: 0.75rem;
-    text-align: right;
     word-break: break-all;
     font-family: monospace;
   }

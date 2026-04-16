@@ -1,67 +1,35 @@
 <div id="tmpl-article" class="image-canvas" hidden>
-  <img id="art-bg" class="t-bg-img" src="" alt="" crossorigin="anonymous" />
-  <div class="t-article-overlay"></div>
+  <img
+    class="social-img-pattern"
+    src="/images/social-article-pattern.png"
+    alt=""
+    crossorigin="anonymous"
+  />
 
-  <div class="t-article-inner">
-    <div class="t-header">
-      <span class="t-brand">PÁGINA NOVE</span>
-      <span class="t-badge t-badge--article">NOTA</span>
-    </div>
+  <img
+    id="art-bg"
+    class="social-img-bg"
+    src=""
+    alt=""
+    crossorigin="anonymous"
+  />
 
-    <div class="t-article-body">
-      <div id="art-tags" class="t-article-tags"></div>
-      <h2 id="art-title" class="t-title t-title--article"></h2>
-    </div>
-
-    <div class="t-footer t-footer--article">
-      <span class="t-url">paginanove.com.br</span>
-      <span id="art-date" class="t-date"></span>
+  <div class="social-inner">
+    <div class="social-body">
+      <div id="art-tags" class="article-tags"></div>
+      <h2 id="art-title" class="social-title"></h2>
     </div>
   </div>
 </div>
 
-<style is:global>
-  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     ARTICLE template
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-  .t-article-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(10, 10, 16, 0.4) 0%,
-      rgba(10, 10, 16, 0.55) 35%,
-      rgba(10, 10, 16, 0.88) 62%,
-      rgba(10, 10, 16, 0.97) 80%,
-      rgba(10, 10, 16, 1) 100%
-    );
-  }
-
-  .t-article-inner {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .t-article-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 64px 48px;
-  }
-
-  .t-article-tags {
+<style is:global lang="scss">
+  .article-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    margin-bottom: 28px;
-  }
 
-  .t-footer--article {
-    border-top: 1px solid rgba(255, 121, 198, 0.2);
+    &:not(:last-child) {
+      margin-block-end: 44px;
+    }
   }
 </style>

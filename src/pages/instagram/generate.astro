@@ -1,4 +1,9 @@
 ---
+import "@fontsource-variable/outfit";
+
+import "@styles/colors.css";
+import "@styles/typography.css";
+
 import { getCollection } from "astro:content";
 
 import CanvasMain from "@components/InstagramGenerator/CanvasMain.astro";
@@ -8,8 +13,6 @@ import TemplateReading from "@components/InstagramGenerator/TemplateReading.astr
 import TemplateReview from "@components/InstagramGenerator/TemplateReview.astro";
 
 import { PATH_IMG_COVERS } from "@utils/constants";
-
-import "@fontsource-variable/outfit";
 
 const allReadings = await getCollection("readings");
 const allNotes = await getCollection("notes");
@@ -22,26 +25,16 @@ function safeJson(data: unknown): string {
 const readings = allReadings.map((r) => ({
   id: r.id,
   title: r.data.title,
-  artists: r.data.artists,
   cover: `${PATH_IMG_COVERS}/${r.data.cover}`,
-  date: r.data.date.toISOString(),
-  pages: r.data.pages,
-  publisher: r.data.publisher,
-  publishYear: r.data.publishYear,
   rating: r.data.rating,
-  label: r.data.label,
-  collection: r.data.collection ?? null,
-  collectionVolume: r.data.collectionVolume ?? null,
   titleNote: r.data.titleNote ?? null,
   coverNote: r.data.coverNote ?? null,
-  dateNote: r.data.dateNote?.toISOString() ?? null,
 }));
 
 const notes = allNotes.map((n) => ({
   id: n.id,
   title: n.data.title,
   cover: n.data.cover,
-  dateNote: n.data.dateNote.toISOString(),
   tags: n.data.tags ?? [],
 }));
 
@@ -53,7 +46,7 @@ const collectionDataJson = safeJson({ readings, notes });
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Instagram Builder | Página Nove</title>
+    <title>Social Media Builder | Página Nove</title>
   </head>
 
   <body>
@@ -152,28 +145,20 @@ const collectionDataJson = safeJson({ readings, notes });
         const cover = entry.coverNote || entry.cover;
         el<HTMLImageElement>("rv-cover").src = cover;
         el("rv-stars").innerHTML = renderStars(entry.rating, "64px");
-        el("rv-rating-num").textContent = entry.rating + " / 5";
         el("rv-title").textContent = entry.title;
-        el("rv-artists").textContent = "por " + formatArtists(entry.artists);
-        el("rv-meta").textContent = entry.publisher + " · " + entry.publishYear;
-        el("rv-date").textContent = formatDate(entry.date);
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       function populateArticle(entry: any) {
         el<HTMLImageElement>("art-bg").src = entry.cover;
         el("art-title").textContent = entry.title;
-        el("art-date").textContent = formatDate(entry.dateNote);
 
         const tagsEl = el("art-tags");
         tagsEl.innerHTML = "";
         ((entry.tags as string[]) || []).forEach((tag) => {
-          const pill = document.createElement("span");
-          pill.style.cssText =
-            "font-family:'Outfit Variable',sans-serif;" +
-            "font-size:20px;font-weight:700;color:#ff79c6;" +
-            "letter-spacing:0.06em;text-transform:uppercase;";
-          pill.textContent = "#" + tag;
+          const pill = document.createElement("p");
+          pill.classList = "social-tag";
+          pill.textContent = tag;
           tagsEl.appendChild(pill);
         });
       }
@@ -299,47 +284,89 @@ const collectionDataJson = safeJson({ readings, notes });
   </body>
 </html>
 
-<style is:global>
-  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     Image canvas templates — 1080 × 1350 px
-     Using is:global so dynamically injected
-     elements (stars, tag pills) also inherit.
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+<style is:global lang="scss">
+  .social-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-block: 32px 216px;
+    padding-inline: 72px;
+    background: linear-gradient(
+      180deg,
+      rgba(158, 148, 250, 0.15) 0%,
+      rgba(94, 88, 148, 0.75) 100%
+    );
+  }
 
-  .image-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1080px;
-    height: 1350px;
-    background: #0f0f14;
-    font-family: "Outfit Variable", sans-serif;
-    transform: scale(0.4);
-    transform-origin: top left;
-    overflow: hidden;
-    color: #ffffff;
+  .social-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 3;
   }
 
   /* ── Shared background image (all 3 types) ── */
 
-  .t-bg-img {
-    position: absolute;
-    inset: 0;
+  .social-img-bg {
+    object-fit: cover;
+    object-position: center;
     width: 100%;
     height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .social-img-pattern {
     object-fit: cover;
-    object-position: center top;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0.75;
+  }
+
+  .social-tag {
+    padding-block: 12px;
+    padding-inline: 24px;
+    border: 8px solid var(--color-grey-dark-200);
+    margin: 0;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--color-grey-dark-200);
+    text-transform: uppercase;
+    background: var(--color-blue-100);
+    box-shadow: 6px 6px 0px var(--color-grey-dark-200);
+    rotate: -1.5deg;
+
+    &.social-tag--orange {
+      background: var(--color-orange-100);
+    }
+  }
+
+  .social-title {
+    margin: 0;
+    font-size: 8.25rem;
+    font-weight: 700;
+    line-height: 164px;
+    color: var(--color-yellow-grey-100);
+    text-shadow:
+      8px 8px 0px var(--color-grey-dark-200),
+      -3px -3px 0 var(--color-grey-dark-200),
+      3px -3px 0 var(--color-grey-dark-200),
+      -3px 3px 0 var(--color-grey-dark-200),
+      3px 3px 0 var(--color-grey-dark-200);
+
+    &:not(:last-child) {
+      margin-block-end: 44px;
+    }
   }
 
   /* ── Shared structural pieces ── */
-
-  .t-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px 56px;
-    flex-shrink: 0;
-  }
 
   .t-brand {
     font-size: 22px;
@@ -383,26 +410,6 @@ const collectionDataJson = safeJson({ readings, notes });
     margin-bottom: 20px;
   }
 
-  .t-title {
-    font-size: 56px;
-    font-weight: 800;
-    line-height: 1.1;
-    color: #ffffff;
-  }
-
-  .t-title--article {
-    font-size: 64px;
-    line-height: 1.05;
-  }
-
-  .t-divider {
-    width: 64px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 28px 0;
-    flex-shrink: 0;
-  }
-
   .t-artists {
     font-size: 26px;
     font-weight: 500;
@@ -414,14 +421,6 @@ const collectionDataJson = safeJson({ readings, notes });
     font-weight: 400;
     color: rgba(255, 255, 255, 0.45);
     margin-top: 10px;
-  }
-
-  .t-rating-num {
-    font-size: 36px;
-    font-weight: 700;
-    color: #9e94fa;
-    margin-bottom: 28px;
-    letter-spacing: 0.04em;
   }
 
   .t-footer {

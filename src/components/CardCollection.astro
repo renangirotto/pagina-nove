@@ -57,7 +57,7 @@ const { cover, date, finished, label, publisher, slug, title } = Astro.props;
     background: linear-gradient(
       180deg,
       rgba(158, 148, 250, 0) 32%,
-      rgba(94, 88, 148, 0.5) 64%
+      rgba(94, 88, 148, 0.64) 64%
     );
 
     @include container-tablet {
@@ -127,8 +127,9 @@ const { cover, date, finished, label, publisher, slug, title } = Astro.props;
 
     @media (hover: hover) {
       &:hover {
-        transform: translate(-1px, -1px);
-        box-shadow: 4px 3px 0px var(--color-grey-dark-200);
+        img {
+          scale: 1.02;
+        }
       }
     }
   }

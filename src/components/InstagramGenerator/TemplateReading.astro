@@ -1,49 +1,26 @@
 <div id="tmpl-reading" class="image-canvas" hidden>
-  <img id="r-cover" class="t-bg-img" src="" alt="" crossorigin="anonymous" />
+  <img
+    class="social-img-pattern"
+    src="/images/social-article-pattern.png"
+    alt=""
+    crossorigin="anonymous"
+  />
 
-  <div class="t-reading-inner">
-    <div class="t-reading-body">
-      <div id="r-stars" class="t-stars"></div>
-      <h2 id="r-title" class="t-title"></h2>
-      <div class="t-divider"></div>
-      <p id="r-artists" class="t-artists"></p>
-      <p id="r-meta" class="t-meta"></p>
-    </div>
+  <img
+    id="r-cover"
+    class="social-img-bg"
+    src=""
+    alt=""
+    crossorigin="anonymous"
+  />
 
-    <div class="t-footer">
-      <span class="t-url">paginanove.com.br</span>
-      <span id="r-date" class="t-date"></span>
+  <div class="social-inner">
+    <div class="social-body">
+      <div class="social-tags">
+        <div id="art-tags" class="social-tag social-tag--pink">ANÁLISE</div>
+      </div>
+      <h2 id="r-title" class="social-title"></h2>
+      <p id="r-issue" class="social-text"></p>
     </div>
   </div>
 </div>
-
-<style is:global>
-  .t-reading-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(10, 10, 16, 0.15) 0%,
-      rgba(10, 10, 16, 0.2) 35%,
-      rgba(10, 10, 16, 0.75) 58%,
-      rgba(10, 10, 16, 0.96) 75%,
-      rgba(10, 10, 16, 1) 100%
-    );
-  }
-
-  .t-reading-inner {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .t-reading-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 64px 48px;
-  }
-</style>

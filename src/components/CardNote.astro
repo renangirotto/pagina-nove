@@ -1,7 +1,7 @@
 ---
 import TagPill from "@components/TagPill.astro";
 
-const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
+const { cover, slug, tags, title, titleIssue } = Astro.props;
 ---
 
 <article class="card-note">
@@ -12,7 +12,7 @@ const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
     <div class="card-content">
       {
         tags?.length > 0 && (
-          <div class="card-tags">
+          <div class="card-tags" data-ui-tags={titleIssue ? "issue" : null}>
             {tags.map((tag: string) => (
               <TagPill>{tag}</TagPill>
             ))}
@@ -20,14 +20,19 @@ const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
         )
       }
       <div>
-        <p class="card-date">{dateNote}</p>
+        {titleIssue && <p class="card-issue">{titleIssue}</p>}
         <p class="card-title">
           {title}
         </p>
-        {titleIssue && <p class="card-issue">{titleIssue}</p>}
       </div>
     </div>
   </a>
+  <figure aria-hidden="true" class="card-pattern">
+    <img src="/images/pattern.svg" />
+  </figure>
+  <figure aria-hidden="true" class="card-pattern">
+    <img src="/images/pattern.svg" />
+  </figure>
 </article>
 
 <style lang="scss">
@@ -40,19 +45,16 @@ const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
     z-index: 1;
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.5) 50%
+      rgba(158, 148, 250, 0) 0%,
+      rgba(94, 88, 148, 0.5) 75%
     );
 
     &:has(.card-tags) {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
+      gap: 16px;
     }
-  }
-
-  .card-date {
-    font-weight: 600;
   }
 
   .card-figure {
@@ -62,7 +64,6 @@ const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
     width: 100%;
     max-height: 352px;
     height: 100%;
-    border-radius: 4px;
     position: relative;
     z-index: 0;
     overflow: hidden;
@@ -78,8 +79,18 @@ const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
   }
 
   .card-issue {
-    font-size: 0.875rem;
-    font-style: italic;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-shadow:
+      3px 3px 0px var(--color-grey-dark-200),
+      -1px -1px 0 var(--color-grey-dark-200),
+      1px -1px 0 var(--color-grey-dark-200),
+      -1px 1px 0 var(--color-grey-dark-200),
+      1px 1px 0 var(--color-grey-dark-200);
+
+    &:not(:last-child) {
+      margin-block-end: 8px;
+    }
   }
 
   .card-note {
@@ -88,8 +99,15 @@ const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
     grid-template-rows: auto;
     grid-template-areas: "all";
     gap: 0px;
-    border-radius: 4px;
+    border: 2px solid var(--color-grey-dark-200);
+    border-radius: 2px;
+    position: relative;
     overflow: hidden;
+
+    a {
+      display: contents;
+      color: var(--color-yellow-grey-100);
+    }
 
     &:not(:first-of-type) {
       background: var(--color-grey-light-50);
@@ -112,19 +130,31 @@ const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
         z-index: 1;
         background: linear-gradient(
           180deg,
-          rgba(0, 0, 0, 0) 0%,
-          rgba(0, 0, 0, 0.5) 50%
+          rgba(158, 148, 250, 0) 0%,
+          rgba(94, 88, 148, 0.5) 75%
         );
       }
 
+      .card-issue {
+        &:not(:last-child) {
+          margin-block-end: 0px;
+        }
+      }
+
       .card-title {
-        --card-note-title: clamp(1.75rem, 3vw, 2rem);
+        --card-note-title: clamp(1.75rem, 3vw, 3.5rem);
       }
     }
 
-    &:nth-child(n + 4) {
+    &:nth-child(7n) {
       @include container-desktop {
-        grid-column: 1 / -1;
+        grid-column: 2 / -1;
+      }
+    }
+
+    &:nth-child(11n) {
+      @include container-desktop {
+        grid-column: 1 / 3;
       }
     }
 
@@ -135,20 +165,35 @@ const { cover, dateNote, slug, tags, title, titleIssue } = Astro.props;
         }
       }
     }
+  }
 
-    a {
-      display: contents;
-      color: var(--color-yellow-grey-100);
+  .card-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+
+    &:last-child {
+      transform: rotate(180deg);
     }
   }
 
   .card-tags {
-    --tag-pull-border-radius: 4px;
-    --tag-pull-font-size: 1rem;
+    --tag-pill-font-size: 1rem;
+    --tag-pill-background: var(--color-blue-100);
+
+    &[data-ui-tags="issue"] {
+      --tag-pill-background: var(--color-pink-100);
+    }
   }
 
   .card-title {
-    font-size: var(--card-note-title, clamp(1.5rem, 2.5vw, 1.75rem));
+    font-size: var(--card-note-title, clamp(1.5rem, 2.5vw, 2rem));
     font-weight: 700;
+    text-shadow:
+      3px 3px 0px var(--color-grey-dark-200),
+      -1px -1px 0 var(--color-grey-dark-200),
+      1px -1px 0 var(--color-grey-dark-200),
+      -1px 1px 0 var(--color-grey-dark-200),
+      1px 1px 0 var(--color-grey-dark-200);
   }
 </style>

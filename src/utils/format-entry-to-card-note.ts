@@ -20,7 +20,7 @@ const slugsTarget = {
 
 const tags = {
   ["notes"]: [],
-  ["readings"]: ["Leitura"],
+  ["readings"]: ["ANÁLISE"],
 };
 
 const title = {
@@ -29,11 +29,19 @@ const title = {
 };
 
 export default function formatEntryToCardNote(entry: CardsNotesEntry) {
+  const getTags = () => {
+    if (entry.data.tags?.length > 0) {
+      return [...entry.data.tags, ...tags[entry.collection]];
+    }
+
+    return tags[entry.collection];
+  };
+
   return {
     cover: entry.data[covers[entry.collection]],
     dateNote: formatDate(entry.data.dateNote),
     slug: `${slugs[entry.collection]}${entry.id}/${slugsTarget[entry.collection]}`,
-    tags: tags[entry.collection],
+    tags: getTags(),
     title: entry.data[title[entry.collection]],
     titleIssue: entry.collection === "readings" ? entry.data.title : null,
   };

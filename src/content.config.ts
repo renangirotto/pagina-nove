@@ -35,6 +35,8 @@ const readings = defineCollection({
     publisher: PublishersSchema,
     publishYear: z.string(),
     rating: RatingSchema,
+    socialCover: z.string().optional(),
+    socialText: z.string().optional(),
     title: z.string(),
     titleNote: z.string().optional(),
   }),

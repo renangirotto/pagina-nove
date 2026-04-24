@@ -6,7 +6,9 @@ const { date, dateFormatted, title } = Astro.props;
 
 <div class="hero-note">
   <TitlePage>{title}</TitlePage>
-  <time class="hero-note-time" datetime={`${date}`}>{dateFormatted}</time>
+  <time class="hero-note-time" datetime={`${date}`}
+    >Nota do dia {dateFormatted}</time
+  >
 </div>
 
 <style lang="scss">

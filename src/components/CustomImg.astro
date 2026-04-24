@@ -2,19 +2,27 @@
 interface Props {
   alt?: string;
   caption: string;
+  size?: "default" | "small";
   src: string;
 }
 
-const { alt, caption, src } = Astro.props;
+const { alt, caption, size, src } = Astro.props;
 ---
 
-<figure class="custom-img">
+<figure class="custom-img" data-ui-size={size || "default"}>
   <img src={src} alt={alt} />
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
 
 <style lang="scss">
   .custom-img {
+    max-inline-size: 735px;
+    margin-inline: auto;
+
+    &[data-ui-size="small"] {
+      max-inline-size: 410px;
+    }
+
     figcaption {
       padding-block-start: 8px;
       font-size: 0.875rem;

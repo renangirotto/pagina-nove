@@ -21,6 +21,7 @@ export const ComicCollectionsSchema = z
     "Os Ogros Deuses",
     "Pluto: Edição de Luxo",
     "Shin Zero",
+    "Transformers - Universo Energon",
   ])
   .optional();
 

@@ -33,7 +33,7 @@ export const PublishersSchema = z.enum([
   "DarkSide",
   "Escória Comix",
   "JBC",
-  "Mau Gosto Corporations",
+  "Mau Gosto corp.",
   "Mino",
   "Mistifório",
   "Monstra",

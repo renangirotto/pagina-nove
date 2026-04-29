@@ -1,0 +1,152 @@
+name: Optimize Images
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'public/images/**'
+
+concurrency:
+  group: optimize-images-${{ github.head_ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  optimize:
+    name: Convert, resize and optimize images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Skip if last commit was ours
+        id: guard
+        run: |
+          LAST_AUTHOR=$(git log -1 --pretty='%an')
+          LAST_MSG=$(git log -1 --pretty='%s')
+          if [[ "$LAST_AUTHOR" == "github-actions[bot]" && "$LAST_MSG" == "chore(images):"* ]]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Skipping: last commit was already our image processing."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install ImageMagick
+        if: steps.guard.outputs.skip != 'true'
+        run: sudo apt-get update -qq && sudo apt-get install -y imagemagick
+
+      - name: Get changed image files
+        if: steps.guard.outputs.skip != 'true'
+        id: images
+        run: |
+          git fetch origin "${{ github.base_ref }}"
+
+          FILES=$(git diff --name-only --diff-filter=ACM \
+            "origin/${{ github.base_ref }}...HEAD" \
+            | grep -iE 'public/images/.*\.(jpg|jpeg|png|gif|webp)$' || true)
+
+          COUNT=$(echo "$FILES" | grep -c . 2>/dev/null || echo "0")
+
+          {
+            echo "files<<EOF"
+            echo "$FILES"
+            echo "EOF"
+            echo "count=$COUNT"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Convert to WebP and resize covers
+        if: steps.guard.outputs.skip != 'true' && steps.images.outputs.count != '0'
+        id: preprocess
+        run: |
+          HAS_CHANGES=false
+
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            [ ! -f "$file" ] && continue
+
+            ext="${file##*.}"
+            ext_lower="${ext,,}"
+            current="$file"
+
+            # Convert non-WebP formats to WebP
+            if [[ "$ext_lower" != "webp" ]]; then
+              webp="${file%.*}.webp"
+              echo "Converting: $file → $webp"
+              convert "$file" "$webp"
+              git rm --force "$file"
+              current="$webp"
+              HAS_CHANGES=true
+            fi
+
+            # Resize covers to 560px height, maintaining aspect ratio
+            if [[ "$current" == public/images/covers/* ]]; then
+              CURRENT_HEIGHT=$(identify -format '%h' "$current" 2>/dev/null || echo "0")
+              if [ "$CURRENT_HEIGHT" -ne 560 ]; then
+                echo "Resizing cover: $current (${CURRENT_HEIGHT}px → 560px height)"
+                convert "$current" -resize x560 -strip "$current"
+                HAS_CHANGES=true
+              fi
+            fi
+
+            git add "$current" 2>/dev/null || true
+
+          done <<< "${{ steps.images.outputs.files }}"
+
+          echo "has_changes=$HAS_CHANGES" >> "$GITHUB_OUTPUT"
+
+      - name: Commit converted and resized images
+        if: steps.preprocess.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --cached --quiet || \
+            git commit -m "chore(images): convert to WebP and resize covers"
+          git push origin "HEAD:${{ github.head_ref }}"
+
+      - name: Optimize with calibreapp/image-actions
+        if: steps.guard.outputs.skip != 'true'
+        uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          webpQuality: '80'
+          jpegQuality: '80'
+          pngQuality: '80'
+          ignorePaths: 'node_modules/**'
+
+      - name: Validate 450KB size limit
+        if: steps.guard.outputs.skip != 'true' && steps.images.outputs.count != '0'
+        run: |
+          git fetch origin "${{ github.base_ref }}"
+
+          MAX_BYTES=$((450 * 1024))
+          FAILED=false
+
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            [ ! -f "$file" ] && continue
+
+            SIZE=$(stat -c%s "$file")
+            if [ "$SIZE" -gt "$MAX_BYTES" ]; then
+              HUMAN=$(numfmt --to=iec "$SIZE")
+              echo "::error file=$file::Imagem excede 450KB: $HUMAN"
+              FAILED=true
+            fi
+          done < <(git diff --name-only --diff-filter=ACM \
+            "origin/${{ github.base_ref }}...HEAD" \
+            | grep -iE 'public/images/.*\.(jpg|jpeg|png|gif|webp)$' || true)
+
+          if [ "$FAILED" = true ]; then
+            echo ""
+            echo "Algumas imagens excedem o limite de 450KB."
+            echo "Considere reduzir a qualidade ou as dimensões antes de abrir a PR."
+            exit 1
+          fi
+
+          echo "Todas as imagens estão dentro do limite de 450KB ✅"

@@ -1,0 +1,187 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from "astro:content";
+
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TextPage from '@components/TextPage.astro';
+import TitlePage from "@components/TitlePage.astro";
+import Layout from "@layouts/Layout.astro";
+import GridRead from "@components/GridRead.astro";
+import CardRead from "@components/CardRead.astro";
+import Pagination from "@components/Pagination.astro";
+
+import formatEntryToCardRead from "@utils/format-entry-to-card-read";
+
+type PageItem = ReturnType<typeof formatEntryToCardRead> & {
+  monthKey: string;
+  monthName: string;
+};
+
+type MonthGroup = {
+  monthDate: string;
+  monthName: string;
+  list: ReturnType<typeof formatEntryToCardRead>[];
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  function formatMonthName(yyyyMm: string): string {
+    const date = new Date(`${yyyyMm}-01`);
+    const formatter = new Intl.DateTimeFormat("pt-BR", {
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    });
+    const formatted = formatter.format(date).replace(" de ", " ");
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+  }
+  const allReadings = await getCollection("readings");
+
+  const sortedReadings = allReadings.sort((a: CollectionEntry<'readings'>, b: CollectionEntry<'readings'>) => {
+    const dateA = new Date(a.data.date);
+    const dateB = new Date(b.data.date);
+
+    if (dateA < dateB) return 1;
+    if (dateA > dateB) return -1;
+
+    if (a.data.collection === b.data.collection) {
+      const volumeA = a.data.collectionVolume;
+      const volumeB = b.data.collectionVolume;
+
+      if (volumeA && volumeB) {
+        const numA = typeof volumeA === 'string' ? parseFloat(volumeA) : volumeA;
+        const numB = typeof volumeB === 'string' ? parseFloat(volumeB) : volumeB;
+
+        if (!isNaN(numA) && !isNaN(numB)) {
+          return numB - numA;
+        }
+
+        return String(volumeA).localeCompare(String(volumeB));
+      }
+
+      if (volumeA && !volumeB) return -1;
+      if (!volumeA && volumeB) return 1;
+    }
+
+    return 0;
+  });
+
+  const items: PageItem[] = sortedReadings.map((entry: CollectionEntry<'readings'>) => {
+    const d = new Date(entry.data.date);
+    const monthKey = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+    return {
+      ...formatEntryToCardRead(entry),
+      monthKey,
+      monthName: formatMonthName(monthKey),
+    };
+  });
+
+  // Build pages: fill up to 20 items, but if the last (partial) month on a page
+  // would have an odd count and the month has more items, take one extra to make it even.
+  const pages: PageItem[][] = [];
+  let i = 0;
+
+  while (i < items.length) {
+    const page: PageItem[] = [];
+
+    while (page.length < 20 && i < items.length) {
+      const monthKey = items[i].monthKey;
+      const monthStart = i;
+      let j = i;
+      while (j < items.length && items[j].monthKey === monthKey) j++;
+
+      const monthCount = j - monthStart;
+      const remaining = 20 - page.length;
+
+      if (monthCount <= remaining) {
+        for (let k = monthStart; k < j; k++) page.push(items[k]);
+        i = j;
+      } else {
+        let take = remaining;
+        if (take % 2 === 1 && monthCount > take) take++;
+        for (let k = 0; k < take; k++) page.push(items[i + k]);
+        i += take;
+        break;
+      }
+    }
+
+    pages.push(page);
+  }
+
+  const totalPages = pages.length;
+
+  return pages.map((pageData, index) => ({
+    params: { page: String(index + 1) },
+    props: {
+      pageData,
+      currentPage: index + 1,
+      lastPage: totalPages,
+      prevUrl: index > 0 ? `/leituras/${index}` : undefined,
+      nextUrl: index < totalPages - 1 ? `/leituras/${index + 2}` : undefined,
+    },
+  }));
+};
+
+const { pageData, currentPage, lastPage, prevUrl, nextUrl } = Astro.props as {
+  pageData: PageItem[];
+  currentPage: number;
+  lastPage: number;
+  prevUrl?: string;
+  nextUrl?: string;
+};
+
+const monthGroups = pageData.reduce((acc: MonthGroup[], item: PageItem) => {
+  const last = acc[acc.length - 1];
+  if (last && last.monthDate === item.monthKey) {
+    last.list.push(item);
+  } else {
+    acc.push({ monthDate: item.monthKey, monthName: item.monthName, list: [item] });
+  }
+  return acc;
+}, []);
+
+const firstMonth = monthGroups[0]?.monthName ?? '';
+const lastMonth = monthGroups[monthGroups.length - 1]?.monthName ?? '';
+---
+
+<Layout title="Todas as leituras">
+  <section>
+    <LayoutContainer>
+      <TitlePage> Todas as leituras </TitlePage>
+
+      <TextPage>
+        {firstMonth === lastMonth
+          ? <>Leituras de <strong>{firstMonth}</strong></>
+          : <>Leituras de <strong>{lastMonth}</strong> até <strong>{firstMonth}</strong></>
+        }
+      </TextPage>
+
+      {
+        monthGroups.map((group) => (
+          <h2 class="title-group">{group.monthName}</h2>
+          <GridRead>
+            {group.list.map(read => <CardRead {...read} />)}
+          </GridRead>
+        ))
+      }
+
+      <Pagination
+        prevUrl={prevUrl}
+        nextUrl={nextUrl}
+        currentPage={currentPage}
+        lastPage={lastPage}
+      />
+    </LayoutContainer>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .title-group {
+    font-size: clamp(2rem, 2.5vw, 2.25rem);
+
+    &:not(:last-child) {
+      margin-block-end: 16px;
+    }
+  }
+
+</style>

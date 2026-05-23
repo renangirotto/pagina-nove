@@ -1,9 +1,18 @@
 ---
 import CustomIcon from "@components/CustomIcon.astro";
-import RatingBar from "@components/RatingBar.astro";
+import TagPill from "@components/TagPill.astro";
 
-const { artists, cover, date, pages, publisher, publishYear, rating, title } =
-  Astro.props;
+const {
+  artists,
+  cover,
+  date,
+  pages,
+  publisher,
+  publisherIsIndependent,
+  publishYear,
+  tags,
+  title,
+} = Astro.props;
 ---
 
 <div class="hero-read-grid">
@@ -14,8 +23,18 @@ const { artists, cover, date, pages, publisher, publishYear, rating, title } =
   </div>
   <div class="hero-read-info">
     <div class="hero-read-rating">
-      <RatingBar rating={rating} />
-      <span>|</span>
+      {
+        tags && tags.length > 0 && (
+          <>
+            <div class="hero-read-tags">
+              {tags.map((tag: string) => (
+                <TagPill class="hero-read-tag">{tag}</TagPill>
+              ))}
+            </div>
+            <span>|</span>
+          </>
+        )
+      }
       <p>
         Leitura de {date}
       </p>
@@ -27,7 +46,8 @@ const { artists, cover, date, pages, publisher, publishYear, rating, title } =
       <CustomIcon name="medical-cross-symbol" />
       <span>{pages} páginas</span>
       <CustomIcon name="medical-cross-symbol" />
-      <span> Editora {publisher} </span>
+      {publisherIsIndependent && <span> Publicação Independente </span>}
+      {!publisherIsIndependent && <span> Editora {publisher} </span>}
       <CustomIcon name="medical-cross-symbol" />
       <span>Ano {publishYear}</span>
     </div>
@@ -106,8 +126,6 @@ const { artists, cover, date, pages, publisher, publishYear, rating, title } =
     color: var(--color-grey-light-400);
 
     @include container-desktop {
-      --rating-color-empty: var(--color-purple-200);
-      --rating-color-filled: var(--color-grey-light-100);
       flex-direction: row;
       color: var(--color-yellow-grey-100);
     }
@@ -127,6 +145,16 @@ const { artists, cover, date, pages, publisher, publishYear, rating, title } =
         display: inline-block;
       }
     }
+  }
+
+  .hero-read-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .hero-read-tag {
+    --tag-pill-background: var(--color-orange-100);
   }
 
   .hero-read-texts {

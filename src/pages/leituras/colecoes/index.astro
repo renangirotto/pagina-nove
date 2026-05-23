@@ -38,9 +38,11 @@ const grouped = allReadings.reduce(
 const collections = Object.entries(grouped)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([name, readings]) => {
-    const latest = readings.sort(
-      (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-    )[0];
+    const latest = readings.sort((a, b) => {
+      const dateDiff = b.data.date.getTime() - a.data.date.getTime();
+      if (dateDiff !== 0) return dateDiff;
+      return (b.data.collectionVolume ?? 0) - (a.data.collectionVolume ?? 0);
+    })[0];
     return {
       cover: latest.data.cover,
       date: formatDate(latest.data.date),

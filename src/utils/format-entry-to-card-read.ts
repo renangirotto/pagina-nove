@@ -13,7 +13,7 @@ export default function formatEntryToCardRead(
     id: entry.id,
     label: entry.data.label,
     publisher: entry.data.publisher,
-    rating: entry.data.rating,
+    tags: entry.data.tags,
     seriesType: getSeriesType(entry.data.collection),
     slug: `${ROUTES.readings}${entry.id}/`,
     title: entry.data.title,

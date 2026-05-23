@@ -2,8 +2,17 @@
 import CustomIcon from "@components/CustomIcon.astro";
 import RatingBar from "@components/RatingBar.astro";
 
-const { artists, cover, date, pages, publisher, publishYear, rating, title } =
-  Astro.props;
+const {
+  artists,
+  cover,
+  date,
+  pages,
+  publisher,
+  publisherIsIndependent,
+  publishYear,
+  rating,
+  title,
+} = Astro.props;
 ---
 
 <div class="hero-read-grid">
@@ -27,7 +36,8 @@ const { artists, cover, date, pages, publisher, publishYear, rating, title } =
       <CustomIcon name="medical-cross-symbol" />
       <span>{pages} páginas</span>
       <CustomIcon name="medical-cross-symbol" />
-      <span> Editora {publisher} </span>
+      {publisherIsIndependent && <span> Publicação Independente </span>}
+      {!publisherIsIndependent && <span> Editora {publisher} </span>}
       <CustomIcon name="medical-cross-symbol" />
       <span>Ano {publishYear}</span>
     </div>

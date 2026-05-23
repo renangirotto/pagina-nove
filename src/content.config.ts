@@ -6,6 +6,7 @@ import {
   LabelSchema,
   PublishersSchema,
   RatingSchema,
+  TagsSchema,
 } from "./collections";
 
 const notes = defineCollection({
@@ -33,10 +34,12 @@ const readings = defineCollection({
     label: LabelSchema,
     pages: z.number(),
     publisher: PublishersSchema,
+    publisherIsIndependent: z.boolean().optional(),
     publishYear: z.string(),
     rating: RatingSchema,
     socialCover: z.string().optional(),
     socialText: z.string().optional(),
+    tags: TagsSchema,
     title: z.string(),
     titleNote: z.string().optional(),
   }),

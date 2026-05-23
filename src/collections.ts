@@ -22,6 +22,7 @@ export const ComicCollectionsSchema = z
     "Pluto: Edição de Luxo",
     "Shin Zero",
     "Transformers - Universo Energon",
+    "Vermillion",
   ])
   .optional();
 
@@ -39,6 +40,7 @@ export const PublishersSchema = z.enum([
   "Monstra",
   "MPEG",
   "Mythos",
+  "N/A",
   "Panini",
   "Pé-de-Cabra",
   "Pipoca & Nanquim",
@@ -58,3 +60,5 @@ export const RatingSchema = z.enum([
   "4.5",
   "5",
 ]);
+
+export const TagsSchema = z.enum(["Para ter na estante"]).optional();

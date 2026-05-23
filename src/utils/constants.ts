@@ -5,7 +5,7 @@ export const ROUTES = {
   collections: "/leituras/colecoes/",
   home: "/",
   notes: "/notas/",
-  readings: "/leituras/",
+  readings: "/leituras/1",
 };
 
 export const NAV_ITEMS = [

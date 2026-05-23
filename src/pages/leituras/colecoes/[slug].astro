@@ -40,9 +40,11 @@ export async function getStaticPaths() {
     params: { slug: slugify(name) },
     props: {
       title: name,
-      readings: readings.sort(
-        (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-      ),
+      readings: readings.sort((a, b) => {
+        const dateDiff = b.data.date.getTime() - a.data.date.getTime();
+        if (dateDiff !== 0) return dateDiff;
+        return (b.data.collectionVolume ?? 0) - (a.data.collectionVolume ?? 0);
+      }),
     },
   }));
 }
@@ -59,11 +61,19 @@ const finishedDate = formatDate(latest.data.date);
   <section>
     <LayoutContainer>
       <TitlePage>{title}</TitlePage>
-      {isFinished ? (
-        <TextPage>Comecei com a leitura desta coleção em {startDate} e finalizei em {finishedDate}.</TextPage>
-      ) : (
-        <TextPage>Comecei com a leitura desta coleção em {startDate} e é uma coleção que ainda não finalizei.</TextPage>
-      )}
+      {
+        isFinished ? (
+          <TextPage>
+            Comecei com a leitura desta coleção em <strong>{startDate}</strong>{" "}
+            e finalizei em <strong>{finishedDate}</strong>.
+          </TextPage>
+        ) : (
+          <TextPage>
+            Comecei com a leitura desta coleção em <strong>{startDate}</strong>{" "}
+            e é uma coleção que ainda não finalizei.
+          </TextPage>
+        )
+      }
 
       <GridRead>
         {

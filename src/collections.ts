@@ -61,4 +61,4 @@ export const RatingSchema = z.enum([
   "5",
 ]);
 
-export const TagsSchema = z.enum(["Para ter na estante"]).optional();
+export const TagsSchema = z.array(z.enum(["Para ter na estante"])).optional();

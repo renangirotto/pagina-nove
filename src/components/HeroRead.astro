@@ -1,6 +1,6 @@
 ---
 import CustomIcon from "@components/CustomIcon.astro";
-import RatingBar from "@components/RatingBar.astro";
+import TagPill from "@components/TagPill.astro";
 
 const {
   artists,
@@ -10,7 +10,7 @@ const {
   publisher,
   publisherIsIndependent,
   publishYear,
-  rating,
+  tags,
   title,
 } = Astro.props;
 ---
@@ -23,8 +23,14 @@ const {
   </div>
   <div class="hero-read-info">
     <div class="hero-read-rating">
-      <RatingBar rating={rating} />
-      <span>|</span>
+      {tags && tags.length > 0 && (
+        <>
+          <div class="hero-read-tags">
+            {tags.map((tag: string) => <TagPill>{tag}</TagPill>)}
+          </div>
+          <span>|</span>
+        </>
+      )}
       <p>
         Leitura de {date}
       </p>
@@ -116,8 +122,6 @@ const {
     color: var(--color-grey-light-400);
 
     @include container-desktop {
-      --rating-color-empty: var(--color-purple-200);
-      --rating-color-filled: var(--color-grey-light-100);
       flex-direction: row;
       color: var(--color-yellow-grey-100);
     }
@@ -137,6 +141,12 @@ const {
         display: inline-block;
       }
     }
+  }
+
+  .hero-read-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
   }
 
   .hero-read-texts {

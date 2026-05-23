@@ -5,7 +5,8 @@ export const ROUTES = {
   collections: "/leituras/colecoes/",
   home: "/",
   notes: "/notas/",
-  readings: "/leituras/1",
+  readings: "/leituras/",
+  readingsFirstPage: "/leituras/1/",
 };
 
 export const NAV_ITEMS = [
@@ -14,7 +15,7 @@ export const NAV_ITEMS = [
     label: "notas",
   },
   {
-    href: ROUTES.readings,
+    href: ROUTES.readingsFirstPage,
     label: "leituras",
   },
   {

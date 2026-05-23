@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import type { GetStaticPaths, Page } from 'astro';
+import type { GetStaticPaths } from 'astro';
 import { getCollection } from "astro:content";
 
 import LayoutContainer from "@components/LayoutContainer.astro";
@@ -24,7 +24,7 @@ type MonthGroup = {
   list: ReturnType<typeof formatEntryToCardRead>[];
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
   function formatMonthName(yyyyMm: string): string {
     const date = new Date(`${yyyyMm}-01`);
     const formatter = new Intl.DateTimeFormat("pt-BR", {
@@ -76,12 +76,61 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
     };
   });
 
-  return paginate(items, { pageSize: 20 });
+  // Build pages: fill up to 20 items, but if the last (partial) month on a page
+  // would have an odd count and the month has more items, take one extra to make it even.
+  const pages: PageItem[][] = [];
+  let i = 0;
+
+  while (i < items.length) {
+    const page: PageItem[] = [];
+
+    while (page.length < 20 && i < items.length) {
+      const monthKey = items[i].monthKey;
+      const monthStart = i;
+      let j = i;
+      while (j < items.length && items[j].monthKey === monthKey) j++;
+
+      const monthCount = j - monthStart;
+      const remaining = 20 - page.length;
+
+      if (monthCount <= remaining) {
+        for (let k = monthStart; k < j; k++) page.push(items[k]);
+        i = j;
+      } else {
+        let take = remaining;
+        if (take % 2 === 1 && monthCount > take) take++;
+        for (let k = 0; k < take; k++) page.push(items[i + k]);
+        i += take;
+        break;
+      }
+    }
+
+    pages.push(page);
+  }
+
+  const totalPages = pages.length;
+
+  return pages.map((pageData, index) => ({
+    params: { page: String(index + 1) },
+    props: {
+      pageData,
+      currentPage: index + 1,
+      lastPage: totalPages,
+      prevUrl: index > 0 ? `/leituras/${index}` : undefined,
+      nextUrl: index < totalPages - 1 ? `/leituras/${index + 2}` : undefined,
+    },
+  }));
 };
 
-const { page } = Astro.props as { page: Page<PageItem> };
+const { pageData, currentPage, lastPage, prevUrl, nextUrl } = Astro.props as {
+  pageData: PageItem[];
+  currentPage: number;
+  lastPage: number;
+  prevUrl?: string;
+  nextUrl?: string;
+};
 
-const monthGroups = (page.data as PageItem[]).reduce((acc: MonthGroup[], item: PageItem) => {
+const monthGroups = pageData.reduce((acc: MonthGroup[], item: PageItem) => {
   const last = acc[acc.length - 1];
   if (last && last.monthDate === item.monthKey) {
     last.list.push(item);
@@ -117,10 +166,10 @@ const lastMonth = monthGroups[monthGroups.length - 1]?.monthName ?? '';
       }
 
       <Pagination
-        prevUrl={page.url.prev}
-        nextUrl={page.url.next}
-        currentPage={page.currentPage}
-        lastPage={page.lastPage}
+        prevUrl={prevUrl}
+        nextUrl={nextUrl}
+        currentPage={currentPage}
+        lastPage={lastPage}
       />
     </LayoutContainer>
   </section>

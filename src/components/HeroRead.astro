@@ -23,14 +23,18 @@ const {
   </div>
   <div class="hero-read-info">
     <div class="hero-read-rating">
-      {tags && tags.length > 0 && (
-        <>
-          <div class="hero-read-tags">
-            {tags.map((tag: string) => <TagPill>{tag}</TagPill>)}
-          </div>
-          <span>|</span>
-        </>
-      )}
+      {
+        tags && tags.length > 0 && (
+          <>
+            <div class="hero-read-tags">
+              {tags.map((tag: string) => (
+                <TagPill class="hero-read-tag">{tag}</TagPill>
+              ))}
+            </div>
+            <span>|</span>
+          </>
+        )
+      }
       <p>
         Leitura de {date}
       </p>
@@ -147,6 +151,10 @@ const {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
+  }
+
+  .hero-read-tag {
+    --tag-pill-background: var(--color-orange-100);
   }
 
   .hero-read-texts {

@@ -13,11 +13,11 @@ const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
   {
     prevUrl ? (
       <a href={prevUrl} class="pagination-link">
-        ← Mais recentes
+        Mais recentes
       </a>
     ) : (
       <span class="pagination-link pagination-link-disabled">
-        ← Mais recentes
+        Mais recentes
       </span>
     )
   }
@@ -25,12 +25,10 @@ const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
   {
     nextUrl ? (
       <a href={nextUrl} class="pagination-link">
-        Mais antigas →
+        Mais antigas
       </a>
     ) : (
-      <span class="pagination-link pagination-link-disabled">
-        Masi antigas →
-      </span>
+      <span class="pagination-link pagination-link-disabled">Masi antigas</span>
     )
   }
 </nav>
@@ -48,14 +46,14 @@ const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
     font-weight: 600;
     text-decoration: none;
 
-    &:hover {
+    &:hover:not(.pagination-link-disabled) {
       text-decoration: underline;
     }
   }
 
   .pagination-link-disabled {
-    opacity: 0.3;
     cursor: default;
+    opacity: 0.3;
   }
 
   .pagination-info {

@@ -4,7 +4,6 @@ import type { GetStaticPaths } from 'astro';
 import { getCollection } from "astro:content";
 
 import LayoutContainer from "@components/LayoutContainer.astro";
-import TextPage from '@components/TextPage.astro';
 import TitlePage from "@components/TitlePage.astro";
 import Layout from "@layouts/Layout.astro";
 import GridRead from "@components/GridRead.astro";
@@ -139,22 +138,12 @@ const monthGroups = pageData.reduce((acc: MonthGroup[], item: PageItem) => {
   }
   return acc;
 }, []);
-
-const firstMonth = monthGroups[0]?.monthName ?? '';
-const lastMonth = monthGroups[monthGroups.length - 1]?.monthName ?? '';
 ---
 
 <Layout title="Todas as leituras">
   <section>
     <LayoutContainer>
       <TitlePage> Todas as leituras </TitlePage>
-
-      <TextPage>
-        {firstMonth === lastMonth
-          ? <>Leituras de <strong>{firstMonth}</strong></>
-          : <>Leituras de <strong>{lastMonth}</strong> até <strong>{firstMonth}</strong></>
-        }
-      </TextPage>
 
       {
         monthGroups.map((group) => (

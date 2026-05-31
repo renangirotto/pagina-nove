@@ -1,14 +1,13 @@
 ---
 import TagPill from "@components/TagPill.astro";
 
-const { cover, date, finished, label, publisher, slug, title } = Astro.props;
+const { cover, finished, slug, title } = Astro.props;
 ---
 
 <article class="card-read">
   <a aria-label={title} class="card-link" href={slug}>
     <div class="card-info">
       <div class="card-info-pills">
-        <TagPill>{publisher}</TagPill>
         {
           finished && (
             <TagPill class="card-info-pill-finished"> Finalizada </TagPill>
@@ -17,7 +16,7 @@ const { cover, date, finished, label, publisher, slug, title } = Astro.props;
       </div>
       <div>
         <h3 class="card-info-title">{title}</h3>
-        <p class="card-info-date">Último volume lido em: <br />{date}</p>
+        <!-- <p class="card-info-date">Último volume lido em: <br />{date}</p> -->
       </div>
     </div>
     <figure aria-hidden="true" class="card-figure">
@@ -92,13 +91,21 @@ const { cover, date, finished, label, publisher, slug, title } = Astro.props;
   }
 
   .card-info-title {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     text-shadow:
       3px 3px 0px var(--color-grey-dark-200),
       -1px -1px 0 var(--color-grey-dark-200),
       1px -1px 0 var(--color-grey-dark-200),
       -1px 1px 0 var(--color-grey-dark-200),
       1px 1px 0 var(--color-grey-dark-200);
+
+    @include container-tablet {
+      font-size: 1.5rem;
+    }
+
+    @include container-desktop {
+      font-size: 1.7rem;
+    }
 
     &:not(:last-child) {
       margin-block-end: 4px;
@@ -116,6 +123,7 @@ const { cover, date, finished, label, publisher, slug, title } = Astro.props;
     aspect-ratio: 3 / 3.8;
     border: 2px solid var(--color-grey-dark-200);
     box-shadow: 0px 0px 0px var(--color-grey-dark-200);
+    overflow: hidden;
     transform: translate(0px, 0px);
     transition:
       transform 0.25s ease-in-out,

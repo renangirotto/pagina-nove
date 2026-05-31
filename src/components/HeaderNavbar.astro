@@ -23,18 +23,50 @@ const { pathname } = Astro.url;
       <DialogDrawer id="dialog-nav" class="nav-dialog" title="Outras páginas">
         <ul class="nav-list">
           {
-            NAV_ITEMS.map((item) => (
-              <li>
-                <a
-                  class="nav-link nav-link-mobile"
-                  data-ui-nav-link-active={item.href === pathname || null}
-                  href={item.href}
-                  target={item.target || `_self`}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))
+            NAV_ITEMS.map((item) =>
+              item.children ? (
+                <li class="nav-item-dropdown">
+                  <details class="nav-dropdown">
+                    <summary
+                      class="nav-link"
+                      data-ui-nav-link-active={
+                        item.children.some((c) => c.href === pathname) || null
+                      }
+                    >
+                      {item.label}
+                    </summary>
+                    <ul class="nav-dropdown-list">
+                      {item.children.map((child) => (
+                        <li>
+                          <a
+                            class="nav-link nav-link-mobile"
+                            data-ui-nav-link-active={
+                              child.href === pathname || null
+                            }
+                            data-ui-nav-link-target="children"
+                            href={child.href}
+                            target={child.target || "_self"}
+                          >
+                            {child.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    class="nav-link nav-link-mobile"
+                    data-ui-nav-link-active={item.href === pathname || null}
+                    href={item.href}
+                    target={item.target || `_self`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ),
+            )
           }
         </ul>
       </DialogDrawer>
@@ -43,18 +75,50 @@ const { pathname } = Astro.url;
     <nav class="nav" data-ui-decive="desktop">
       <ul class="nav-list">
         {
-          NAV_ITEMS.map((item) => (
-            <li>
-              <a
-                class="nav-link"
-                data-ui-nav-link-active={item.href === pathname || null}
-                href={item.href}
-                target={item.target || `_self`}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))
+          NAV_ITEMS.map((item) =>
+            item.children ? (
+              <li class="nav-item-dropdown">
+                <details class="nav-dropdown">
+                  <summary
+                    class="nav-link"
+                    data-ui-nav-link-active={
+                      item.children.some((c) => c.href === pathname) || null
+                    }
+                  >
+                    {item.label}
+                  </summary>
+                  <ul class="nav-dropdown-list">
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          class="nav-link"
+                          data-ui-nav-link-active={
+                            child.href === pathname || null
+                          }
+                          data-ui-nav-link-target="children"
+                          href={child.href}
+                          target={child.target || "_self"}
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ) : (
+              <li>
+                <a
+                  class="nav-link"
+                  data-ui-nav-link-active={item.href === pathname || null}
+                  href={item.href}
+                  target={item.target || `_self`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ),
+          )
         }
       </ul>
     </nav>
@@ -76,12 +140,20 @@ const { pathname } = Astro.url;
       (dialog as HTMLDialogElement)?.close();
     });
   });
+
+  document.addEventListener("click", (e) => {
+    const target = e.target as Element;
+    document.querySelectorAll(".nav-dropdown[open]").forEach((dropdown) => {
+      if (!dropdown.contains(target)) {
+        (dropdown as HTMLDetailsElement).open = false;
+      }
+    });
+  });
 </script>
 
 <style lang="scss">
   .header {
     padding-inline: 16px;
-    background: var(--color-grey-light-50);
   }
 
   .header-container {
@@ -92,10 +164,12 @@ const { pathname } = Astro.url;
     grid-template-areas: "logo nav";
     align-items: center;
     width: 100%;
-    padding-block: 28px 24px;
+    padding-block: 24px 24px;
     padding-inline: 8px;
+    border-block-end: 1px solid var(--color-grey-light-100);
 
     @include container-desktop {
+      padding-block: 32px 32px;
       padding-inline: 0px;
     }
   }
@@ -133,11 +207,11 @@ const { pathname } = Astro.url;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-block: 8px;
-    padding-inline: 8px;
-    border: none;
-    border-radius: 4px;
-    background: none;
+    padding-block: 12px;
+    padding-inline: 12px;
+    border: 3px solid var(--color-grey-dark-200);
+    background: var(--color-purple-100);
+    box-shadow: 2px 2px 0px var(--color-grey-dark-200);
   }
 
   .nav-list {
@@ -151,6 +225,50 @@ const { pathname } = Astro.url;
     @include container-desktop {
       flex-direction: row;
     }
+
+    li {
+      width: 100%;
+
+      @include container-desktop {
+        width: auto;
+      }
+    }
+  }
+
+  .nav-item-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown {
+    summary {
+      list-style: none;
+      cursor: pointer;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+  }
+
+  .nav-dropdown-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-inline-start: 0;
+    margin-block-start: 8px;
+
+    @include container-desktop {
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      z-index: 10;
+      gap: 0;
+      margin-block-start: 0;
+      min-width: 120px;
+      box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.1);
+      background: var(--color-yellow-grey-100);
+    }
   }
 
   .nav-link {
@@ -159,30 +277,31 @@ const { pathname } = Astro.url;
     --icon-color-light: var(--color-grey-light-100);
 
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 8px;
     padding-block: 12px;
     padding-inline: 24px;
-    border-bottom: 4px solid var(--nav-link-border-color, transparent);
-    border-radius: 4px;
-    font-size: 1.375rem;
-    font-weight: 400;
+    border: 3px solid var(--nav-link-border-color, transparent);
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
     text-decoration: none;
     transition: all 0.25s ease;
 
     @include container-desktop {
       --icon-size: 18px;
       padding-block: 8px;
-      padding-inline: 16px;
-      font-size: 1.125rem;
+      padding-inline: 12px;
+      font-size: 0.875rem;
       gap: 6px;
+      text-transform: uppercase;
     }
 
     &:hover,
     &:focus-within {
-      color: var(--color-grey-light-1100);
-      background: var(--color-grey-light-100);
       --nav-link-border-color: var(--color-grey-light-200);
+      background: var(--color-grey-light-100);
 
       @include container-desktop {
         --icon-color-dark: var(--color-purple-200);
@@ -190,12 +309,22 @@ const { pathname } = Astro.url;
       }
     }
 
+    &[data-ui-nav-link-target="children"] {
+      &[data-ui-nav-link-active="true"] {
+        --nav-link-border-color: var(--color-purple-100);
+        background: var(--color-purple-50);
+      }
+    }
+
     &[data-ui-nav-link-active="true"] {
       --icon-color-dark: var(--color-purple-200);
       --icon-color-light: var(--color-purple-100);
-      --nav-link-border-color: var(--color-purple-100);
-      color: var(--color-purple-200);
-      background: var(--color-purple-50);
+      --nav-link-border-color: var(--color-grey-dark-200);
+      background: var(--color-purple-100);
+
+      &:not([data-ui-nav-link-target="children"]) {
+        box-shadow: 2px 2px 0px var(--color-grey-dark-200);
+      }
     }
   }
 </style>

@@ -2,25 +2,29 @@ export const PATH_IMG_COVERS = "/images/covers";
 
 export const ROUTES = {
   buy: "/onde-comprar/",
-  collections: "/leituras/colecoes/",
+  collections: "/colecoes/",
   home: "/",
   notes: "/notas/",
   readings: "/leituras/",
   readingsFirstPage: "/leituras/1/",
 };
 
-export const NAV_ITEMS = [
+type NavChild = { href: string; label: string; target?: string };
+type NavItem =
+  | { href: string; label: string; target?: string; children?: never }
+  | { href?: never; label: string; target?: never; children: NavChild[] };
+
+export const NAV_ITEMS: NavItem[] = [
   {
     href: ROUTES.notes,
     label: "notas",
   },
   {
-    href: ROUTES.readingsFirstPage,
     label: "leituras",
-  },
-  {
-    href: ROUTES.collections,
-    label: "coleções",
+    children: [
+      { href: ROUTES.readingsFirstPage, label: "todas" },
+      { href: ROUTES.collections, label: "coleções" },
+    ],
   },
   {
     href: ROUTES.buy,

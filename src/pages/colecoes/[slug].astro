@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
+import Breadcrumb from "@components/Breadcrumb.astro";
 import CardRead from "@components/CardRead.astro";
 import GridRead from "@components/GridRead.astro";
 import LayoutContainer from "@components/LayoutContainer.astro";
@@ -11,6 +12,7 @@ import Layout from "@layouts/Layout.astro";
 
 import formatDate from "@utils/format-date";
 import formatEntryToCardRead from "@utils/format-entry-to-card-read";
+import { ROUTES } from "@utils/constants";
 
 export async function getStaticPaths() {
   const slugify = (str: string) =>
@@ -55,11 +57,17 @@ const latest = readings[0];
 const isFinished = latest.data.collectionLastIssue === true;
 const startDate = formatDate(readings[readings.length - 1].data.date);
 const finishedDate = formatDate(latest.data.date);
+
+const breadcrumbs = [
+  { href: ROUTES.collections, text: "Todas as Coleções" },
+  { href: null, text: title },
+];
 ---
 
 <Layout title={title}>
   <section>
     <LayoutContainer>
+      <Breadcrumb items={breadcrumbs} />
       <TitlePage>{title}</TitlePage>
       {
         isFinished ? (

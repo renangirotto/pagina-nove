@@ -13,6 +13,8 @@ import Layout from "@layouts/Layout.astro";
 import "@styles/content.css";
 
 import formatDate from "@utils/format-date";
+import { ROUTES } from "@utils/constants";
+import Breadcrumb from "@components/Breadcrumb.astro";
 
 export async function getStaticPaths() {
   const allNotes = await getCollection("notes");
@@ -35,10 +37,19 @@ if (!entry) {
 }
 
 const { Content } = await render(entry);
+
+// * ----------------
+// * Breadcrumb control
+// * ----------------
+const breadcrumbs = [
+  { href: ROUTES.notes, text: "Todas as Notas" },
+  { href: null, text: note.data.title },
+];
 ---
 
 <Layout title={note.data.title}>
   <LayoutContainer class="layout-notes">
+    <Breadcrumb items={breadcrumbs} />
     <HeroNote
       date={note.data.dateNote}
       dateFormatted={dateFormatted}

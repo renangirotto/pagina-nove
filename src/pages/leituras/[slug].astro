@@ -16,9 +16,10 @@ import Layout from "@layouts/Layout.astro";
 
 import "@styles/content.css";
 
-import { PATH_IMG_COVERS } from "@utils/constants";
+import { PATH_IMG_COVERS, ROUTES } from "@utils/constants";
 import formatDate from "@utils/format-date";
 import formatEntryToCardNote from "@utils/format-entry-to-card-note";
+import Breadcrumb from "@components/Breadcrumb.astro";
 
 type CardNoteData = {
   cover: any;
@@ -86,9 +87,20 @@ if (relatedNotes.length > 0) {
     relatedNotesToRender.push(formatEntryToCardNote(item));
   });
 }
+
+// * ----------------
+// * Breadcrumb control
+// * ----------------
+const breadcrumbs = [
+  { href: ROUTES.readingsFirstPage, text: "Todas as Leituras" },
+  { href: null, text: heroData.title },
+];
 ---
 
 <Layout title={read.data.title}>
+  <LayoutContainer>
+    <Breadcrumb items={breadcrumbs} />
+  </LayoutContainer>
   <LayoutContainer class="layout-grid">
     <div class="layout-pattern">
       <figure class="cover-pattern">

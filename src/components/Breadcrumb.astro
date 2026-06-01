@@ -1,0 +1,122 @@
+---
+import CustomIcon from "./CustomIcon.astro";
+
+interface BreadcrumbItem {
+  href: string | null;
+  text: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+const previousItem = items.length >= 2 ? items[items.length - 2] : null;
+---
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="breadcrumb-list breadcrumb-full">
+    {
+      items.map((item, index) => (
+        <li class="breadcrumb-item">
+          {item.href ? (
+            <a href={item.href} class="breadcrumb-link">
+              {item.text}
+            </a>
+          ) : (
+            <span class="breadcrumb-current" aria-current="page">
+              {item.text}
+            </span>
+          )}
+          {index < items.length - 1 && (
+            <span class="breadcrumb-separator" aria-hidden="true">
+              /
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+
+  {
+    previousItem && (
+      <div class="breadcrumb-mobile">
+        <span class="breadcrumb-separator" aria-hidden="true">
+          <CustomIcon name="arrow-left" />
+        </span>
+        {previousItem.href ? (
+          <a href={previousItem.href} class="breadcrumb-link">
+            {previousItem.text}
+          </a>
+        ) : (
+          <span class="breadcrumb-current">{previousItem.text}</span>
+        )}
+      </div>
+    )
+  }
+</nav>
+
+<style lang="scss">
+  .breadcrumb {
+    font-size: 1rem;
+
+    &:not(:last-child) {
+      margin-block-end: 24px;
+    }
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .breadcrumb-link {
+    color: var(--color-grey-light-1100);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb-current {
+    color: var(--color-grey-dark-100);
+    font-weight: 600;
+  }
+
+  .breadcrumb-separator {
+    --icon-size: 1.25rem;
+    color: var(--color-grey-light-1100);
+  }
+
+  .breadcrumb-full {
+    display: none;
+  }
+
+  .breadcrumb-mobile {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  @include container-tablet {
+    .breadcrumb-full {
+      display: flex;
+    }
+
+    .breadcrumb-mobile {
+      display: none;
+    }
+  }
+</style>

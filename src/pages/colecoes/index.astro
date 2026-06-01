@@ -13,6 +13,7 @@ import { ROUTES } from "@utils/constants";
 import formatDate from "@utils/format-date";
 
 const allReadings = await getCollection("readings");
+const allSeries = await getCollection("series");
 
 const slugify = (str: string) =>
   str
@@ -26,10 +27,10 @@ const slugify = (str: string) =>
 
 const grouped = allReadings.reduce(
   (acc, reading) => {
-    const { collection } = reading.data;
-    if (!collection) return acc;
-    if (!acc[collection]) acc[collection] = [];
-    acc[collection].push(reading);
+    const { series } = reading.data;
+    if (!series) return acc;
+    if (!acc[series]) acc[series] = [];
+    acc[series].push(reading);
     return acc;
   },
   {} as Record<string, typeof allReadings>,
@@ -41,12 +42,13 @@ const collections = Object.entries(grouped)
     const latest = readings.sort((a, b) => {
       const dateDiff = b.data.date.getTime() - a.data.date.getTime();
       if (dateDiff !== 0) return dateDiff;
-      return (b.data.collectionVolume ?? 0) - (a.data.collectionVolume ?? 0);
+      return (b.data.seriesIssue ?? 0) - (a.data.seriesIssue ?? 0);
     })[0];
+    const seriesEntry = allSeries.find((s) => s.data.name === name);
     return {
       cover: latest.data.cover,
       date: formatDate(latest.data.date),
-      finished: latest.data.collectionLastIssue,
+      finished: seriesEntry?.data.isFinished,
       label: latest.data.label,
       publisher: [latest.data.publisher],
       slug: `${ROUTES.collections}${slugify(name)}`,

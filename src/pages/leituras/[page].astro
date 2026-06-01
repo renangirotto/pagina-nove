@@ -43,9 +43,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     if (dateA < dateB) return 1;
     if (dateA > dateB) return -1;
 
-    if (a.data.collection === b.data.collection) {
-      const volumeA = a.data.collectionVolume;
-      const volumeB = b.data.collectionVolume;
+    if (a.data.series === b.data.series) {
+      const volumeA = a.data.seriesIssue;
+      const volumeB = b.data.seriesIssue;
 
       if (volumeA && volumeB) {
         const numA = typeof volumeA === 'string' ? parseFloat(volumeA) : volumeA;

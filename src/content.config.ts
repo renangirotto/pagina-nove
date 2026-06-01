@@ -1,48 +1,6 @@
-import { z, defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
+import notes from "./collections/notes";
+import publishers from "./collections/publishers";
+import readings from "./collections/readings";
+import series from "./collections/series";
 
-import {
-  ComicCollectionsSchema,
-  LabelSchema,
-  PublishersSchema,
-  RatingSchema,
-  TagsSchema,
-} from "./collections";
-
-const notes = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/data/notes" }),
-  schema: z.object({
-    collection: z.array(z.string()).optional(),
-    cover: z.string(),
-    dateNote: z.date(),
-    tags: z.array(z.string()).optional(),
-    title: z.string(),
-  }),
-});
-
-const readings = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/data/readings" }),
-  schema: z.object({
-    artists: z.array(z.string()),
-    collection: ComicCollectionsSchema,
-    collectionLastIssue: z.boolean().optional(),
-    collectionVolume: z.number().optional(),
-    cover: z.string(),
-    coverNote: z.string().optional(),
-    date: z.date(),
-    dateNote: z.date().optional(),
-    label: LabelSchema,
-    pages: z.number(),
-    publisher: PublishersSchema,
-    publisherIsIndependent: z.boolean().optional(),
-    publishYear: z.string(),
-    rating: RatingSchema,
-    socialCover: z.string().optional(),
-    socialText: z.string().optional(),
-    tags: TagsSchema,
-    title: z.string(),
-    titleNote: z.string().optional(),
-  }),
-});
-
-export const collections = { notes, readings };
+export const collections = { notes, publishers, readings, series };

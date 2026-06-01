@@ -63,9 +63,9 @@ const recentReadings = allReadings
 
     if (dateCompare !== 0) return dateCompare;
 
-    if (a.data.collection === b.data.collection) {
-      const volumeA = a.data.collectionVolume;
-      const volumeB = b.data.collectionVolume;
+    if (a.data.series === b.data.series) {
+      const volumeA = a.data.seriesIssue;
+      const volumeB = b.data.seriesIssue;
 
       if (volumeA && volumeB) {
         const numA =

@@ -26,37 +26,40 @@ export async function getStaticPaths() {
       .replace(/-{2,}/g, "-");
 
   const allReadings = await getCollection("readings");
+  const allSeries = await getCollection("series");
 
-  const grouped = await allReadings.reduce(
+  const grouped = allReadings.reduce(
     (acc, reading) => {
-      const { collection } = reading.data;
-      if (!collection) return acc;
-      if (!acc[collection]) acc[collection] = [];
-      acc[collection].push(reading);
+      const { series } = reading.data;
+      if (!series) return acc;
+      if (!acc[series]) acc[series] = [];
+      acc[series].push(reading);
       return acc;
     },
     {} as Record<string, typeof allReadings>,
   );
 
-  return Object.entries(grouped).map(([name, readings]) => ({
-    params: { slug: slugify(name) },
-    props: {
-      title: name,
-      readings: readings.sort((a, b) => {
-        const dateDiff = b.data.date.getTime() - a.data.date.getTime();
-        if (dateDiff !== 0) return dateDiff;
-        return (b.data.collectionVolume ?? 0) - (a.data.collectionVolume ?? 0);
-      }),
-    },
-  }));
+  return Object.entries(grouped).map(([name, readings]) => {
+    const seriesEntry = allSeries.find((s) => s.data.name === name);
+    return {
+      params: { slug: slugify(name) },
+      props: {
+        title: name,
+        isFinished: seriesEntry?.data.isFinished ?? false,
+        readings: readings.sort((a, b) => {
+          const dateDiff = b.data.date.getTime() - a.data.date.getTime();
+          if (dateDiff !== 0) return dateDiff;
+          return (b.data.seriesIssue ?? 0) - (a.data.seriesIssue ?? 0);
+        }),
+      },
+    };
+  });
 }
 
-const { title, readings } = Astro.props;
+const { title, readings, isFinished } = Astro.props;
 
-const latest = readings[0];
-const isFinished = latest.data.collectionLastIssue === true;
 const startDate = formatDate(readings[readings.length - 1].data.date);
-const finishedDate = formatDate(latest.data.date);
+const finishedDate = formatDate(readings[0].data.date);
 
 const breadcrumbs = [
   { href: ROUTES.collections, text: "Todas as Coleções" },

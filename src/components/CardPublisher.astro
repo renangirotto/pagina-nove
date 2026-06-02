@@ -1,0 +1,123 @@
+---
+interface Props {
+  href?: string;
+  logo?: string;
+  name: string;
+  readingsCount: number;
+}
+
+const { href, logo, name, readingsCount } = Astro.props;
+
+const Tag = href ? "a" : "article";
+---
+
+<Tag class="card-publisher" href={href}>
+  <div class="card-inner">
+    {
+      logo ? (
+        <figure class="card-logo" aria-hidden="true">
+          <img loading="lazy" src={logo} alt="" />
+        </figure>
+      ) : (
+        <div class="card-initials" aria-hidden="true">
+          {name.charAt(0)}
+        </div>
+      )
+    }
+    <div>
+      <p class="card-name">{name}</p>
+      <p class="card-count">
+        {readingsCount}
+        {readingsCount === 1 ? "leitura" : "leituras"}
+      </p>
+    </div>
+  </div>
+</Tag>
+
+<style lang="scss" scoped>
+  .card-count {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .card-publisher {
+    cursor: pointer;
+    block-size: fit-content;
+    align-content: center;
+    border: 4px solid var(--border-color, var(--color-purple-50));
+    padding-block: 8px;
+    padding-inline: 16px;
+    text-decoration: none;
+    background-color: var(--color-purple-50);
+    transition: all ease-in-out 0.15s;
+    overflow: hidden;
+
+    @include container-desktop {
+      min-block-size: 96px;
+    }
+
+    @media (hover: hover) {
+      &:hover,
+      &:focus {
+        --border-color: var(--color-purple-100);
+        outline: none;
+
+        .card-initials {
+          --border-color: var(--color-grey-dark-200);
+          --background: var(--color-purple-100);
+        }
+      }
+    }
+  }
+
+  .card-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 100%;
+  }
+
+  .card-logo {
+    aspect-ratio: 1 / 1;
+    inline-size: 64px;
+    max-inline-size: 64px;
+    block-size: 64px;
+    max-block-size: 64px;
+    transition: all ease-in-out 0.15s;
+
+    img {
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+      margin-inline: auto;
+    }
+  }
+
+  .card-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border: 4px solid var(--border-color, var(--color-grey-light-300));
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-yellow-grey-100);
+    text-transform: uppercase;
+    background-color: var(--background, var(--color-grey-light-200));
+    transition: all ease-in-out 0.15s;
+  }
+
+  .card-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-grey-dark-200);
+    text-decoration: underline;
+
+    @include container-tablet {
+      font-size: 1.25rem;
+    }
+  }
+</style>

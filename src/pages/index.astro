@@ -15,8 +15,6 @@ import Layout from "@layouts/Layout.astro";
 import { ROUTES, TOTAL_AMOUNT_ON_SHELF } from "@utils/constants";
 import formatEntryToCardNote from "@utils/format-entry-to-card-note";
 import formatEntryToCardRead from "@utils/format-entry-to-card-read";
-import getReadingsWithNotes from "@utils/get-readings-with-notes";
-import mergeNotesReadings from "@utils/merge-notes-readings";
 
 const allNotes = await getCollection("notes");
 const allReadings = await getCollection("readings");
@@ -24,16 +22,10 @@ const allReadings = await getCollection("readings");
 // * ----------------
 // * Notes control
 // * ----------------
-const readingsWithAsNotes = getReadingsWithNotes(allReadings);
-
-const listWithNotesAndReadingNotes = mergeNotesReadings({
-  notes: allNotes,
-  readings: readingsWithAsNotes,
-}).slice(0, 6);
-
-const listToRender = listWithNotesAndReadingNotes.map((item) =>
-  formatEntryToCardNote(item),
-);
+const listToRender = allNotes
+  .sort((a, b) => new Date(b.data.dateNote).getTime() - new Date(a.data.dateNote).getTime())
+  .slice(0, 6)
+  .map(formatEntryToCardNote);
 
 // * ----------------
 // * Readings control

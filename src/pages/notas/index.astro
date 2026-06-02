@@ -10,22 +10,12 @@ import TitlePage from "@components/TitlePage.astro";
 import Layout from "@layouts/Layout.astro";
 
 import formatEntryToCardNote from "@utils/format-entry-to-card-note";
-import getReadingsWithNotes from "@utils/get-readings-with-notes";
-import mergeNotesReadings from "@utils/merge-notes-readings";
 
 const allNotes = await getCollection("notes");
-const allReadings = await getCollection("readings");
 
-const readingsWithAsNotes = getReadingsWithNotes(allReadings);
-
-const listWithNotesAndReadingNotes = mergeNotesReadings({
-  notes: allNotes,
-  readings: readingsWithAsNotes,
-});
-
-const listToRender = listWithNotesAndReadingNotes.map((item) =>
-  formatEntryToCardNote(item),
-);
+const listToRender = allNotes
+  .sort((a, b) => new Date(b.data.dateNote).getTime() - new Date(a.data.dateNote).getTime())
+  .map(formatEntryToCardNote);
 ---
 
 <Layout title="Notas de leitura">

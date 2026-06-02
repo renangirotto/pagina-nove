@@ -11,9 +11,7 @@ export default defineCollection({
   schema: z.object({
     artists: z.array(z.string()),
     cover: z.string(),
-    coverNote: z.string().optional(),
     date: z.date(),
-    dateNote: z.date().optional(),
     label,
     pages: z.number(),
     publisher: publishers,
@@ -26,6 +24,5 @@ export default defineCollection({
     socialTitle: z.string().optional(),
     tags,
     title: z.string(),
-    titleNote: z.string().optional(),
   }),
 });

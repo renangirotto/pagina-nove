@@ -1,7 +1,7 @@
 ---
 import TagPill from "@components/TagPill.astro";
 
-const { cover, slug, tags, title, titleIssue } = Astro.props;
+const { cover, issue, slug, tags, title } = Astro.props;
 ---
 
 <article class="card-note">
@@ -12,7 +12,7 @@ const { cover, slug, tags, title, titleIssue } = Astro.props;
     <div class="card-content">
       {
         tags?.length > 0 && (
-          <div class="card-tags" data-ui-tags={titleIssue ? "issue" : null}>
+          <div class="card-tags" data-ui-tags={issue ? "issue" : null}>
             {tags.map((tag: string) => (
               <TagPill>{tag}</TagPill>
             ))}
@@ -23,7 +23,7 @@ const { cover, slug, tags, title, titleIssue } = Astro.props;
         <p class="card-title">
           {title}
         </p>
-        {titleIssue && <p class="card-issue">{titleIssue}</p>}
+        {issue && <p class="card-issue">{issue}</p>}
       </div>
     </div>
   </a>

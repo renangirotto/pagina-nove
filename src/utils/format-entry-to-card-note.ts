@@ -1,48 +1,15 @@
-import type { CardsNotesEntry } from "./merge-notes-readings";
+import type { CollectionEntry } from "astro:content";
 
 import { ROUTES } from "@utils/constants";
 import formatDate from "@utils/format-date";
 
-const covers = {
-  ["notes"]: `cover`,
-  ["readings"]: `coverNote`,
-};
-
-const slugs = {
-  ["notes"]: `${ROUTES.notes}`,
-  ["readings"]: `${ROUTES.readings}`,
-};
-
-const slugsTarget = {
-  ["notes"]: ``,
-  ["readings"]: `#read-note`,
-};
-
-const tags = {
-  ["notes"]: [],
-  ["readings"]: ["ANÁLISE"],
-};
-
-const title = {
-  ["notes"]: `title`,
-  ["readings"]: `titleNote`,
-};
-
-export default function formatEntryToCardNote(entry: CardsNotesEntry) {
-  const getTags = () => {
-    if (entry.data.tags?.length > 0) {
-      return [...entry.data.tags, ...tags[entry.collection]];
-    }
-
-    return tags[entry.collection];
-  };
-
+export default function formatEntryToCardNote(entry: CollectionEntry<"notes">) {
   return {
-    cover: entry.data[covers[entry.collection]],
+    cover: entry.data.cover,
     dateNote: formatDate(entry.data.dateNote),
-    slug: `${slugs[entry.collection]}${entry.id}/${slugsTarget[entry.collection]}`,
-    tags: getTags(),
-    title: entry.data[title[entry.collection]],
-    titleIssue: entry.collection === "readings" ? entry.data.title : null,
+    issue: entry.data.issue ?? null,
+    slug: `${ROUTES.notes}${entry.id}/`,
+    tags: entry.data.tags ?? [],
+    title: entry.data.title,
   };
 }

@@ -26,11 +26,9 @@ const readings = allReadings.map((r) => ({
   id: r.id,
   title: r.data.title,
   cover: `${PATH_IMG_COVERS}/${r.data.cover}`,
-  coverNote: r.data.coverNote ?? null,
   rating: r.data.rating,
   socialCover: r.data.socialCover ?? null,
   socialText: r.data.socialText ?? null,
-  titleNote: r.data.titleNote ?? null,
 }));
 
 const notes = allNotes.map((n) => ({

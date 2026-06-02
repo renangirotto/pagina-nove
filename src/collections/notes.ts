@@ -7,6 +7,7 @@ export default defineCollection({
     collection: z.array(z.string()).optional(),
     cover: z.string(),
     dateNote: z.date(),
+    issue: z.string().optional(),
     tags: z.array(z.string()).optional(),
     title: z.string(),
   }),

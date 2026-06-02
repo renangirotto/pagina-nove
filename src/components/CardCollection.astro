@@ -1,17 +1,29 @@
 ---
 import TagPill from "@components/TagPill.astro";
 
-const { cover, finished, publisher, slug, title } = Astro.props;
+export interface Props {
+  cover: string;
+  finished?: boolean;
+  publisher?: string;
+  slug: string;
+  tags?: string[];
+  title: string;
+  volumes?: number;
+}
+
+const { cover, finished, publisher, slug, tags, title, volumes } = Astro.props;
 ---
 
 <article class="card-read">
   <a aria-label={title} class="card-link" href={slug}>
     <div class="card-info">
       <div class="card-info-pills">
-        <TagPill>{publisher}</TagPill>
+        {publisher && <TagPill>{publisher}</TagPill>}
+        {tags && tags.map((tag: string) => <TagPill>{tag}</TagPill>)}
+        {volumes && <TagPill>{volumes} volumes</TagPill>}
         {
           finished && (
-            <TagPill class="card-info-pill-finished"> Finalizada </TagPill>
+            <TagPill class="card-info-pill-finished">Finalizada</TagPill>
           )
         }
       </div>

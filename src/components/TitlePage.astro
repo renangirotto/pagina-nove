@@ -23,10 +23,10 @@ const CustomTag = tag || "h1";
     text-align: var(--title-page-text-align, left);
 
     &:not(:last-child) {
-      margin-block-end: 16px;
+      margin-block-end: var(--title-page-margin-block-end, 16px);
 
       &:has(+ p) {
-        margin-block-end: 24px;
+        margin-block-end: var(--title-page-margin-block-end-p, 24px);
       }
     }
   }

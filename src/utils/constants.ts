@@ -5,11 +5,13 @@ export const ROUTES = {
   collections: "/colecoes/",
   home: "/",
   notes: "/notas/",
+  publishers: "/editoras/",
   readings: "/leituras/",
   readingsFirstPage: "/leituras/1/",
 };
 
 type NavChild = { href: string; label: string; target?: string };
+
 type NavItem =
   | { href: string; label: string; target?: string; children?: never }
   | { href?: never; label: string; target?: never; children: NavChild[] };
@@ -24,6 +26,7 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { href: ROUTES.readingsFirstPage, label: "todas" },
       { href: ROUTES.collections, label: "coleções" },
+      { href: ROUTES.publishers, label: "editoras" },
     ],
   },
   {

@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+
+import CardPublisher from "@components/CardPublisher.astro";
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TextPage from "@components/TextPage.astro";
+import TitlePage from "@components/TitlePage.astro";
+
+import Layout from "@layouts/Layout.astro";
+
+import { ROUTES } from "@utils/constants";
+
+const allPublishers = await getCollection("publishers");
+const allReadings = await getCollection("readings");
+
+const publishers = allPublishers
+  .sort((a, b) => a.data.name.localeCompare(b.data.name, "pt-BR"))
+  .map(({ id, data }) => ({
+    href: `${ROUTES.publishers}${id}/`,
+    logo: data.logo ? `/images/publishers/${data.logo}` : undefined,
+    name: data.name,
+    readingsCount: allReadings.filter((r) => r.data.publisher === data.name)
+      .length,
+  }));
+---
+
+<Layout title="Editoras">
+  <section>
+    <LayoutContainer>
+      <TitlePage> Editoras que tenho lido </TitlePage>
+      <TextPage>
+        Dentre tantas editoras de quadrinhos por aí, aqui estão aquelas que já
+        publiquei pelo menos uma leitura neste blog. <br />Você pode <strong
+          >clicar</strong
+        > na editora para ver as leituras e coleções que estou fazendo.
+      </TextPage>
+      <div class="grid-publishers">
+        {publishers.map((publisher) => <CardPublisher {...publisher} />)}
+      </div>
+    </LayoutContainer>
+  </section>
+</Layout>
+
+<style lang="scss">
+  .grid-publishers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+
+    @include container-tablet {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    @include container-desktop {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+  }
+</style>

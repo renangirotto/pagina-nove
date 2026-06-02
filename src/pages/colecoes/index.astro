@@ -10,7 +10,6 @@ import TitlePage from "@components/TitlePage.astro";
 import Layout from "@layouts/Layout.astro";
 
 import { ROUTES } from "@utils/constants";
-import formatDate from "@utils/format-date";
 
 const allReadings = await getCollection("readings");
 const allSeries = await getCollection("series");
@@ -25,46 +24,44 @@ const slugify = (str: string) =>
     .replace(/\s+/g, "-")
     .replace(/-{2,}/g, "-");
 
-const grouped = allReadings.reduce(
-  (acc, reading) => {
-    const { series } = reading.data;
-    if (!series) return acc;
-    if (!acc[series]) acc[series] = [];
-    acc[series].push(reading);
-    return acc;
-  },
-  {} as Record<string, typeof allReadings>,
-);
+const collections = allSeries
+  .filter((s) => s.data.name !== undefined)
+  .map((series) => {
+    const name = series.data.name as string;
+    const readings = allReadings
+      .filter((r) => r.data.series === name)
+      .sort((a, b) => {
+        const dateDiff = b.data.date.getTime() - a.data.date.getTime();
+        if (dateDiff !== 0) return dateDiff;
+        return (b.data.seriesIssue ?? 0) - (a.data.seriesIssue ?? 0);
+      });
 
-const collections = Object.entries(grouped)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([name, readings]) => {
-    const latest = readings.sort((a, b) => {
-      const dateDiff = b.data.date.getTime() - a.data.date.getTime();
-      if (dateDiff !== 0) return dateDiff;
-      return (b.data.seriesIssue ?? 0) - (a.data.seriesIssue ?? 0);
-    })[0];
-    const seriesEntry = allSeries.find((s) => s.data.name === name);
+    if (!readings.length) return null;
+
+    const latest = readings[0];
     return {
       cover: latest.data.cover,
-      date: formatDate(latest.data.date),
-      finished: seriesEntry?.data.isFinished,
-      label: latest.data.label,
-      publisher: [latest.data.publisher],
+      finished: series.data.isFinished,
+      publisher: latest.data.publisher,
       slug: `${ROUTES.collections}${slugify(name)}`,
       title: name,
+      volumes: readings.length,
     };
-  });
+  })
+  .filter((c): c is NonNullable<typeof c> => c !== null)
+  .sort((a, b) => a.title.localeCompare(b.title));
 ---
 
 <Layout title="Leituras por coleções">
   <section>
     <LayoutContainer>
-      <TitlePage> Leituras por coleções </TitlePage>
+      <TitlePage> Leituras por Coleções </TitlePage>
       <TextPage>
-        Não estranhe se em algumas coleções como Hellboy todos os volumes terem
-        5 estrelas, tem certas coisas que sou fanboy e não tenho vergonha de
-        adminitir.
+        Fazer uma serie de qualquer quadrinho ou manga é o mesmo que escolher
+        qual batalha você quer enfrentar, principalmente quando você não sabe se
+        o autor vai morrer por burnout, ser preso, desistir ou se a Panini vai
+        de novo aumentar o preço. <br />Mas aqui tem as series que estou fazendo
+        e que talvez eu termine.
       </TextPage>
       <GridRead>
         {collections.map((collection) => <CardCollection {...collection} />)}

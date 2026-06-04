@@ -18,11 +18,13 @@ const dialogId = id;
 </dialog>
 
 <script define:vars={{ dialogId }}>
-  const dialogCloseButton = document.getElementById("dialog-close");
-  const dialog = document.getElementById(dialogId);
+  document.addEventListener("astro:page-load", () => {
+    const dialogCloseButton = document.getElementById("dialog-close");
+    const dialog = document.getElementById(dialogId);
 
-  dialogCloseButton?.addEventListener("click", () => {
-    dialog?.close();
+    dialogCloseButton?.addEventListener("click", () => {
+      dialog?.close();
+    });
   });
 </script>
 

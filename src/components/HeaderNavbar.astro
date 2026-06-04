@@ -125,18 +125,18 @@ const { pathname } = Astro.url;
 </header>
 
 <script>
-  const buttonNavMobile = document.getElementById("nav-button-mobile");
-  const dialog = document.getElementById("dialog-nav");
+  document.addEventListener("astro:page-load", () => {
+    const buttonNavMobile = document.getElementById("nav-button-mobile");
+    const dialog = document.getElementById("dialog-nav");
 
-  buttonNavMobile?.addEventListener("click", () => {
-    (dialog as HTMLDialogElement)?.showModal();
-  });
+    buttonNavMobile?.addEventListener("click", () => {
+      (dialog as HTMLDialogElement)?.showModal();
+    });
 
-  const mobileLinks = document.querySelectorAll(".nav-link-mobile");
-
-  mobileLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      (dialog as HTMLDialogElement)?.close();
+    document.querySelectorAll(".nav-link-mobile").forEach((link) => {
+      link.addEventListener("click", () => {
+        (dialog as HTMLDialogElement)?.close();
+      });
     });
   });
 

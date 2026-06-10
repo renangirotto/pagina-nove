@@ -26,7 +26,6 @@ const readings = allReadings.map((r) => ({
   id: r.id,
   title: r.data.title,
   cover: getCoverPath(r.data.cover, r.data.series, r.data.title),
-  rating: r.data.rating,
   socialCover: r.data.socialCover ?? null,
   socialText: r.data.socialText ?? null,
 }));

@@ -11,6 +11,8 @@ import { ClientRouter } from "astro:transitions";
 
 const { title } = Astro.props;
 
+const isProd = import.meta.env.PROD;
+
 const PageTitle = title
   ? `${title} | Página Nove`
   : "Página Nove | Quadinhos e textos mal escritos.";
@@ -32,12 +34,16 @@ const PageTitle = title
     <main class="layout-main">
       <slot />
     </main>
-  </body><!-- <script is:inline src="/scripts/newrelic.js"></script> -->
-  <script
-    is:inline
-    defer
-    src="https://cloud.umami.is/script.js"
-    data-website-id="7d0306c1-6aa3-49b8-9d4b-a782dec84ba5"></script>
+  </body><!-- <script is:inline src="/scripts/newrelic.js"></script> -->{
+    isProd && (
+      <script
+        is:inline
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id="7d0306c1-6aa3-49b8-9d4b-a782dec84ba5"
+      />
+    )
+  }
 </html>
 
 <style lang="scss">

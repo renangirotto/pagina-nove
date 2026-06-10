@@ -13,18 +13,9 @@ import Layout from "@layouts/Layout.astro";
 import formatDate from "@utils/format-date";
 import formatEntryToCardRead from "@utils/format-entry-to-card-read";
 import { ROUTES } from "@utils/constants";
+import { slugify } from "@utils/slugify";
 
 export async function getStaticPaths() {
-  const slugify = (str: string) =>
-    str
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9\s-]/gi, "")
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(/-{2,}/g, "-");
-
   const allReadings = await getCollection("readings");
   const allSeries = await getCollection("series");
 

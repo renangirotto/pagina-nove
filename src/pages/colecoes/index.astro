@@ -10,19 +10,10 @@ import TitlePage from "@components/TitlePage.astro";
 import Layout from "@layouts/Layout.astro";
 
 import { ROUTES } from "@utils/constants";
+import { slugify } from "@utils/slugify";
 
 const allReadings = await getCollection("readings");
 const allSeries = await getCollection("series");
-
-const slugify = (str: string) =>
-  str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9\s-]/gi, "")
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/-{2,}/g, "-");
 
 const collections = allSeries
   .filter((s) => s.data.name !== undefined)

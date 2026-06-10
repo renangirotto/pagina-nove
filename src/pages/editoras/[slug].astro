@@ -13,16 +13,7 @@ import Layout from "@layouts/Layout.astro";
 
 import formatEntryToCardRead from "@utils/format-entry-to-card-read";
 import { ROUTES } from "@utils/constants";
-
-const slugify = (str: string) =>
-  str
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9\s-]/gi, "")
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/-{2,}/g, "-");
+import { slugify } from "@utils/slugify";
 
 export async function getStaticPaths() {
   const allPublishers = await getCollection("publishers");
@@ -47,7 +38,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const { name, description, logo, readings, seriesFinished } = Astro.props;
+const { name, description, logo, readings } = Astro.props;
 
 // Group series readings; pass singles through
 const seriesMap = new Map<string, typeof readings>();

@@ -12,7 +12,7 @@ import TemplateArticle from "@components/InstagramGenerator/TemplateArticle.astr
 import TemplateReading from "@components/InstagramGenerator/TemplateReading.astro";
 import TemplateReview from "@components/InstagramGenerator/TemplateReview.astro";
 
-import { PATH_IMG_COVERS } from "@utils/constants";
+import { getCoverPath } from "@utils/get-cover-path";
 
 const allReadings = await getCollection("readings");
 const allNotes = await getCollection("notes");
@@ -25,8 +25,7 @@ function safeJson(data: unknown): string {
 const readings = allReadings.map((r) => ({
   id: r.id,
   title: r.data.title,
-  cover: `${PATH_IMG_COVERS}/${r.data.cover}`,
-  rating: r.data.rating,
+  cover: getCoverPath(r.data.cover, r.data.series, r.data.title),
   socialCover: r.data.socialCover ?? null,
   socialText: r.data.socialText ?? null,
 }));

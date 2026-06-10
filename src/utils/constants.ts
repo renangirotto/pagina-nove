@@ -1,3 +1,9 @@
+type NavChild = { href: string; label: string; target?: string };
+
+type NavItem =
+  | { href: string; label: string; target?: string; children?: never }
+  | { href?: never; label: string; target?: never; children: NavChild[] };
+
 export const PATH_IMG_COVERS = "/images/covers";
 
 export const ROUTES = {
@@ -9,12 +15,6 @@ export const ROUTES = {
   readings: "/leituras/",
   readingsFirstPage: "/leituras/1/",
 };
-
-type NavChild = { href: string; label: string; target?: string };
-
-type NavItem =
-  | { href: string; label: string; target?: string; children?: never }
-  | { href?: never; label: string; target?: never; children: NavChild[] };
 
 export const NAV_ITEMS: NavItem[] = [
   {
@@ -39,5 +39,14 @@ export const NAV_ITEMS: NavItem[] = [
     target: "_blank",
   },
 ];
+
+export const TAGS = {
+  "destaque-da-serie": {
+    text: "Destaque da série",
+  },
+  "para-ter-na-estante": {
+    text: "Para ter na estante",
+  },
+};
 
 export const TOTAL_AMOUNT_ON_SHELF = 238;

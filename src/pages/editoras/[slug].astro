@@ -13,6 +13,7 @@ import Layout from "@layouts/Layout.astro";
 
 import formatEntryToCardRead from "@utils/format-entry-to-card-read";
 import { ROUTES } from "@utils/constants";
+import { getCoverPath } from "@utils/get-cover-path";
 import { slugify } from "@utils/slugify";
 
 export async function getStaticPaths() {
@@ -102,7 +103,7 @@ for (const [seriesName, seriesReadings] of seriesMap) {
 
   items.push({
     type: "series",
-    cover: firstIssue.data.cover,
+    cover: getCoverPath(firstIssue.data.cover, seriesName),
     sortDate: mostRecentDate,
     slug: `${ROUTES.collections}${slugify(seriesName)}/`,
     tags: ["serie"],

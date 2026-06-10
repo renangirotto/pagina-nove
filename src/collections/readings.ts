@@ -1,10 +1,12 @@
 import { z, defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 
-import { publishers, RatingSchema, series } from "./collections.config";
+import { publishers, series } from "./collections.config";
 
 const label = z.enum(["Quadrinho", "Manga"]);
-const tags = z.array(z.enum(["Para ter na estante"])).optional();
+
+// TAGS
+// - Para ter na estante
 
 export default defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/data/readings" }),
@@ -16,13 +18,15 @@ export default defineCollection({
     pages: z.number(),
     publisher: publishers,
     publishYear: z.string(),
-    rating: RatingSchema,
     series,
     seriesIssue: z.number().optional(),
     socialCover: z.string().optional(),
     socialText: z.string().optional(),
     socialTitle: z.string().optional(),
-    tags,
+    tags: z.array(z.string()).refine(
+      (tags) => tags.every((t) => ["para-ter-na-estante", "destaque-da-serie"].includes(t)),
+      { message: "Invalid tag value" }
+    ).optional(),
     title: z.string(),
   }),
 });

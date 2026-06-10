@@ -11,7 +11,8 @@ import TitlePage from "@components/TitlePage.astro";
 
 import Layout from "@layouts/Layout.astro";
 
-import { PATH_IMG_COVERS, ROUTES } from "@utils/constants";
+import { ROUTES } from "@utils/constants";
+import { getCoverPath } from "@utils/get-cover-path";
 import formatDate from "@utils/format-date";
 import formatEntryToCardNote from "@utils/format-entry-to-card-note";
 import Breadcrumb from "@components/Breadcrumb.astro";
@@ -48,7 +49,7 @@ function formatArtists(artists: string[]) {
 
 const heroData = {
   artists: formatArtists(read.data.artists),
-  cover: `${PATH_IMG_COVERS}/${read.data.cover}`,
+  cover: getCoverPath(read.data.cover, read.data.series, read.data.title),
   date: formatDate(read.data.date),
   pages: read.data.pages,
   publisher: read.data.publisher,
@@ -151,7 +152,7 @@ const breadcrumbs = [
     grid-area: pattern;
     width: 100%;
     height: var(--pattern-height);
-    border-radius: 16px;
+    border: 6px solid var(--color-purple-200);
     margin-inline: auto;
     background: var(--color-purple-100);
     overflow: hidden;

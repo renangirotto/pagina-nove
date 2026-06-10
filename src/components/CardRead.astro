@@ -1,6 +1,8 @@
 ---
 import TagPill from "@components/TagPill.astro";
 
+import { TAGS } from "@utils/constants";
+
 const { cover, date, slug, tags, title } = Astro.props;
 ---
 
@@ -11,8 +13,10 @@ const { cover, date, slug, tags, title } = Astro.props;
         {
           tags && tags.length > 0 && (
             <div class="card-info-tags">
-              {tags.map((tag: string) => (
-                <TagPill class="card-info-tag">{tag}</TagPill>
+              {tags.map((tag: keyof typeof TAGS) => (
+                <TagPill class="card-info-tag" data-ui-tag={tag}>
+                  {TAGS[tag].text}
+                </TagPill>
               ))}
             </div>
           )
@@ -22,7 +26,7 @@ const { cover, date, slug, tags, title } = Astro.props;
       </div>
     </div>
     <figure aria-hidden="true" class="card-figure">
-      <img loading="lazy" src={`/images/covers/${cover}`} alt="" />
+      <img loading="lazy" src={cover} alt="" />
     </figure>
   </a>
 </article>
@@ -99,6 +103,10 @@ const { cover, date, slug, tags, title } = Astro.props;
 
     @include container-tablet {
       --tag-pill-padding-inline: 8px;
+    }
+
+    &[data-ui-tag="destaque-da-serie"] {
+      --tag-pill-background: var(--color-blue-100);
     }
   }
 

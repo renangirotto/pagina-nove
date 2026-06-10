@@ -2,13 +2,14 @@ import type { CollectionEntry } from "astro:content";
 
 import { ROUTES } from "@utils/constants";
 import formatDate from "@utils/format-date";
+import { getCoverPath } from "@utils/get-cover-path";
 import getSeriesType from "@utils/series-type";
 
 export default function formatEntryToCardRead(
   entry: CollectionEntry<"readings">,
 ) {
   return {
-    cover: entry.data.cover,
+    cover: getCoverPath(entry.data.cover, entry.data.series, entry.data.title),
     date: formatDate(entry.data.date),
     id: entry.id,
     label: entry.data.label,

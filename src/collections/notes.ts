@@ -9,6 +9,8 @@ export default defineCollection({
     dateNote: z.date(),
     draft: z.boolean().optional(),
     issue: z.string().optional(),
+    socialCover: z.string().optional(),
+    socialText: z.string().optional(),
     tags: z.array(z.string()).optional(),
     title: z.string(),
   }),

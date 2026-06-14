@@ -23,8 +23,12 @@ const allReadings = await getCollection("readings");
 // * Notes control
 // * ----------------
 const listToRender = allNotes
-  .sort((a, b) => new Date(b.data.dateNote).getTime() - new Date(a.data.dateNote).getTime())
-  .slice(0, 6)
+  .filter((note) => !note.data.draft)
+  .sort(
+    (a, b) =>
+      new Date(b.data.dateNote).getTime() - new Date(a.data.dateNote).getTime(),
+  )
+  .slice(0, 5)
   .map(formatEntryToCardNote);
 
 // * ----------------

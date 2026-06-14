@@ -92,6 +92,14 @@ const Tag = href ? "a" : "article";
     max-block-size: 64px;
     transition: all ease-in-out 0.15s;
 
+    &:has(img[src$=".jpg"]),
+    &:has(img[src$=".png"]),
+    &:has(img[src$=".webp"]) {
+      border: 2px solid var(--color-grey-dark-200);
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
     img {
       width: auto;
       height: 100%;

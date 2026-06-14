@@ -34,6 +34,8 @@ const notes = allNotes.map((n) => ({
   id: n.id,
   title: n.data.title,
   cover: n.data.cover,
+  socialCover: n.data.socialCover ?? null,
+  socialText: n.data.socialText ?? null,
   tags: n.data.tags ?? [],
 }));
 
@@ -80,15 +82,6 @@ const collectionDataJson = safeJson({ readings, notes });
       // ─────────────────────────────────────────────────────────
       // Utils
       // ─────────────────────────────────────────────────────────
-
-      function formatDate(iso: string) {
-        return new Date(iso).toLocaleDateString("pt-BR", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-          timeZone: "UTC",
-        });
-      }
 
       function renderStars(rating: string, size = "88px") {
         const r = parseFloat(rating);
@@ -151,15 +144,25 @@ const collectionDataJson = safeJson({ readings, notes });
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      function populateArticle(entry: any) {
-        el<HTMLImageElement>("art-bg").src = entry.cover;
+      function populateArticle(entry: any, tagColor = "") {
+        el<HTMLImageElement>("art-bg").src = entry.socialCover || entry.cover;
         el("art-title").textContent = entry.title;
+
+        if (entry.socialText) {
+          el("art-text").innerHTML = entry.socialText;
+        }
 
         const tagsEl = el("art-tags");
         tagsEl.innerHTML = "";
+        const colorClass =
+          tagColor === "orange"
+            ? "social-tag--orange"
+            : tagColor === "pink"
+              ? "social-tag--pink"
+              : "";
         ((entry.tags as string[]) || []).forEach((tag) => {
           const pill = document.createElement("p");
-          pill.classList = "social-tag";
+          pill.className = colorClass ? `social-tag ${colorClass}` : "social-tag";
           pill.textContent = tag;
           tagsEl.appendChild(pill);
         });
@@ -171,6 +174,7 @@ const collectionDataJson = safeJson({ readings, notes });
 
       let currentType = "";
       let currentTarget = "";
+      let currentTagColor = "";
       let activeTemplate: HTMLElement | null = null;
 
       function showError(msg: string) {
@@ -186,9 +190,11 @@ const collectionDataJson = safeJson({ readings, notes });
         const params = new URLSearchParams(window.location.search);
         currentType = params.get("type") || "";
         currentTarget = params.get("target") || "";
+        currentTagColor = params.get("tagColor") || "";
 
         el("info-type").textContent = currentType || "—";
         el("info-target").textContent = currentTarget || "—";
+        el("info-tag-color").textContent = currentTagColor || "—";
 
         if (!currentType || !currentTarget) {
           showError("Parâmetros ?type= e ?target= são necessários.");
@@ -229,7 +235,7 @@ const collectionDataJson = safeJson({ readings, notes });
             return;
           }
           templateId = "tmpl-article";
-          populateArticle(entry);
+          populateArticle(entry, currentTagColor);
         }
 
         activeTemplate = el(templateId);
@@ -370,7 +376,7 @@ const collectionDataJson = safeJson({ readings, notes });
     font-weight: 700;
     line-height: 1.2;
     color: var(--color-yellow-grey-100);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-shadow:
       8px 8px 0px var(--color-grey-dark-200),
       -3px -3px 0 var(--color-grey-dark-200),

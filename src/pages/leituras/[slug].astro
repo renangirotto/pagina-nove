@@ -62,7 +62,7 @@ const heroData = {
 // * Notes control
 // * ----------------
 const relatedNotes = await getCollection("notes", (entry) => {
-  return entry.data.collection?.includes(read.id) || false;
+  return !entry.data.draft && (entry.data.collection?.includes(read.id) || false);
 });
 
 const relatedNotesToRender: CardNoteData[] = [];

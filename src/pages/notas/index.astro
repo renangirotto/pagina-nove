@@ -14,6 +14,7 @@ import formatEntryToCardNote from "@utils/format-entry-to-card-note";
 const allNotes = await getCollection("notes");
 
 const listToRender = allNotes
+  .filter((note) => !note.data.draft)
   .sort((a, b) => new Date(b.data.dateNote).getTime() - new Date(a.data.dateNote).getTime())
   .map(formatEntryToCardNote);
 ---

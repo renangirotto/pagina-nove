@@ -19,7 +19,9 @@ import Breadcrumb from "@components/Breadcrumb.astro";
 export async function getStaticPaths() {
   const allNotes = await getCollection("notes");
 
-  const allNotesSlugs = allNotes.map((note: CollectionEntry<"notes">) => {
+  const allNotesSlugs = allNotes
+    .filter((note) => !note.data.draft)
+    .map((note: CollectionEntry<"notes">) => {
     return { params: { slug: note.id }, props: { note } };
   });
 

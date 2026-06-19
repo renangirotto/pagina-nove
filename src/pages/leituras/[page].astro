@@ -9,9 +9,11 @@ import Layout from "@layouts/Layout.astro";
 import GridRead from "@components/GridRead.astro";
 import CardRead from "@components/CardRead.astro";
 import Pagination from "@components/Pagination.astro";
+import SearchBar from "@components/SearchBar.astro";
 
 import formatEntryToCardRead from "@utils/format-entry-to-card-read";
 import TextPage from '@components/TextPage.astro';
+import { ROUTES } from "@utils/constants";
 
 type PageItem = ReturnType<typeof formatEntryToCardRead> & {
   monthKey: string;
@@ -36,6 +38,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return formatted.charAt(0).toUpperCase() + formatted.slice(1);
   }
   const allReadings = await getCollection("readings");
+  const allSeries = await getCollection("series");
+  const seriesSlugMap = new Map(allSeries.map((s) => [s.data.name, s.id]));
 
   const sortedReadings = allReadings.sort((a: CollectionEntry<'readings'>, b: CollectionEntry<'readings'>) => {
     const dateA = new Date(a.data.date);
@@ -65,6 +69,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return 0;
   });
+
+  const searchData = allReadings.map((entry: CollectionEntry<'readings'>) => ({
+    title: entry.data.title,
+    artists: entry.data.artists,
+    slug: `${ROUTES.readings}${entry.id}/`,
+    series: entry.data.series,
+    seriesSlug: entry.data.series ? seriesSlugMap.get(entry.data.series) : undefined,
+  }));
 
   const items: PageItem[] = sortedReadings.map((entry: CollectionEntry<'readings'>) => {
     const d = new Date(entry.data.date);
@@ -114,6 +126,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { page: String(index + 1) },
     props: {
       pageData,
+      searchData,
       currentPage: index + 1,
       lastPage: totalPages,
       prevUrl: index > 0 ? `/leituras/${index}` : undefined,
@@ -122,8 +135,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 };
 
-const { pageData, currentPage, lastPage, prevUrl, nextUrl } = Astro.props as {
+type SearchItem = { title: string; artists: string[]; slug: string; series?: string; seriesSlug?: string };
+
+const { pageData, searchData, currentPage, lastPage, prevUrl, nextUrl } = Astro.props as {
   pageData: PageItem[];
+  searchData: SearchItem[];
   currentPage: number;
   lastPage: number;
   prevUrl?: string;
@@ -149,6 +165,8 @@ const monthGroups = pageData.reduce((acc: MonthGroup[], item: PageItem) => {
       {currentPage === 1 &&
         <TextPage> Leio menos do que gostaria e a pilha de leituras nunca acaba, mas fazer o quê? </TextPage>
       }
+
+      <SearchBar searchData={searchData} />
 
       {
         monthGroups.map((group) => (

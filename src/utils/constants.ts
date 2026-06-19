@@ -14,6 +14,7 @@ export const ROUTES = {
   publishers: "/editoras/",
   readings: "/leituras/",
   readingsFirstPage: "/leituras/1/",
+  search: "/leituras/busca/",
 };
 
 export const NAV_ITEMS: NavItem[] = [

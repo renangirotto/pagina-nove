@@ -1,0 +1,181 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+import Layout from "@layouts/Layout.astro";
+import LayoutContainer from "@components/LayoutContainer.astro";
+import TitlePage from "@components/TitlePage.astro";
+import CardRead from "@components/CardRead.astro";
+import SearchBar from "@components/SearchBar.astro";
+
+import formatEntryToCardRead from "@utils/format-entry-to-card-read";
+import { ROUTES } from "@utils/constants";
+
+function normalizeForSearch(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+}
+
+const allSeries = await getCollection("series");
+const seriesSlugMap = new Map(allSeries.map((s) => [s.data.name, s.id]));
+
+const allReadings = (await getCollection("readings")).sort(
+  (a: CollectionEntry<"readings">, b: CollectionEntry<"readings">) => {
+    const seriesA = a.data.series ?? "";
+    const seriesB = b.data.series ?? "";
+
+    if (seriesA !== seriesB) {
+      if (!seriesA) return 1;
+      if (!seriesB) return -1;
+      return seriesA.localeCompare(seriesB, "pt-BR");
+    }
+
+    return (b.data.seriesIssue ?? 0) - (a.data.seriesIssue ?? 0);
+  }
+);
+
+const searchData = allReadings.map((entry: CollectionEntry<"readings">) => ({
+  title: entry.data.title,
+  artists: entry.data.artists,
+  slug: `${ROUTES.readings}${entry.id}/`,
+  series: entry.data.series,
+  seriesSlug: entry.data.series ? seriesSlugMap.get(entry.data.series) : undefined,
+}));
+
+const allCards = allReadings.map((entry: CollectionEntry<"readings">) => ({
+  ...formatEntryToCardRead(entry),
+  searchKey: normalizeForSearch(
+    entry.data.title + " " + entry.data.artists.join(" ")
+  ),
+}));
+---
+
+<Layout title="Busca de leituras">
+  <section>
+    <LayoutContainer>
+      <TitlePage>Busca de leituras</TitlePage>
+
+      <SearchBar searchData={searchData} />
+
+      <div id="busca-status" class="busca-status" aria-live="polite"></div>
+
+      <div id="busca-empty" class="busca-empty" hidden aria-live="polite">
+        <p class="busca-empty-title">Nenhum resultado encontrado</p>
+        <p class="busca-empty-text">Tente buscar por outro título ou artista.</p>
+      </div>
+
+      <div class="busca-grid">
+        {
+          allCards.map((card) => (
+            <div class="busca-item" data-search-key={card.searchKey}>
+              <CardRead {...card} />
+            </div>
+          ))
+        }
+      </div>
+    </LayoutContainer>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const statusEl = document.getElementById("busca-status");
+    if (!statusEl) return;
+
+    const emptyEl = document.getElementById("busca-empty") as HTMLElement;
+    const items = document.querySelectorAll<HTMLElement>(".busca-item");
+
+    function normalize(text: string): string {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "");
+    }
+
+    function filter(query: string) {
+      if (!query) {
+        statusEl.textContent = "";
+        emptyEl.hidden = true;
+        items.forEach((item) => item.classList.remove("busca-item--visible"));
+        return;
+      }
+
+      const q = normalize(query);
+      let count = 0;
+
+      items.forEach((item) => {
+        const key = item.dataset.searchKey ?? "";
+        const matches = key.includes(q);
+        item.classList.toggle("busca-item--visible", matches);
+        if (matches) count++;
+      });
+
+      const hasResults = count > 0;
+      emptyEl.hidden = hasResults;
+      statusEl.textContent = hasResults
+        ? `${count} resultado${count !== 1 ? "s" : ""} para "${query}"`
+        : "";
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    filter(params.get("busca")?.trim() ?? "");
+  });
+</script>
+
+<style lang="scss">
+  .busca-status {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-grey-light-1100);
+    min-height: 1.4em;
+
+    &:not(:empty) {
+      margin-block-end: 32px;
+    }
+  }
+
+  .busca-empty {
+    padding-block: 48px;
+    text-align: center;
+    border: 3px dashed var(--color-grey-light-200);
+  }
+
+  .busca-empty-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-block-end: 8px;
+  }
+
+  .busca-empty-text {
+    font-size: 0.9375rem;
+    color: var(--color-grey-light-1100);
+  }
+
+  .busca-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-auto-flow: row;
+    grid-auto-rows: 1fr;
+    gap: 24px 8px;
+
+    @include container-tablet {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px 12px;
+    }
+
+    @include container-desktop {
+      grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
+      gap: 24px 16px;
+    }
+  }
+
+  .busca-item {
+    display: none;
+
+    &.busca-item--visible {
+      display: contents;
+    }
+  }
+</style>

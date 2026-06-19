@@ -238,7 +238,7 @@ const { searchData, class: className } = Astro.props;
   .search-input-wrapper {
     display: flex;
     align-items: stretch;
-    min-height: 64px;
+    min-height: clamp(56px, 13vw, 64px);
     border: 3px solid var(--color-grey-dark-200);
     box-shadow: 3px 3px 0px var(--color-grey-dark-200);
     background: var(--color-yellow-grey-100);
@@ -251,6 +251,7 @@ const { searchData, class: className } = Astro.props;
 
   .search-input {
     flex: 1;
+    min-width: 0;
     padding-block: 10px;
     padding-inline: 20px;
     border: none;
@@ -280,7 +281,7 @@ const { searchData, class: className } = Astro.props;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: 64px;
+    width: clamp(56px, 13vw, 64px);
     padding: 0;
     border: none;
     border-inline-start: 3px solid var(--color-grey-dark-200);

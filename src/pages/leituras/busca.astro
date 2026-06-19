@@ -6,9 +6,12 @@ import Layout from "@layouts/Layout.astro";
 import LayoutContainer from "@components/LayoutContainer.astro";
 import TitlePage from "@components/TitlePage.astro";
 import CardRead from "@components/CardRead.astro";
+import CardCollection from "@components/CardCollection.astro";
 import SearchBar from "@components/SearchBar.astro";
 
 import formatEntryToCardRead from "@utils/format-entry-to-card-read";
+import { getCoverPath } from "@utils/get-cover-path";
+import { slugify } from "@utils/slugify";
 import { ROUTES } from "@utils/constants";
 
 function normalizeForSearch(text: string): string {
@@ -18,23 +21,9 @@ function normalizeForSearch(text: string): string {
     .replace(/[̀-ͯ]/g, "");
 }
 
+const allReadings = await getCollection("readings");
 const allSeries = await getCollection("series");
 const seriesSlugMap = new Map(allSeries.map((s) => [s.data.name, s.id]));
-
-const allReadings = (await getCollection("readings")).sort(
-  (a: CollectionEntry<"readings">, b: CollectionEntry<"readings">) => {
-    const seriesA = a.data.series ?? "";
-    const seriesB = b.data.series ?? "";
-
-    if (seriesA !== seriesB) {
-      if (!seriesA) return 1;
-      if (!seriesB) return -1;
-      return seriesA.localeCompare(seriesB, "pt-BR");
-    }
-
-    return (b.data.seriesIssue ?? 0) - (a.data.seriesIssue ?? 0);
-  }
-);
 
 const searchData = allReadings.map((entry: CollectionEntry<"readings">) => ({
   title: entry.data.title,
@@ -44,12 +33,59 @@ const searchData = allReadings.map((entry: CollectionEntry<"readings">) => ({
   seriesSlug: entry.data.series ? seriesSlugMap.get(entry.data.series) : undefined,
 }));
 
-const allCards = allReadings.map((entry: CollectionEntry<"readings">) => ({
-  ...formatEntryToCardRead(entry),
-  searchKey: normalizeForSearch(
-    entry.data.title + " " + entry.data.artists.join(" ")
-  ),
-}));
+// One card per series, using the same logic as /colecoes/
+type SeriesCard = {
+  cover: string;
+  finished: boolean;
+  publisher?: string;
+  slug: string;
+  title: string;
+  volumes: number;
+  searchKey: string;
+};
+
+const seriesCards: SeriesCard[] = allSeries
+  .filter((s) => s.data.name !== undefined)
+  .map((series) => {
+    const name = series.data.name as string;
+    const readings = allReadings
+      .filter((r: CollectionEntry<"readings">) => r.data.series === name)
+      .sort((a: CollectionEntry<"readings">, b: CollectionEntry<"readings">) => {
+        const dateDiff = b.data.date.getTime() - a.data.date.getTime();
+        if (dateDiff !== 0) return dateDiff;
+        return (b.data.seriesIssue ?? 0) - (a.data.seriesIssue ?? 0);
+      });
+
+    if (!readings.length) return null;
+
+    const latest = readings[0];
+    const allText = [name, ...readings.flatMap((r: CollectionEntry<"readings">) => r.data.artists)].join(" ");
+
+    return {
+      cover: getCoverPath(latest.data.cover, name),
+      finished: series.data.isFinished,
+      publisher: latest.data.publisher,
+      slug: `${ROUTES.collections}${slugify(name)}`,
+      title: name,
+      volumes: readings.length,
+      searchKey: normalizeForSearch(allText),
+    };
+  })
+  .filter((c): c is SeriesCard => c !== null)
+  .sort((a, b) => a.title.localeCompare(b.title, "pt-BR"));
+
+// Standalone readings (no series)
+type StandaloneCard = ReturnType<typeof formatEntryToCardRead> & { searchKey: string };
+
+const standaloneCards: StandaloneCard[] = allReadings
+  .filter((entry: CollectionEntry<"readings">) => !entry.data.series)
+  .sort((a: CollectionEntry<"readings">, b: CollectionEntry<"readings">) =>
+    b.data.date.getTime() - a.data.date.getTime()
+  )
+  .map((entry: CollectionEntry<"readings">) => ({
+    ...formatEntryToCardRead(entry),
+    searchKey: normalizeForSearch(entry.data.title + " " + entry.data.artists.join(" ")),
+  }));
 ---
 
 <Layout title="Busca de leituras">
@@ -68,7 +104,21 @@ const allCards = allReadings.map((entry: CollectionEntry<"readings">) => ({
 
       <div class="busca-grid">
         {
-          allCards.map((card) => (
+          seriesCards.map((card) => (
+            <div class="busca-item" data-search-key={card.searchKey}>
+              <CardCollection
+                cover={card.cover}
+                finished={card.finished}
+                publisher={card.publisher}
+                slug={card.slug}
+                title={card.title}
+                volumes={card.volumes}
+              />
+            </div>
+          ))
+        }
+        {
+          standaloneCards.map((card) => (
             <div class="busca-item" data-search-key={card.searchKey}>
               <CardRead {...card} />
             </div>
@@ -106,8 +156,7 @@ const allCards = allReadings.map((entry: CollectionEntry<"readings">) => ({
       let count = 0;
 
       items.forEach((item) => {
-        const key = item.dataset.searchKey ?? "";
-        const matches = key.includes(q);
+        const matches = (item.dataset.searchKey ?? "").includes(q);
         item.classList.toggle("busca-item--visible", matches);
         if (matches) count++;
       });

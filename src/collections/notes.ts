@@ -11,6 +11,7 @@ export default defineCollection({
     issue: z.string().optional(),
     socialCover: z.string().optional(),
     socialText: z.string().optional(),
+    subTitle: z.string().optional(),
     tags: z.array(z.string()).optional(),
     title: z.string(),
   }),

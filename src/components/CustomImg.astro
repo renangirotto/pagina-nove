@@ -2,7 +2,7 @@
 interface Props {
   alt?: string;
   caption: string;
-  size?: "default" | "small";
+  size?: "default" | "medium" | "small";
   src: string;
 }
 
@@ -18,6 +18,10 @@ const { alt, caption, size, src } = Astro.props;
   .custom-img {
     max-inline-size: 735px;
     margin-inline: auto;
+
+    &[data-ui-size="medium"] {
+      max-inline-size: 572px;
+    }
 
     &[data-ui-size="small"] {
       max-inline-size: 410px;

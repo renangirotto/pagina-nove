@@ -1,7 +1,8 @@
 ---
 import TagPill from "@components/TagPill.astro";
 
-const { cover, issue, slug, tags, title } = Astro.props;
+const { cover, issue, slug, subTitle, tags, title } = Astro.props;
+const subTitleText = subTitle || issue;
 ---
 
 <article class="card-note">
@@ -23,7 +24,7 @@ const { cover, issue, slug, tags, title } = Astro.props;
         <p class="card-title">
           {title}
         </p>
-        {issue && <p class="card-issue">{issue}</p>}
+        {subTitleText && <p class="card-issue">{subTitleText}</p>}
       </div>
     </div>
   </a>

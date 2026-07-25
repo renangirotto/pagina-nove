@@ -22,10 +22,11 @@ export default defineConfig({
     },
     resolve: {
       alias: {
-        "@components": path.resolve(__dirname, "./src/components"),
-        "@assets": path.resolve(__dirname, "./src/assets"),
-        "@layouts": path.resolve(__dirname, "./src/layouts"),
         "@": path.resolve(__dirname, "./src"),
+        "@assets": path.resolve(__dirname, "./src/assets"),
+        "@components": path.resolve(__dirname, "./src/components"),
+        "@layouts": path.resolve(__dirname, "./src/layouts"),
+        "@styles": path.resolve(__dirname, "./src/styles"),
       },
     },
   },

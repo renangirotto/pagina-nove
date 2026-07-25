@@ -4,7 +4,7 @@ import { glob } from "astro/loaders";
 import { publishers } from "./collections.config";
 
 export default defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/data/publishers" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/publishers" }),
   schema: z.object({
     description: z.string().optional(),
     logo: z.string().optional(),

@@ -3,10 +3,13 @@ import type { CollectionEntry } from "astro:content";
 
 import { getCollection, getEntry, render } from "astro:content";
 
+import BoxSpoiler from "@components/BoxSpoiler.astro";
+import CustomImg from "@components/CustomImg.astro";
 import HeroNote from "@components/HeroNote.astro";
 import LayoutContainer from "@components/LayoutContainer.astro";
 import NotesContent from "@components/NotesContent.astro";
 import TextPage from "@components/TextPage.astro";
+import TitlePage from "@components/TitlePage.astro";
 
 import Layout from "@layouts/Layout.astro";
 
@@ -22,8 +25,8 @@ export async function getStaticPaths() {
   const allNotesSlugs = allNotes
     .filter((note) => !note.data.draft)
     .map((note: CollectionEntry<"notes">) => {
-    return { params: { slug: note.id }, props: { note } };
-  });
+      return { params: { slug: note.id }, props: { note } };
+    });
 
   return allNotesSlugs;
 }
@@ -61,6 +64,9 @@ const breadcrumbs = [
       <Content
         components={{
           p: TextPage,
+          BoxSpoiler,
+          CustomImg,
+          TitlePage,
         }}
       />
     </NotesContent>

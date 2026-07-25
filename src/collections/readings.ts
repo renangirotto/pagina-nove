@@ -9,7 +9,7 @@ const label = z.enum(["Quadrinho", "Manga"]);
 // - Para ter na estante
 
 export default defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/data/readings" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/readings" }),
   schema: z.object({
     artists: z.array(z.string()),
     cover: z.string(),

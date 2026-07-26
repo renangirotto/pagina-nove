@@ -210,7 +210,7 @@ const { pathname } = Astro.url;
     padding-inline: 12px;
     border: 3px solid var(--color-grey-dark-200);
     background: var(--color-purple-100);
-    box-shadow: 2px 2px 0px var(--color-grey-dark-200);
+    box-shadow: 0px 3px 0px var(--color-grey-dark-200);
   }
 
   .nav-list {
@@ -274,7 +274,7 @@ const { pathname } = Astro.url;
     --icon-size: 24px;
     --icon-color-dark: var(--color-grey-light-200);
     --icon-color-light: var(--color-grey-light-100);
-
+    --nav-link-border-color: var(--color-grey-light-200);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -286,9 +286,12 @@ const { pathname } = Astro.url;
     font-weight: 700;
     text-align: center;
     text-decoration: none;
+    background: var(--color-grey-light-100);
     transition: all 0.25s ease;
 
     @include container-desktop {
+      --icon-color-dark: var(--color-purple-200);
+      --icon-color-light: var(--color-purple-100);
       --icon-size: 18px;
       padding-block: 8px;
       padding-inline: 12px;
@@ -297,14 +300,14 @@ const { pathname } = Astro.url;
       text-transform: uppercase;
     }
 
-    &:hover,
-    &:focus-within {
-      --nav-link-border-color: var(--color-grey-light-200);
-      background: var(--color-grey-light-100);
+    &:not([data-ui-nav-link-target="children"]) {
+      // color: var(--color-grey-light-200);
+      box-shadow: 0px 3px 0px var(--color-grey-light-200);
 
-      @include container-desktop {
-        --icon-color-dark: var(--color-purple-200);
-        --icon-color-light: var(--color-purple-100);
+      &:hover,
+      &:focus-within {
+        box-shadow: 0px 0px 0px var(--color-grey-light-200);
+        transform: translate(0px, 3px);
       }
     }
 
@@ -320,9 +323,16 @@ const { pathname } = Astro.url;
       --icon-color-light: var(--color-purple-100);
       --nav-link-border-color: var(--color-grey-dark-200);
       background: var(--color-purple-100);
+      transition: all 0.15s ease-in-out;
 
       &:not([data-ui-nav-link-target="children"]) {
-        box-shadow: 2px 2px 0px var(--color-grey-dark-200);
+        box-shadow: 0px 3px 0px var(--color-grey-dark-200);
+
+        &:hover,
+        &:focus-within {
+          box-shadow: 0px 0px 0px var(--color-grey-dark-200);
+          transform: translate(0px, 3px);
+        }
       }
     }
   }

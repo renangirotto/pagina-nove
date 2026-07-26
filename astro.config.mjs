@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import { unified } from "@astrojs/markdown-remark";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -12,6 +13,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
+  markdown: {
+    processor: unified(),
+  },
   vite: {
     css: {
       preprocessorOptions: {

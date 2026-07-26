@@ -41,7 +41,6 @@ export async function getStaticPaths() {
 
 const { name, description, logo, readings } = Astro.props;
 
-// Group series readings; pass singles through
 const seriesMap = new Map<string, typeof readings>();
 for (const reading of readings) {
   const series = reading.data.series;

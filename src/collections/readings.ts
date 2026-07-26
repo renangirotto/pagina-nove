@@ -1,5 +1,6 @@
-import { z, defineCollection } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 import { publishers, series } from "./collections.config";
 
@@ -23,10 +24,16 @@ export default defineCollection({
     socialCover: z.string().optional(),
     socialText: z.string().optional(),
     socialTitle: z.string().optional(),
-    tags: z.array(z.string()).refine(
-      (tags) => tags.every((t) => ["para-ter-na-estante", "destaque-da-serie"].includes(t)),
-      { message: "Invalid tag value" }
-    ).optional(),
+    tags: z
+      .array(z.string())
+      .refine(
+        (tags) =>
+          tags.every((t) =>
+            ["para-ter-na-estante", "destaque-da-serie"].includes(t),
+          ),
+        { message: "Invalid tag value" },
+      )
+      .optional(),
     title: z.string(),
   }),
 });

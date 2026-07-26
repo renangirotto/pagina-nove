@@ -13,6 +13,7 @@ export const publishers = z.enum([
   "Monstra",
   "MPEG",
   "Mythos",
+  "Nemo",
   "Panini",
   "Pé-de-Cabra",
   "Pipoca & Nanquim",
@@ -58,5 +59,6 @@ export const series = z
     "Shin Zero",
     "Transformers - Universo Energon",
     "Vermillion",
+    "Yon",
   ])
   .optional();
